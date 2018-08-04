@@ -14,6 +14,11 @@ import android.widget.Toast;
 import com.arbresystems.appoint.R;
 import com.arbresystems.appoint.RetrofitConfig;
 import com.arbresystems.appoint.Usuario;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,8 +35,9 @@ public class CadastrarActivity extends AppCompatActivity {
     private EditText txtCpf;
     private EditText txtDtNascimento;
     private Button btnCadastro;
-    private Button btnCadastroFacebook;
     private ProgressBar mProgress;
+    private CallbackManager callbackManager;
+    private LoginButton loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +50,7 @@ public class CadastrarActivity extends AppCompatActivity {
         txtSenha = findViewById(R.id.confirmarSenha);
         txtCpf = findViewById(R.id.txtCpf);
         txtDtNascimento = findViewById(R.id.txtDtNascimnnto);
-        btnCadastroFacebook = findViewById(R.id.btnCadastroComFb);
-        //btnCadastro = findViewById(R.id.btnCadastro);
+        btnCadastro = findViewById(R.id.btnCadastro);
 
         mProgress = new ProgressBar(getApplicationContext());
         mProgress.setMax(100);
@@ -55,10 +60,25 @@ public class CadastrarActivity extends AppCompatActivity {
 
         final SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
-        btnCadastroFacebook.setOnClickListener(new View.OnClickListener() {
+        callbackManager = CallbackManager.Factory.create();
+        loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions("email");
+
+        // Callback registration
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
-            public void onClick(View v) {
-                //fazer os ngc para cadastrar com o face
+            public void onSuccess(LoginResult loginResult) {
+                // App code
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
             }
         });
 
@@ -110,5 +130,11 @@ public class CadastrarActivity extends AppCompatActivity {
             }
         });
         mProgress.setProgress(100);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }
