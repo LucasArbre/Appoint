@@ -12,4 +12,9 @@
     <string name="confirmarSenha">Confirmar senha...</string>
     <string name="dataNascimento">Data de nascimento...</string>
     <string name="email">e-mail...</string>
+
+    <!--Facebook Strings-->
+    <string name="facebook_app_id">441677559571677</string>
+    <string name="fb_login_protocol_scheme">fb441677559571677</string>
+
 </resources>

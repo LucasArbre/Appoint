@@ -14,6 +14,11 @@ import android.widget.Toast;
 import com.arbresystems.appoint.R;
 import com.arbresystems.appoint.RetrofitConfig;
 import com.arbresystems.appoint.Usuario;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,11 +32,38 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnCadastro;
     private Button btnEntrar;
     private ProgressBar mProgress;
+    private CallbackManager callbackManager;
+    private LoginButton loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        callbackManager = CallbackManager.Factory.create();
+
+
+
+        loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions("email");
+
+        // Callback registration
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // App code
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        });
 
         editSenha = findViewById(R.id.editSenha);
         editEmail = findViewById(R.id.editEmail);
@@ -101,5 +133,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         mProgress.setProgress(100);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
     }
 }

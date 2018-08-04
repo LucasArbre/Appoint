@@ -45,7 +45,7 @@ public class CadastrarActivity extends AppCompatActivity {
         txtCpf = findViewById(R.id.txtCpf);
         txtDtNascimento = findViewById(R.id.txtDtNascimnnto);
         btnCadastroFacebook = findViewById(R.id.btnCadastroComFb);
-        btnCadastro = findViewById(R.id.btnCadastro);
+        //btnCadastro = findViewById(R.id.btnCadastro);
 
         mProgress = new ProgressBar(getApplicationContext());
         mProgress.setMax(100);
