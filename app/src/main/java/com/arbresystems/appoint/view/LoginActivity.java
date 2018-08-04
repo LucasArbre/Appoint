@@ -19,6 +19,9 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,11 +37,29 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar mProgress;
     private CallbackManager callbackManager;
     private LoginButton loginButton;
+    private GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // Configure sign-in to request the user's ID, email address, and basic
+        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        // Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+                //startActivityForResult(signInIntent, RC_SIGN_IN);
+            }
+        });
 
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_button);
@@ -102,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(), "Usuário não existe!",
                                                 Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(getApplicationContext(), CadastrarActivity.class);
-                                        startActivity(intent);  
+                                        startActivity(intent);
                                     } else if (response.body().getDescricao().equals("senha incorreta")) {
                                         mProgress.setProgress(100);
                                         Toast.makeText(getApplicationContext(), "Senha incorreta!",
@@ -132,10 +153,11 @@ public class LoginActivity extends AppCompatActivity {
         mProgress.setProgress(100);
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+
 }

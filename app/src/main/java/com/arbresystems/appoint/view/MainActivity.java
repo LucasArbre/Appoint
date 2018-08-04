@@ -9,6 +9,8 @@ import android.os.Bundle;
 import com.arbresystems.appoint.R;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 public class MainActivity extends AppCompatActivity {
     public static String PREF_NAME = "SP";
@@ -21,6 +23,11 @@ public class MainActivity extends AppCompatActivity {
 
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
+
+        // Check for existing Google Sign In account, if the user is already signed in
+        // the GoogleSignInAccount will be non-null.
+        //GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        //updateUI(account);
 
         SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         if (sp.getString("token", null) == null){
