@@ -30,6 +30,7 @@ public class CadastrarActivity extends AppCompatActivity {
     private EditText txtCpf;
     private EditText txtDtNascimento;
     private Button btnCadastro;
+    private Button btnCadastroFacebook;
     private ProgressBar mProgress;
 
     @Override
@@ -43,7 +44,8 @@ public class CadastrarActivity extends AppCompatActivity {
         txtSenha = findViewById(R.id.confirmarSenha);
         txtCpf = findViewById(R.id.txtCpf);
         txtDtNascimento = findViewById(R.id.txtDtNascimnnto);
-        btnCadastro = findViewById(R.id.btnLogarComFb);
+        btnCadastroFacebook = findViewById(R.id.btnCadastroComFb);
+        btnCadastro = findViewById(R.id.btnCadastro);
 
         mProgress = new ProgressBar(getApplicationContext());
         mProgress.setMax(100);
@@ -52,6 +54,13 @@ public class CadastrarActivity extends AppCompatActivity {
         getActionBar().hide();
 
         final SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+
+        btnCadastroFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //fazer os ngc para cadastrar com o face
+            }
+        });
 
         btnCadastro.setOnClickListener(new View.OnClickListener() {
             @Override

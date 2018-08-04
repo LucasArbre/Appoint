@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
         editSenha = findViewById(R.id.editSenha);
         editEmail = findViewById(R.id.editEmail);
-        btnCadastro = findViewById(R.id.btnLogarComFb);
+        btnCadastro = findViewById(R.id.btnCadastroComFb);
         btnEntrar = findViewById(R.id.btnEntrar);
 
         final SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
