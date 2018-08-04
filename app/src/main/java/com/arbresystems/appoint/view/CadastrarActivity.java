@@ -47,6 +47,7 @@ public class CadastrarActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_cadastrar);
 
         txtName = findViewById(R.id.txtName);
@@ -59,9 +60,6 @@ public class CadastrarActivity extends AppCompatActivity {
 
         mProgress = new ProgressBar(getApplicationContext());
         mProgress.setMax(100);
-
-        setContentView(R.layout.activity_cadastrar);
-        getActionBar().hide();
 
         final SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
@@ -150,6 +148,10 @@ public class CadastrarActivity extends AppCompatActivity {
             public void onCompleted(GraphResponse response) {
                 Log.i("FACEBOOK", response.getJSONObject().toString());
                 Log.i("FACEBOOK", Profile.getCurrentProfile().toString());
+                String nome = Profile.getCurrentProfile().getName();
+                String dados = Profile.getCurrentProfile().toString();
+                Log.e("nome", nome);
+                Log.e("dados", dados);
             }
         });
 
@@ -157,6 +159,5 @@ public class CadastrarActivity extends AppCompatActivity {
         parameters.putString("fields", "id, name, email, gender, birthday");
         request.setParameters(parameters);
         request.executeAsync();
-        Log.e("resposta", parameters.toString());
     }
 }

@@ -37,7 +37,7 @@ import static com.arbresystems.appoint.view.MainActivity.PREF_NAME;
 public class LoginActivity extends AppCompatActivity {
     private EditText editEmail;
     private EditText editSenha;
-    private Button btnCadastro;
+    private Button btnCadastrar;
     private Button btnEntrar;
     private ProgressBar mProgress;
     private CallbackManager callbackManager;
@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
 
         // Configure sign-in to request the user's ID, email address, and basic
@@ -68,7 +69,8 @@ public class LoginActivity extends AppCompatActivity {
 
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("public_profile", "email");
+        loginButton.setReadPermissions("public_profile");
+        loginButton.setReadPermissions("email");
 
         // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -91,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
 
         editSenha = findViewById(R.id.editSenha);
         editEmail = findViewById(R.id.editEmail);
-        btnCadastro = findViewById(R.id.btnCadastro);
+        btnCadastrar = findViewById(R.id.btnCadastrar);
         btnEntrar = findViewById(R.id.btnEntrar);
 
         final SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
@@ -99,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
         mProgress = new ProgressBar(getApplicationContext());
         mProgress.setMax(100);
 
-        btnCadastro.setOnClickListener(new View.OnClickListener() {
+        btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CadastrarActivity.class);
@@ -171,6 +173,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onCompleted(GraphResponse response) {
                 Log.i("FACEBOOK", response.getJSONObject().toString());
                 Log.i("FACEBOOK", Profile.getCurrentProfile().toString());
+                String nome = Profile.getCurrentProfile().getName();
+                String dados = Profile.getCurrentProfile().toString();
+                Log.e("nome", nome);
+                Log.e("dados", dados);
             }
         });
 
@@ -178,6 +184,5 @@ public class LoginActivity extends AppCompatActivity {
         parameters.putString("fields", "id, name, email, gender, birthday");
         request.setParameters(parameters);
         request.executeAsync();
-        Log.e("resposta", parameters.toString());
     }
 }
