@@ -14,9 +14,14 @@ import android.widget.Toast;
 import com.arbresystems.appoint.R;
 import com.arbresystems.appoint.RetrofitConfig;
 import com.arbresystems.appoint.Usuario;
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -63,13 +68,14 @@ public class LoginActivity extends AppCompatActivity {
 
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("email");
+        loginButton.setReadPermissions("public_profile", "email");
 
         // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 // App code
+                executeGraphRequest(loginResult.getAccessToken().getUserId());
             }
 
             @Override
@@ -159,5 +165,19 @@ public class LoginActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    private void executeGraphRequest(String userId){
+        GraphRequest request = new GraphRequest(AccessToken.getCurrentAccessToken(), userId, null, HttpMethod.GET, new GraphRequest.Callback() {
+            @Override
+            public void onCompleted(GraphResponse response) {
+                Log.i("FACEBOOK", response.getJSONObject().toString());
+                Log.i("FACEBOOK", Profile.getCurrentProfile().toString());
+            }
+        });
 
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "id, name, email, gender, birthday");
+        request.setParameters(parameters);
+        request.executeAsync();
+        Log.e("resposta", parameters.toString());
+    }
 }
