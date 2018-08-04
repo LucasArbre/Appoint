@@ -69,7 +69,6 @@ public class LoginActivity extends AppCompatActivity {
 
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("public_profile");
         loginButton.setReadPermissions("email");
 
         // Callback registration
@@ -106,7 +105,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CadastrarActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 

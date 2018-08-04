@@ -25,6 +25,9 @@ import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -149,9 +152,15 @@ public class CadastrarActivity extends AppCompatActivity {
                 Log.i("FACEBOOK", response.getJSONObject().toString());
                 Log.i("FACEBOOK", Profile.getCurrentProfile().toString());
                 String nome = Profile.getCurrentProfile().getName();
-                String dados = Profile.getCurrentProfile().toString();
+                try {
+                    JSONObject jsonObject = new JSONObject(Profile.getCurrentProfile().toString());
+                    Profile profile = Profile.getCurrentProfile();
+
+                    Log.e("dados", jsonObject.toString());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 Log.e("nome", nome);
-                Log.e("dados", dados);
             }
         });
 
