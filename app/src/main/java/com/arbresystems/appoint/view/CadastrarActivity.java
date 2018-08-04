@@ -43,10 +43,13 @@ public class CadastrarActivity extends AppCompatActivity {
         txtSenha = findViewById(R.id.confirmarSenha);
         txtCpf = findViewById(R.id.txtCpf);
         txtDtNascimento = findViewById(R.id.txtDtNascimnnto);
-        btnCadastro = findViewById(R.id.btnCadastro);
+        btnCadastro = findViewById(R.id.btnLogarComFb);
 
         mProgress = new ProgressBar(getApplicationContext());
         mProgress.setMax(100);
+
+        setContentView(R.layout.activity_cadastrar);
+        getActionBar().hide();
 
         final SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 

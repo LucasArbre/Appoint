@@ -1,4 +1,9 @@
 <resources>
+    <!--login-->
+    <string name="esqueceuSenha">esqueceu a senha?</string>
+    <string name="login">Entrar</string>
+    <string name="cadastrar">ainda não possui uma conta?</string>
+    <!--cadastro-->
     <string name="app_name">Appoint</string>
     <string name="nome">Nome...</string>
     <string name="senha">Senha...</string>
