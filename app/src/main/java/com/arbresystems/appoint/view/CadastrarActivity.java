@@ -44,8 +44,6 @@ public class CadastrarActivity extends AppCompatActivity {
     private EditText txtDtNascimento;
     private Button btnCadastro;
     private ProgressBar mProgress;
-    private CallbackManager callbackManager;
-    private LoginButton loginButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,29 +63,6 @@ public class CadastrarActivity extends AppCompatActivity {
         mProgress.setMax(100);
 
         final SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-
-        callbackManager = CallbackManager.Factory.create();
-        loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("public_profile");
-
-        // Callback registration
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                // App code
-                executeGraphRequest(loginResult.getAccessToken().getUserId());
-            }
-
-            @Override
-            public void onCancel() {
-                // App code
-            }
-
-            @Override
-            public void onError(FacebookException exception) {
-                // App code
-            }
-        });
 
         btnCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,34 +112,5 @@ public class CadastrarActivity extends AppCompatActivity {
             }
         });
         mProgress.setProgress(100);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private void executeGraphRequest(String userId){
-        GraphRequest request = new GraphRequest(AccessToken.getCurrentAccessToken(), userId, null, HttpMethod.GET, new GraphRequest.Callback() {
-            @Override
-            public void onCompleted(GraphResponse response) {
-                Log.i("FACEBOOK", response.getJSONObject().toString());
-                String teste[] = Profile.getCurrentProfile().toString().split(",");
-                String nome = Profile.getCurrentProfile().getName();
-                String id = Profile.getCurrentProfile().getId();
-                Log.i("nome", nome);
-                Log.i("id", id);
-                Log.i("teste", teste.toString());
-                for (String a : teste){
-                    Log.i("a", a);
-                }
-            }
-        });
-
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "id, name, email, gender, birthday");
-        request.setParameters(parameters);
-        request.executeAsync();
     }
 }

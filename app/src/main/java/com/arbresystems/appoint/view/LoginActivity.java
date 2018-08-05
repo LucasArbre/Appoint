@@ -170,11 +170,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onCompleted(GraphResponse response) {
                 Log.i("FACEBOOK", response.getJSONObject().toString());
-                Log.i("FACEBOOK", Profile.getCurrentProfile().toString());
+                String teste[] = Profile.getCurrentProfile().toString().split(",");
                 String nome = Profile.getCurrentProfile().getName();
-                String dados = Profile.getCurrentProfile().toString();
-                Log.e("nome", nome);
-                Log.e("dados", dados);
+                String id = Profile.getCurrentProfile().getId();
+                Log.i("nome", nome);
+                Log.i("id", id);
+                Log.i("teste", teste.toString());
+                for (String a : teste){
+                    Log.i("a", a);
+                }
             }
         });
 
