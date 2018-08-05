@@ -1,7 +1,7 @@
 package com.arbresystems.appoint.view;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,41 +12,37 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.arbresystems.appoint.R;
-import com.arbresystems.appoint.RetrofitConfig;
-import com.arbresystems.appoint.Usuario;
-import com.facebook.AccessToken;
-import com.facebook.CallbackManager;
-import com.facebook.FacebookCallback;
-import com.facebook.FacebookException;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
-import com.facebook.Profile;
-import com.facebook.login.LoginResult;
-import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.FirebaseTooManyRequestsException;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.concurrent.TimeUnit;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static com.arbresystems.appoint.view.MainActivity.PREF_NAME;
 
 public class CadastrarActivity extends AppCompatActivity {
 
+    private static final  String TAG = "PhoneAuth";
+
     private EditText txtName;
-    private EditText txtEmail;
-    private EditText txtTelefone;
-    private EditText txtSenha;
-    private EditText txtCpf;
-    private EditText txtDtNascimento;
+    private EditText txtTel;
+    private EditText txtCod;
     private Button btnCadastro;
     private ProgressBar mProgress;
+    private Button btnVerificarCodigo;
+
+    private String phoneVerificationId;
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks verificationCallbacks;
+    private PhoneAuthProvider.ForceResendingToken resendToken;
+
+    private FirebaseAuth fbAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,17 +51,17 @@ public class CadastrarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastrar);
 
         txtName = findViewById(R.id.txtName);
-        txtEmail = findViewById(R.id.txtEmail);
-        txtTelefone = findViewById(R.id.txtTelefone);
-        txtSenha = findViewById(R.id.confirmarSenha);
-        txtCpf = findViewById(R.id.txtCpf);
-        txtDtNascimento = findViewById(R.id.txtDtNascimnnto);
+        txtTel = findViewById(R.id.txtTel);
+        txtCod = findViewById(R.id.txtCod);
         btnCadastro = findViewById(R.id.btnCadastro);
+        btnVerificarCodigo = findViewById(R.id.btnVerificarCodigo);
 
         mProgress = new ProgressBar(getApplicationContext());
         mProgress.setMax(100);
 
         final SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+
+        fbAuth = FirebaseAuth.getInstance();
 
         /*btnCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,14 +114,102 @@ public class CadastrarActivity extends AppCompatActivity {
         btnCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                        phoneNumber,        // Phone number to verify
-                        60,                 // Timeout duration
-                        TimeUnit.SECONDS,   // Unit of timeout
-                        this,               // Activity (for callback binding)
-                        mCallbacks);        // OnVerificationStateChangedCallbacks
+                sendCode(v);
             }
         });
+
+        btnVerificarCodigo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                verifyCode(v);
+            }
+        });
+
         mProgress.setProgress(100);
+    }
+
+    public void sendCode(View view){
+        String phoneNumber = txtTel.getText().toString(); //para teste, dps mudar para um campo especifico de telefone
+
+        setUpVerificatonCallbacks();
+
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                phoneNumber,        // Phone number to verify
+                60,                 // Timeout duration
+                TimeUnit.SECONDS,   // Unit of timeout
+                this,               // Activity (for callback binding)
+                verificationCallbacks);        // OnVerificationStateChangedCallbacks
+    }
+
+    private void setUpVerificatonCallbacks(){
+        verificationCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+            @Override
+            public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+                //se td der certo
+                signInWhithPhoneAuthCredential(phoneAuthCredential);
+            }
+
+            @Override
+            public void onVerificationFailed(FirebaseException e) {
+                //se td der errado
+                if (e instanceof FirebaseAuthInvalidCredentialsException){
+                    Log.e(TAG, "Crendencial inválida: " + e.getLocalizedMessage());
+                }else if(e instanceof FirebaseTooManyRequestsException){
+                    Log.e(TAG, "Cota de SMS excedida.");
+                }
+            }
+
+            @Override
+            public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                phoneVerificationId = s;
+                resendToken = forceResendingToken;
+            }
+        };
+    }
+
+    public void verifyCode(View view){
+        //verifica o codigo
+        String code = txtCod.getText().toString();
+
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(phoneVerificationId, code);
+        signInWhithPhoneAuthCredential(credential);
+    }
+
+    private void signInWhithPhoneAuthCredential(PhoneAuthCredential credential){
+        fbAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            //acho que deu certo
+                            FirebaseUser user = task.getResult().getUser();
+                            Toast.makeText(getApplicationContext(), "Uau, codigo ok", Toast.LENGTH_SHORT).show();
+                        }else{
+                            if(task.getException() instanceof  FirebaseAuthInvalidCredentialsException){
+                                //o código de verificação inserido era inválido
+                                Toast.makeText(getApplicationContext(), "Código inválido", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+    }
+
+    public void resendCode(View view){
+        String phoneNumber = txtTel.getText().toString(); //para teste, dps mudar para um campo especifico de telefone
+
+        setUpVerificatonCallbacks();
+
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                phoneNumber,        // Phone number to verify
+                60,                 // Timeout duration
+                TimeUnit.SECONDS,   // Unit of timeout
+                this,               // Activity (for callback binding)
+                verificationCallbacks);        // OnVerificationStateChangedCallbacks
+    }
+
+    public void signOut(View view){
+        //sair
+        fbAuth.signOut();
     }
 }

@@ -26,13 +26,13 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/txtEmail"
+        android:id="@+id/txtTel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="@string/email"
-        android:inputType="textPersonName"
+        android:hint="@string/telefone"
+        android:inputType="textPhonetic"
         app:layout_constraintEnd_toEndOf="@+id/txtName"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/txtName"
@@ -42,88 +42,33 @@
         android:id="@+id/btnCadastro"
         android:layout_width="200dp"
         android:layout_height="39dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:background="@drawable/edit_btn"
-        android:text="Cadastrar"
+        android:text="Enviar Codigo"
         android:textColor="#fff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirmarSenha"
-        app:layout_constraintVertical_bias="0.923" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/txtTelefone"
+        android:id="@+id/txtCod"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="152dp"
         android:ems="10"
-        android:hint="@string/telefone"
-        android:inputType="textPersonName"
+        android:hint="@string/cod"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/txtDtNascimnnto"
-        app:layout_constraintTop_toBottomOf="@+id/txtDtNascimnnto" />
-
-    <EditText
-        android:id="@+id/txtCpf"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/cpf"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/txtTelefone"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/txtEmail"
-        app:layout_constraintTop_toBottomOf="@+id/txtTelefone" />
-
-    <EditText
-        android:id="@+id/txtDtNascimnnto"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/dataNascimento"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/txtEmail"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
-
-    <EditText
-        android:id="@+id/txtSenha"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/senha"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/txtCpf"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtCpf"
-        app:layout_constraintTop_toBottomOf="@+id/txtCpf" />
-
-    <EditText
-        android:id="@+id/confirmarSenha"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="@string/confirmarSenha"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/txtSenha"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/txtSenha"
-        app:layout_constraintTop_toBottomOf="@+id/txtSenha" />
+        app:layout_constraintStart_toStartOf="@+id/txtTel"
+        app:layout_constraintTop_toBottomOf="@+id/txtTel" />
 
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
@@ -137,4 +82,20 @@
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnVerificarCodigo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="113dp"
+        android:text="Verificar Codigo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnCadastro"
+        app:layout_constraintTop_toBottomOf="@+id/txtCod" />
 </android.support.constraint.ConstraintLayout>
