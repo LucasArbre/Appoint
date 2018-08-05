@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "574083445680-kv6almu7nr5dljto054jlpvl1r7pshog.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.arbresystems.appoint",
+            "certificate_hash": "8fd4b633c94405bc27a0e2fbd36123c3f828bdb0"
+          }
+        },
+        {
           "client_id": "574083445680-gj2eke6f7k7iec4ossolv0aerofeu3p7.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "574083445680-ro0r58ck486se71o30pigg9nthji4q59.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

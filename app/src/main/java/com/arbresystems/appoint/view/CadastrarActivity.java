@@ -149,7 +149,7 @@ public class CadastrarActivity extends AppCompatActivity {
         GraphRequest request = new GraphRequest(AccessToken.getCurrentAccessToken(), userId, null, HttpMethod.GET, new GraphRequest.Callback() {
             @Override
             public void onCompleted(GraphResponse response) {
-                Log.i("FACEBOOK", Profile.getCurrentProfile().toString());
+                Log.i("FACEBOOK", response.getJSONObject().toString());
                 String teste[] = Profile.getCurrentProfile().toString().split(",");
                 String nome = Profile.getCurrentProfile().getName();
                 String id = Profile.getCurrentProfile().getId();
