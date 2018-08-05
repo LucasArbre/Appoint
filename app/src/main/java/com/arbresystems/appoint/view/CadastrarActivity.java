@@ -1,9 +1,9 @@
 package com.arbresystems.appoint.view;
 
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -29,7 +29,7 @@ import static com.arbresystems.appoint.view.MainActivity.PREF_NAME;
 
 public class CadastrarActivity extends AppCompatActivity {
 
-    private static final  String TAG = "PhoneAuth";
+    private static final String TAG = "PhoneAuth";
 
     private EditText txtName;
     private EditText txtTel;
@@ -55,6 +55,8 @@ public class CadastrarActivity extends AppCompatActivity {
         txtCod = findViewById(R.id.txtCod);
         btnCadastro = findViewById(R.id.btnCadastro);
         btnVerificarCodigo = findViewById(R.id.btnVerificarCodigo);
+
+        btnVerificarCodigo.setEnabled(false);
 
         mProgress = new ProgressBar(getApplicationContext());
         mProgress.setMax(100);
@@ -128,20 +130,28 @@ public class CadastrarActivity extends AppCompatActivity {
         mProgress.setProgress(100);
     }
 
-    public void sendCode(View view){
-        String phoneNumber = txtTel.getText().toString(); //para teste, dps mudar para um campo especifico de telefone
+    public void sendCode(View view) {
+        String phoneNumber = txtTel.getText().toString();
+        String nome = txtName.getText().toString(); //dps eu vejo oq eu faço com o nome KKKKK
 
-        setUpVerificatonCallbacks();
+        if (phoneNumber.length() == 0 || nome.length() == 0) {
+            Toast.makeText(getApplicationContext(), "Digite um nome e um número de telefone!",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            setUpVerificatonCallbacks();
 
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                phoneNumber,        // Phone number to verify
-                60,                 // Timeout duration
-                TimeUnit.SECONDS,   // Unit of timeout
-                this,               // Activity (for callback binding)
-                verificationCallbacks);        // OnVerificationStateChangedCallbacks
+            btnVerificarCodigo.setEnabled(true);
+
+            PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                    phoneNumber,        // Phone number to verify
+                    60,                 // Timeout duration
+                    TimeUnit.SECONDS,   // Unit of timeout
+                    this,               // Activity (for callback binding)
+                    verificationCallbacks);        // OnVerificationStateChangedCallbacks
+        }
     }
 
-    private void setUpVerificatonCallbacks(){
+    private void setUpVerificatonCallbacks() {
         verificationCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             @Override
@@ -153,9 +163,9 @@ public class CadastrarActivity extends AppCompatActivity {
             @Override
             public void onVerificationFailed(FirebaseException e) {
                 //se td der errado
-                if (e instanceof FirebaseAuthInvalidCredentialsException){
+                if (e instanceof FirebaseAuthInvalidCredentialsException) {
                     Log.e(TAG, "Crendencial inválida: " + e.getLocalizedMessage());
-                }else if(e instanceof FirebaseTooManyRequestsException){
+                } else if (e instanceof FirebaseTooManyRequestsException) {
                     Log.e(TAG, "Cota de SMS excedida!");
                 }
             }
@@ -168,7 +178,7 @@ public class CadastrarActivity extends AppCompatActivity {
         };
     }
 
-    public void verifyCode(View view){
+    public void verifyCode(View view) {
         //verifica o codigo
         String code = txtCod.getText().toString();
 
@@ -176,17 +186,17 @@ public class CadastrarActivity extends AppCompatActivity {
         signInWhithPhoneAuthCredential(credential);
     }
 
-    private void signInWhithPhoneAuthCredential(PhoneAuthCredential credential){
+    private void signInWhithPhoneAuthCredential(PhoneAuthCredential credential) {
         fbAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             //acho que deu certo
                             FirebaseUser user = task.getResult().getUser();
                             Toast.makeText(getApplicationContext(), "Uau, codigo ok", Toast.LENGTH_SHORT).show();
-                        }else{
-                            if(task.getException() instanceof  FirebaseAuthInvalidCredentialsException){
+                        } else {
+                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 //o código de verificação inserido era inválido
                                 Toast.makeText(getApplicationContext(), "Código inválido", Toast.LENGTH_SHORT).show();
                             }
@@ -195,7 +205,7 @@ public class CadastrarActivity extends AppCompatActivity {
                 });
     }
 
-    public void resendCode(View view){
+    public void resendCode(View view) {
         String phoneNumber = txtTel.getText().toString(); //para teste, dps mudar para um campo especifico de telefone
 
         setUpVerificatonCallbacks();
@@ -208,7 +218,7 @@ public class CadastrarActivity extends AppCompatActivity {
                 verificationCallbacks);        // OnVerificationStateChangedCallbacks
     }
 
-    public void signOut(View view){
+    public void signOut(View view) {
         //sair
         fbAuth.signOut();
     }
