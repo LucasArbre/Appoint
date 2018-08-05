@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="@string/senha"
+        android:hint="senha"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/editEmail"
         app:layout_constraintStart_toStartOf="@+id/editEmail"

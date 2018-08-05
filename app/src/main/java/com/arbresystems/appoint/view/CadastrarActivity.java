@@ -156,7 +156,7 @@ public class CadastrarActivity extends AppCompatActivity {
                 if (e instanceof FirebaseAuthInvalidCredentialsException){
                     Log.e(TAG, "Crendencial inválida: " + e.getLocalizedMessage());
                 }else if(e instanceof FirebaseTooManyRequestsException){
-                    Log.e(TAG, "Cota de SMS excedida.");
+                    Log.e(TAG, "Cota de SMS excedida!");
                 }
             }
 
