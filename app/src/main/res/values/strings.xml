@@ -1,8 +1,8 @@
 <resources>
     <!--login-->
-    <string name="esqueceuSenha">esqueceu a senha?</string>
+    <string name="esqueceuSenha">Esqueceu a senha?</string>
     <string name="login">Entrar</string>
-    <string name="cadastrar">ainda não possui uma conta?</string>
+    <string name="cadastrar">Ainda não possui uma conta?</string>
     <!--cadastro-->
     <string name="app_name">Appoint</string>
     <string name="nome">Nome...</string>
@@ -11,7 +11,7 @@
     <string name="cpf">CPF...</string>
     <string name="confirmarSenha">Confirmar senha...</string>
     <string name="dataNascimento">Data de nascimento...</string>
-    <string name="email">e-mail...</string>
+    <string name="email">E-mail...</string>
 
     <!--Facebook Strings-->
     <string name="facebook_app_id">441677559571677</string>

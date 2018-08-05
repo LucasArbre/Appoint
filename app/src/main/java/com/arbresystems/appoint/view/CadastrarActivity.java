@@ -68,7 +68,7 @@ public class CadastrarActivity extends AppCompatActivity {
 
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("email");
+        loginButton.setReadPermissions("public_profile");
 
         // Callback registration
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -149,18 +149,16 @@ public class CadastrarActivity extends AppCompatActivity {
         GraphRequest request = new GraphRequest(AccessToken.getCurrentAccessToken(), userId, null, HttpMethod.GET, new GraphRequest.Callback() {
             @Override
             public void onCompleted(GraphResponse response) {
-                Log.i("FACEBOOK", response.getJSONObject().toString());
-                Log.i("FACEBOOK", Profile.getCurrentProfile().toString());
+                Log.e("FACEBOOK", Profile.getCurrentProfile().toString());
+                String teste[] = Profile.getCurrentProfile().toString().split(",");
                 String nome = Profile.getCurrentProfile().getName();
-                try {
-                    JSONObject jsonObject = new JSONObject(Profile.getCurrentProfile().toString());
-                    Profile profile = Profile.getCurrentProfile();
-
-                    Log.e("dados", jsonObject.toString());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                String id = Profile.getCurrentProfile().getId();
                 Log.e("nome", nome);
+                Log.e("id", id);
+                Log.e("teste", teste.toString());
+                for (String a : teste){
+                    Log.e("a", a);
+                }
             }
         });
 
