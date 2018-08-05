@@ -149,15 +149,15 @@ public class CadastrarActivity extends AppCompatActivity {
         GraphRequest request = new GraphRequest(AccessToken.getCurrentAccessToken(), userId, null, HttpMethod.GET, new GraphRequest.Callback() {
             @Override
             public void onCompleted(GraphResponse response) {
-                Log.e("FACEBOOK", Profile.getCurrentProfile().toString());
+                Log.i("FACEBOOK", Profile.getCurrentProfile().toString());
                 String teste[] = Profile.getCurrentProfile().toString().split(",");
                 String nome = Profile.getCurrentProfile().getName();
                 String id = Profile.getCurrentProfile().getId();
-                Log.e("nome", nome);
-                Log.e("id", id);
-                Log.e("teste", teste.toString());
+                Log.i("nome", nome);
+                Log.i("id", id);
+                Log.i("teste", teste.toString());
                 for (String a : teste){
-                    Log.e("a", a);
+                    Log.i("a", a);
                 }
             }
         });
