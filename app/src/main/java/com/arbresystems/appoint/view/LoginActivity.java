@@ -2,18 +2,15 @@ package com.arbresystems.appoint.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.arbresystems.appoint.R;
-import com.arbresystems.appoint.RetrofitConfig;
-import com.arbresystems.appoint.Usuario;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -27,10 +24,6 @@ import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static com.arbresystems.appoint.view.MainActivity.PREF_NAME;
 
@@ -108,7 +101,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        btnEntrar.setOnClickListener(new View.OnClickListener() {
+        /*btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mProgress.setProgress(50);
@@ -155,7 +148,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         });
             }
-        });
+        });*/
         mProgress.setProgress(100);
     }
 

@@ -46,6 +46,10 @@ public class CadastrarActivity extends AppCompatActivity {
 
     private Dialog dialog;
 
+    private String id;
+    private String nome;
+    private String telefone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,10 +140,10 @@ public class CadastrarActivity extends AppCompatActivity {
     }
 
     public void sendCode(View view) {
-        String phoneNumber = txtTel.getText().toString();
-        String nome = txtName.getText().toString(); //dps eu vejo oq eu faço com o nome KKKKK
+        telefone = txtTel.getText().toString();
+        nome = txtName.getText().toString(); //dps eu vejo oq eu faço com o nome KKKKK
 
-        if (phoneNumber.length() == 0 || nome.length() == 0) {
+        if (telefone.length() == 0 || nome.length() == 0) {
             Toast.makeText(getApplicationContext(), "Digite um nome e um número de telefone!",
                     Toast.LENGTH_SHORT).show();
         } else {
@@ -148,7 +152,7 @@ public class CadastrarActivity extends AppCompatActivity {
             btnVerificarCodigo.setEnabled(true);
 
             PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                    phoneNumber,        // Phone number to verify
+                    telefone,        // Phone number to verify
                     60,                 // Timeout duration
                     TimeUnit.SECONDS,   // Unit of timeout
                     this,               // Activity (for callback binding)
@@ -199,6 +203,7 @@ public class CadastrarActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             //acho que deu certo
                             FirebaseUser user = task.getResult().getUser();
+                            id = user.getUid();
                             Toast.makeText(getApplicationContext(), "Uau, codigo ok", Toast.LENGTH_SHORT).show();
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
@@ -211,12 +216,12 @@ public class CadastrarActivity extends AppCompatActivity {
     }
 
     public void resendCode(View view) {
-        String phoneNumber = txtTel.getText().toString(); //para teste, dps mudar para um campo especifico de telefone
+        telefone = txtTel.getText().toString(); //para teste, dps mudar para um campo especifico de telefone
 
         setUpVerificatonCallbacks();
 
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                phoneNumber,        // Phone number to verify
+                telefone,        // Phone number to verify
                 60,                 // Timeout duration
                 TimeUnit.SECONDS,   // Unit of timeout
                 this,               // Activity (for callback binding)
