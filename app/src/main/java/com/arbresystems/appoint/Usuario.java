@@ -8,21 +8,12 @@ public class Usuario {
     @SerializedName("nome")
     @Expose
     private String nome;
-    @SerializedName("email")
+    @SerializedName("id")
     @Expose
-    private String email;
+    private String id;
     @SerializedName("telefone")
     @Expose
     private String telefone;
-    @SerializedName("senha")
-    @Expose
-    private String senha;
-    @SerializedName("CPF")
-    @Expose
-    private String CPF;
-    @SerializedName("dataNascimento")
-    @Expose
-    private String dataNascimento;
     @SerializedName("erro")
     @Expose
     private Boolean erro;
@@ -35,35 +26,25 @@ public class Usuario {
 
     /**
      * No args constructor for use in serialization
+     *
      */
     public Usuario() {
     }
 
     /**
-     * @param email
-     * @param telefone
-     * @param dataNascimento
-     * @param nome
-     * @param senha
-     * @param CPF
-     */
-    public Usuario(String nome, String email, String telefone, String senha, String CPF, String dataNascimento) {
-        super();
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-        this.senha = senha;
-        this.CPF = CPF;
-        this.dataNascimento = dataNascimento;
-    }
-
-    /**
+     *
+     * @param id
      * @param token
      * @param erro
+     * @param telefone
+     * @param nome
      * @param descricao
      */
-
-    public Usuario(Boolean erro, String descricao, String token) {
+    public Usuario(String nome, String id, String telefone, Boolean erro, String descricao, String token) {
+        super();
+        this.nome = nome;
+        this.id = id;
+        this.telefone = telefone;
         this.erro = erro;
         this.descricao = descricao;
         this.token = token;
@@ -77,12 +58,12 @@ public class Usuario {
         this.nome = nome;
     }
 
-    public String getEmail() {
-        return email;
+    public String getId() {
+        return id;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTelefone() {
@@ -91,30 +72,6 @@ public class Usuario {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getCPF() {
-        return CPF;
-    }
-
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
-    }
-
-    public String getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
     }
 
     public Boolean getErro() {
@@ -145,11 +102,8 @@ public class Usuario {
     public String toString() {
         return "Usuario{" +
                 "nome='" + nome + '\'' +
-                ", email='" + email + '\'' +
+                ", id='" + id + '\'' +
                 ", telefone='" + telefone + '\'' +
-                ", senha='" + senha + '\'' +
-                ", CPF='" + CPF + '\'' +
-                ", dataNascimento='" + dataNascimento + '\'' +
                 ", erro=" + erro +
                 ", descricao='" + descricao + '\'' +
                 ", token='" + token + '\'' +
