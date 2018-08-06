@@ -129,7 +129,6 @@ public class CadastrarActivity extends AppCompatActivity {
         btnCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showCadastrar(v);
                 sendCode(v);
             }
         });
@@ -207,9 +206,12 @@ public class CadastrarActivity extends AppCompatActivity {
                             //acho que deu certo
                             FirebaseUser user = task.getResult().getUser();
                             id = user.getUid();
-                            Toast.makeText(getApplicationContext(), "Uau, codigo ok", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Código correto!", Toast.LENGTH_SHORT).show();
 
-                            Usuario usuario = new Usuario();
+                            dialog.setContentView(R.layout.load);
+                            dialog.show();
+
+                            final Usuario usuario = new Usuario();
                             usuario.setNome(nome);
                             usuario.setId(id);
                             usuario.setTelefone(telefone);
@@ -221,10 +223,12 @@ public class CadastrarActivity extends AppCompatActivity {
                                             if (response.isSuccessful()) {
                                                 if (response.body().getErro()) {
                                                     if (response.body().getDescricao().equals("usuario ja existe")) {
+                                                        dialog.dismiss();
+
                                                         Toast.makeText(getApplicationContext(), "Usuário ja existe!",
                                                                 Toast.LENGTH_SHORT).show();
                                                     } else {
-
+                                                        dialog.dismiss();
                                                         Toast.makeText(getApplicationContext(), "Erro cadastrar usuário!",
                                                                 Toast.LENGTH_SHORT).show();
                                                     }
@@ -232,6 +236,9 @@ public class CadastrarActivity extends AppCompatActivity {
                                                     SharedPreferences.Editor editor = sp.edit();
                                                     editor.putString("token", response.body().getToken());
                                                     editor.apply();
+
+                                                    dialog.dismiss();
+
                                                     Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!",
                                                             Toast.LENGTH_SHORT).show();
                                                     startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
@@ -260,10 +267,5 @@ public class CadastrarActivity extends AppCompatActivity {
     public void signOut(View view) {
         //sair
         fbAuth.signOut();
-    }
-
-    private void showCadastrar(View v) {
-        dialog.setContentView(R.layout.load);
-        dialog.show();
     }
 }
