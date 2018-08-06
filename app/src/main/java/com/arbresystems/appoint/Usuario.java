@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class Usuario {
 
+    @SerializedName("idUsuario")
+    @Expose
+    private Integer idUsuario;
     @SerializedName("nome")
     @Expose
     private String nome;
@@ -23,6 +26,9 @@ public class Usuario {
     @SerializedName("token")
     @Expose
     private String token;
+    @SerializedName("ultimaLocalizacao")
+    @Expose
+    private String ultimaLocalizacao;
 
     /**
      * No args constructor for use in serialization
@@ -34,20 +40,32 @@ public class Usuario {
     /**
      *
      * @param id
+     * @param idUsuario
      * @param token
      * @param erro
      * @param telefone
+     * @param ultimaLocalizacao
      * @param nome
      * @param descricao
      */
-    public Usuario(String nome, String id, String telefone, Boolean erro, String descricao, String token) {
+    public Usuario(Integer idUsuario, String nome, String id, String telefone, Boolean erro, String descricao, String token, String ultimaLocalizacao) {
         super();
+        this.idUsuario = idUsuario;
         this.nome = nome;
         this.id = id;
         this.telefone = telefone;
         this.erro = erro;
         this.descricao = descricao;
         this.token = token;
+        this.ultimaLocalizacao = ultimaLocalizacao;
+    }
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNome() {
@@ -98,15 +116,25 @@ public class Usuario {
         this.token = token;
     }
 
+    public String getUltimaLocalizacao() {
+        return ultimaLocalizacao;
+    }
+
+    public void setUltimaLocalizacao(String ultimaLocalizacao) {
+        this.ultimaLocalizacao = ultimaLocalizacao;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
-                "nome='" + nome + '\'' +
+                "idUsuario=" + idUsuario +
+                ", nome='" + nome + '\'' +
                 ", id='" + id + '\'' +
                 ", telefone='" + telefone + '\'' +
                 ", erro=" + erro +
                 ", descricao='" + descricao + '\'' +
                 ", token='" + token + '\'' +
+                ", ultimaLocalizacao='" + ultimaLocalizacao + '\'' +
                 '}';
     }
 }
