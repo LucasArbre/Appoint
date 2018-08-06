@@ -46,7 +46,6 @@ public class CadastrarActivity extends AppCompatActivity {
 
     private String phoneVerificationId;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks verificationCallbacks;
-    private PhoneAuthProvider.ForceResendingToken resendToken;
     private FirebaseAuth fbAuth;
 
     private Dialog dialog;
@@ -149,6 +148,9 @@ public class CadastrarActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Digite um nome e um número de telefone!",
                     Toast.LENGTH_SHORT).show();
         } else {
+            Toast.makeText(getApplicationContext(), "Enviando código...",
+                    Toast.LENGTH_LONG).show();
+
             setUpVerificatonCallbacks();
 
             btnVerificarCodigo.setEnabled(true);
@@ -174,6 +176,8 @@ public class CadastrarActivity extends AppCompatActivity {
             @Override
             public void onVerificationFailed(FirebaseException e) {
                 //se td der errado
+                Toast.makeText(getApplicationContext(), "Erro ao processar o envio!",
+                        Toast.LENGTH_SHORT).show();
                 if (e instanceof FirebaseAuthInvalidCredentialsException) {
                     Log.e(TAG, "Crendencial inválida: " + e.getLocalizedMessage());
                 } else if (e instanceof FirebaseTooManyRequestsException) {
@@ -184,7 +188,6 @@ public class CadastrarActivity extends AppCompatActivity {
             @Override
             public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 phoneVerificationId = s;
-                resendToken = forceResendingToken;
             }
         };
     }
