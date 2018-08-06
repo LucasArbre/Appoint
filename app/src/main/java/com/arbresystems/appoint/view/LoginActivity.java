@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.arbresystems.appoint.R;
@@ -19,9 +18,7 @@ import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -34,11 +31,11 @@ import static com.arbresystems.appoint.view.MainActivity.PREF_NAME;
 
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "PhoneAuth";
+
     private EditText editEmail;
     private EditText editSenha;
     private Button btnCadastrar;
     private Button btnEntrar;
-    private ProgressBar mProgress;
 
     private CallbackManager callbackManager;
     private LoginButton loginButton;
@@ -53,24 +50,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
-
-        // Configure sign-in to request the user's ID, email address, and basic
-        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-
-        // Build a GoogleSignInClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-
-        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-                //startActivityForResult(signInIntent, RC_SIGN_IN);
-            }
-        });
-
 
         // Initialize Facebook Login button
         callbackManager = CallbackManager.Factory.create();
@@ -102,9 +81,6 @@ public class LoginActivity extends AppCompatActivity {
         btnEntrar = findViewById(R.id.btnEntrar);
 
         final SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-
-        mProgress = new ProgressBar(getApplicationContext());
-        mProgress.setMax(100);
 
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,7 +138,6 @@ public class LoginActivity extends AppCompatActivity {
                         });
             }
         });*/
-        mProgress.setProgress(100);
     }
 
     @Override

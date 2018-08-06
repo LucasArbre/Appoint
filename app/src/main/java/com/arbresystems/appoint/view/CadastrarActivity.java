@@ -35,7 +35,6 @@ import retrofit2.Response;
 import static com.arbresystems.appoint.view.MainActivity.PREF_NAME;
 
 public class CadastrarActivity extends AppCompatActivity {
-
     private static final String TAG = "PhoneAuth";
 
     private EditText txtName;
