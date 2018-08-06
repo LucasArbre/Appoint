@@ -98,4 +98,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnCadastro"
         app:layout_constraintTop_toBottomOf="@+id/txtCod" />
+
 </android.support.constraint.ConstraintLayout>

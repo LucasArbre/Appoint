@@ -1,5 +1,6 @@
 package com.arbresystems.appoint.view;
 
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -41,14 +42,17 @@ public class CadastrarActivity extends AppCompatActivity {
     private String phoneVerificationId;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks verificationCallbacks;
     private PhoneAuthProvider.ForceResendingToken resendToken;
-
     private FirebaseAuth fbAuth;
+
+    private Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_cadastrar);
+
+        dialog = new Dialog(this);
 
         txtName = findViewById(R.id.txtName);
         txtTel = findViewById(R.id.txtTel);
@@ -116,6 +120,7 @@ public class CadastrarActivity extends AppCompatActivity {
         btnCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showCadastrar(v);
                 sendCode(v);
             }
         });
@@ -221,5 +226,10 @@ public class CadastrarActivity extends AppCompatActivity {
     public void signOut(View view) {
         //sair
         fbAuth.signOut();
+    }
+
+    private void showCadastrar(View v) {
+        dialog.setContentView(R.layout.load);
+        dialog.show();
     }
 }
