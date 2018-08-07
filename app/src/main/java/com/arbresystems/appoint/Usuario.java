@@ -7,7 +7,7 @@ public class Usuario {
 
     @SerializedName("idUsuario")
     @Expose
-    private Integer idUsuario;
+    private String idUsuario;
     @SerializedName("nome")
     @Expose
     private String nome;
@@ -29,6 +29,9 @@ public class Usuario {
     @SerializedName("ultimaLocalizacao")
     @Expose
     private String ultimaLocalizacao;
+    @SerializedName("email")
+    @Expose
+    private String email;
 
     /**
      * No args constructor for use in serialization
@@ -41,6 +44,7 @@ public class Usuario {
      *
      * @param id
      * @param idUsuario
+     * @param email
      * @param token
      * @param erro
      * @param telefone
@@ -48,7 +52,7 @@ public class Usuario {
      * @param nome
      * @param descricao
      */
-    public Usuario(Integer idUsuario, String nome, String id, String telefone, Boolean erro, String descricao, String token, String ultimaLocalizacao) {
+    public Usuario(String idUsuario, String nome, String id, String telefone, Boolean erro, String descricao, String token, String ultimaLocalizacao, String email) {
         super();
         this.idUsuario = idUsuario;
         this.nome = nome;
@@ -58,13 +62,14 @@ public class Usuario {
         this.descricao = descricao;
         this.token = token;
         this.ultimaLocalizacao = ultimaLocalizacao;
+        this.email = email;
     }
 
-    public Integer getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
+    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -124,6 +129,14 @@ public class Usuario {
         this.ultimaLocalizacao = ultimaLocalizacao;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
@@ -135,6 +148,7 @@ public class Usuario {
                 ", descricao='" + descricao + '\'' +
                 ", token='" + token + '\'' +
                 ", ultimaLocalizacao='" + ultimaLocalizacao + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

@@ -35,7 +35,6 @@ import retrofit2.Response;
 import static com.arbresystems.appoint.view.MainActivity.PREF_NAME;
 
 public class CadastrarActivity extends AppCompatActivity {
-
     private static final String TAG = "PhoneAuth";
 
     private EditText txtName;
@@ -218,6 +217,8 @@ public class CadastrarActivity extends AppCompatActivity {
                             usuario.setNome(nome);
                             usuario.setId(id);
                             usuario.setTelefone(telefone);
+
+                            Log.e("usuario", usuario.toString());
                             new RetrofitConfig().getCadastroService().cadastro(usuario).enqueue(
                                     new Callback<Usuario>() {
 
@@ -255,6 +256,7 @@ public class CadastrarActivity extends AppCompatActivity {
                                             Log.e("erro", t.getMessage());
                                             Toast.makeText(getApplicationContext(), "Impossível cadastrar usuário!",
                                                     Toast.LENGTH_SHORT).show();
+                                            dialog.dismiss();
                                         }
                                     });
                         } else {
