@@ -70,6 +70,7 @@ public class CadastrarActivity extends AppCompatActivity {
         //btnVerificarCodigo = findViewById(R.id.btnVerificarCodigo);
 
         btnVerificarCodigo.setEnabled(false);
+        txtCod.setEnabled(false);
 
         sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
@@ -153,6 +154,7 @@ public class CadastrarActivity extends AppCompatActivity {
             setUpVerificatonCallbacks();
 
             btnVerificarCodigo.setEnabled(true);
+            txtCod.setEnabled(true);
 
             PhoneAuthProvider.getInstance().verifyPhoneNumber(
                     telefone,        // Phone number to verify
