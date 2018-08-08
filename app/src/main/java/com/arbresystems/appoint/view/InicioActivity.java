@@ -1,11 +1,11 @@
 package com.arbresystems.appoint.view;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.arbresystems.appoint.R;
 
-public class Inicio extends AppCompatActivity {
+public class InicioActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
