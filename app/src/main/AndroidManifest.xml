@@ -42,7 +42,8 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.LoginGoogleActivity"></activity>
+        <activity android:name=".view.LoginGoogleActivity" />
+        <activity android:name=".view.Inicio"></activity>
     </application>
 
 </manifest>

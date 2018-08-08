@@ -101,7 +101,7 @@
             android:layout_centerInParent="true"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="Ou"
+            android:text="@string/ou"
             android:textColor="@color/colorPrimary" />
 
         <View

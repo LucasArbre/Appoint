@@ -65,9 +65,9 @@ public class CadastrarActivity extends AppCompatActivity {
 
         txtName = findViewById(R.id.txtName);
         txtTel = findViewById(R.id.txtTel);
-        txtCod = findViewById(R.id.txtCod);
-        btnCadastro = findViewById(R.id.btnCadastro);
-        btnVerificarCodigo = findViewById(R.id.btnVerificarCodigo);
+        //txtCod = findViewById(R.id.txtCod);
+       // btnCadastro = findViewById(R.id.btnCadastro);
+        //btnVerificarCodigo = findViewById(R.id.btnVerificarCodigo);
 
         btnVerificarCodigo.setEnabled(false);
 
