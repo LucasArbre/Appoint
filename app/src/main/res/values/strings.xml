@@ -19,5 +19,11 @@
     <string name="cd_gl">Google</string>
     <string name="cd_fb">Facebook</string>
     <string name="ou">Ou</string>
+    <string name="nav_home">home</string>
+    <string name="nav_search">search</string>
+    <string name="nav_menu">menu</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
