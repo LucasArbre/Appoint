@@ -2,15 +2,13 @@ package com.arbresystems.appoint.view;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
 import com.arbresystems.appoint.R;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 public class MainActivity extends AppCompatActivity {
     public static String PREF_NAME = "SP";
@@ -32,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         if (sp.getString("token", null) == null){
             //login
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            Intent intent = new Intent(getApplicationContext(), InicioActivity.class);
             startActivity(intent);
             finish();
         }else{

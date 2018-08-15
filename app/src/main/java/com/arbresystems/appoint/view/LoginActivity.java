@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.arbresystems.appoint.R;
@@ -21,7 +20,6 @@ import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
@@ -44,16 +42,12 @@ public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "PhoneAuth";
     private static final int RC_SIGN_IN = 1;
 
-    private EditText editEmail;
-    private EditText editSenha;
-    private Button btnCadastrar;
     private Button btnEntrar;
 
     private CallbackManager callbackManager;
     private LoginButton loginButton;
 
     private GoogleApiClient mGoogleApiClient;
-    private GoogleSignInClient mGoogleSignInClient;
     private SignInButton mSignInButton;
 
     private FirebaseAuth mAuth;
@@ -116,20 +110,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        editSenha = findViewById(R.id.editSenha);
-        editEmail = findViewById(R.id.editEmail);
-        btnCadastrar = findViewById(R.id.btnCadastrar);
+
+        //btnCadastrar = findViewById(R.id.btnCadastrar);
         btnEntrar = findViewById(R.id.btnEntrar);
 
         final SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
-        btnCadastrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), CadastrarActivity.class);
-                startActivity(intent);
-            }
-        });
 
         /*btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
