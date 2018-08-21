@@ -115,7 +115,7 @@
             tools:layout_editor_absoluteY="388dp" />
 
         <Button
-            android:id="@+id/login_button"
+            android:id="@+id/btnFacebook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_btn2"
@@ -148,7 +148,7 @@
             android:visibility="invisible" />
 
         <Button
-            android:id="@+id/sign_in_button"
+            android:id="@+id/btnGoogle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_btn2"
