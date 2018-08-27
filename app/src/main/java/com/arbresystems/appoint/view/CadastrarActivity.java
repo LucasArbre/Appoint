@@ -39,9 +39,7 @@ public class CadastrarActivity extends AppCompatActivity {
 
     private EditText txtName;
     private EditText txtTel;
-    private EditText txtCod;
     private Button btnCadastro;
-    private Button btnVerificarCodigo;
 
     private String phoneVerificationId;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks verificationCallbacks;
@@ -69,8 +67,6 @@ public class CadastrarActivity extends AppCompatActivity {
        // btnCadastro = findViewById(R.id.btnCadastro);
         //btnVerificarCodigo = findViewById(R.id.btnVerificarCodigo);
 
-        btnVerificarCodigo.setEnabled(false);
-        txtCod.setEnabled(false);
 
         sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
@@ -125,19 +121,19 @@ public class CadastrarActivity extends AppCompatActivity {
             }
         });*/
 
-        btnCadastro.setOnClickListener(new View.OnClickListener() {
+        /*btnCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendCode(v);
             }
-        });
+        });*/
 
-        btnVerificarCodigo.setOnClickListener(new View.OnClickListener() {
+        /*btnVerificarCodigo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 verifyCode(v);
             }
-        });
+        });*/
     }
 
     public void sendCode(View view) {
@@ -153,8 +149,8 @@ public class CadastrarActivity extends AppCompatActivity {
 
             setUpVerificatonCallbacks();
 
-            btnVerificarCodigo.setEnabled(true);
-            txtCod.setEnabled(true);
+            //btnVerificarCodigo.setEnabled(true);
+            //txtCod.setEnabled(true);
 
             PhoneAuthProvider.getInstance().verifyPhoneNumber(
                     telefone,        // Phone number to verify
@@ -195,7 +191,7 @@ public class CadastrarActivity extends AppCompatActivity {
 
     public void verifyCode(View view) {
         //verifica o codigo
-        String code = txtCod.getText().toString();
+        String code = "codigo";
 
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(phoneVerificationId, code);
         signInWhithPhoneAuthCredential(credential);
