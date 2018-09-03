@@ -144,7 +144,7 @@
             android:visibility="gone" />
 
         <Button
-            android:id="@+id/fb"
+            android:id="@+id/btnFB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_btn2"
