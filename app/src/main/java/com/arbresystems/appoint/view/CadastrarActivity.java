@@ -109,7 +109,7 @@ public class CadastrarActivity extends AppCompatActivity {
 
         // Initialize Facebook Login button
         callbackManager = CallbackManager.Factory.create();
-        loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton = findViewById(R.id.login_button);
         loginButton.setReadPermissions("email", "public_profile");
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -131,7 +131,7 @@ public class CadastrarActivity extends AppCompatActivity {
             }
         });
 
-        mSignInButton = (SignInButton) findViewById(R.id.sign_in_button);
+        mSignInButton = findViewById(R.id.sign_in_button);
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
