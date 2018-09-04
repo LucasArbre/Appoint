@@ -5,6 +5,9 @@
     <string name="esqueceuSenha">Esqueceu a senha?</string>
     <string name="login">Entrar</string>
     <string name="cadastrar">Cadastrar</string>
+    <string name="codigo">Insira o código enviado ao seu dispositivo.</string>
+    <string name="pronto">Pronto</string>
+    <string name="cancelar">Cancelar</string>
     <!--cadastro-->
     <string name="app_name">Appoint</string>
     <string name="nome">Nome...</string>

@@ -1,13 +1,16 @@
 package com.arbresystems.appoint.view;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.arbresystems.appoint.R;
@@ -118,7 +121,34 @@ public class LoginActivity extends AppCompatActivity {
 
         final SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
+        btnEntrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder popUp=new AlertDialog.Builder(LoginActivity.this);
+                popUp.setTitle(getString(R.string.codigo));
 
+                final EditText codigo = new EditText(LoginActivity.this);
+
+                popUp.setView(codigo);
+
+
+                popUp.setPositiveButton(getString(R.string.pronto), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Verifica o código enviado por telefone para efetuar o login.
+                    }
+                });
+                popUp.setNegativeButton(getString(R.string.cancelar), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Fecha o pop-up.
+                    }
+                });
+                AlertDialog janela = popUp.create();
+                janela.show();
+
+            }
+        });
         /*btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

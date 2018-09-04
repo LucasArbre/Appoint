@@ -4,31 +4,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/edit_fundo"
     tools:context=".view.Inicio">
 
     <Button
         android:id="@+id/btnCadastrar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/edit_btn"
+        android:shadowColor="#FFF"
         android:text="@string/cadastrar"
         android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEntrar" />
+        app:layout_constraintTop_toBottomOf="@+id/btnEntrar"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btnEntrar"
         android:layout_width="0dp"
+        android:shadowColor="#FFF"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginLeft="32dp"
@@ -38,7 +41,7 @@
         android:background="@drawable/edit_btn2"
         android:text="@string/login"
         android:textColor="@color/colorPrimary"
-        android:textSize="16sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,8 +60,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -67,7 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_in_app" />
+        app:srcCompat="@drawable/logoappoint" />
 
     <ImageView
         android:id="@+id/imageView2"
