@@ -5,35 +5,45 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.LoginActivity"
+    android:background="@drawable/edit_fundo"
     tools:layout_editor_absoluteY="25dp">
 
-    <!--EditText
-        android:id="@+id/editSenha"
+
+
+    <EditText
+        android:id="@+id/txtName"
+        android:layout_width="0dp"
+        android:layout_height="43dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:ems="10"
+        android:hint="@string/nome"
+        android:inputType="textPersonName"
+        android:singleLine="true"
+        android:textColorHint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+    <EditText
+        android:id="@+id/txtTel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:backgroundTint="@color/colorPrimary"
         android:ems="10"
-        android:hint="senha"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/editEmail"
-        app:layout_constraintStart_toStartOf="@+id/editEmail"
-        app:layout_constraintTop_toBottomOf="@+id/editEmail" />
-
-    <EditText
-        android:id="@+id/editEmail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="50dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="228dp"
-        android:ems="10"
-        android:hint="@string/email"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" /-->
+        android:hint="@string/telefone"
+        android:inputType="textPhonetic"
+        android:textColorHint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="@+id/txtName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtName"
+        app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
     <Button
         android:id="@+id/btnEntrar"
@@ -43,14 +53,14 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/edit_btn"
-        android:text="@string/login"
+        android:text="@string/loginTel"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTel" />
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
@@ -123,9 +133,9 @@
             android:paddingLeft="20px"
             android:text="@string/cd_fb"
             android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textColor="@color/fb_color"
+            android:backgroundTint="@color/fb_color"
+            android:textSize="16sp" />
     </FrameLayout>
 
     <FrameLayout
@@ -156,15 +166,15 @@
             android:paddingLeft="20px"
             android:text="@string/cd_gl"
             android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textColor="@color/gl_color"
+            android:backgroundTint="@color/gl_color"/>
     </FrameLayout>
 
     <ImageView
         android:id="@+id/imageView4"
-        android:layout_width="133dp"
-        android:layout_height="127dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -174,6 +184,6 @@
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:srcCompat="@drawable/logoappoint" />
 
 </android.support.constraint.ConstraintLayout>

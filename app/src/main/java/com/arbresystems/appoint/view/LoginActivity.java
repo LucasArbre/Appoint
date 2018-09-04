@@ -1,13 +1,19 @@
 package com.arbresystems.appoint.view;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.arbresystems.appoint.R;
@@ -54,11 +60,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+    private Dialog janela;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
+        janela = new Dialog(this);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -118,7 +127,12 @@ public class LoginActivity extends AppCompatActivity {
 
         final SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
-
+        btnEntrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostrarPopUp(v);
+            }
+        });
         /*btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -169,6 +183,29 @@ public class LoginActivity extends AppCompatActivity {
         });*/
     }
 
+    public void mostrarPopUp(View v){
+        janela.setContentView(R.layout.custom_pop_up);
+        EditText codigo =(EditText) janela.findViewById(R.id.editCodigo);
+        Button confirma =(Button) janela.findViewById(R.id.btnConfirma);
+        Button cancela =(Button) janela.findViewById(R.id.btnCancela);
+
+        confirma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //confirma o codigo
+            }
+        });
+
+        cancela.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //fecha o pop-up
+                janela.dismiss();
+            }
+        });
+        janela.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        janela.show();
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (a == 1) {

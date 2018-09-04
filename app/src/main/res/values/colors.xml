@@ -8,4 +8,9 @@
     <color name="fb_color">#3B5998</color>
     <color name="gl_color">#dc4e41</color>
     <color name="tel_color">#00ff50</color>
+    <color name="colorOposite">#f44242</color>
+
+    <color name="gradientDark">#001021</color>
+    <color name="gradientLight">#002247</color>
+
 </resources>
