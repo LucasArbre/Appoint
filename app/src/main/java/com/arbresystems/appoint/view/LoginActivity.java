@@ -1,14 +1,12 @@
 package com.arbresystems.appoint.view;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -50,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button btnEntrar;
     private Button btnFacebook;
+    private Button btnGoogle;
     //private
 
     private CallbackManager callbackManager;
@@ -68,6 +67,9 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
         janela = new Dialog(this);
+
+        btnFacebook = findViewById(R.id.btnFacebook);
+        btnGoogle = findViewById(R.id.btnGoogle);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -94,6 +96,15 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 a = 2;
                 signIn();
+            }
+        });
+
+        btnGoogle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                a = 2;
+                signIn();
+                Log.e("teste2", "teste2");
             }
         });
 
@@ -181,6 +192,14 @@ public class LoginActivity extends AppCompatActivity {
                         });
             }
         });*/
+
+        btnFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("teste", "teste");
+                loginButton.performClick();
+            }
+        });
     }
 
     public void mostrarPopUp(View v){
