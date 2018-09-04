@@ -4,6 +4,7 @@
     <!--login-->
     <string name="esqueceuSenha">Esqueceu a senha?</string>
     <string name="login">Entrar</string>
+    <string name="loginTel">Entrar com Telefone</string>
     <string name="cadastrar">Cadastrar</string>
     <string name="codigo">Insira o código enviado ao seu dispositivo.</string>
     <string name="pronto">Pronto</string>
@@ -19,8 +20,8 @@
     <string name="facebook_app_id">441677559571677</string>
     <string name="fb_login_protocol_scheme">fb441677559571677</string>
 
-    <string name="cd_gl">Google</string>
-    <string name="cd_fb">Facebook</string>
+    <string name="cd_gl">Entrar com Google</string>
+    <string name="cd_fb">Entrar com Facebook</string>
     <string name="ou">Ou</string>
     <string name="nav_home">home</string>
     <string name="nav_search">search</string>
