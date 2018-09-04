@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:background="@drawable/ic_check"
         android:backgroundTint="@color/tel_color" />
+    <!--android:background="@drawable/ic_check"-->
 
 </RelativeLayout>

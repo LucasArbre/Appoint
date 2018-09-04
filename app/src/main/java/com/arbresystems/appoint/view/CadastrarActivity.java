@@ -84,13 +84,13 @@ public class CadastrarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
-        setContentView(R.layout.activity_cadastrar);
+        //setContentView(R.layout.activity_cadastrar);
 
         dialog = new Dialog(this);
 
         txtName = findViewById(R.id.txtName);
         txtTel = findViewById(R.id.txtTel);
-        btnFacebook = findViewById(R.id.btnFB);
+        //btnFacebook = findViewById(R.id.btnFB);
         //txtCod = findViewById(R.id.txtCod);
        // btnCadastro = findViewById(R.id.btnCadastro);
         //btnVerificarCodigo = findViewById(R.id.btnVerificarCodigo);

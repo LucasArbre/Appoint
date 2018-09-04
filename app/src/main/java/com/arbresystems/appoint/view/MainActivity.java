@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         if (sp.getString("token", null) == null){
             //login
-            Intent intent = new Intent(getApplicationContext(), InicioActivity.class);
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
             finish();
         }else{
