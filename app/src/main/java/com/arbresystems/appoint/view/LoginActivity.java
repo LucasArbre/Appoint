@@ -1,8 +1,11 @@
 package com.arbresystems.appoint.view;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -57,11 +60,14 @@ public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+    private Dialog janela;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
+        janela = new Dialog(this);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -124,29 +130,7 @@ public class LoginActivity extends AppCompatActivity {
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder popUp=new AlertDialog.Builder(LoginActivity.this);
-                popUp.setTitle(getString(R.string.codigo));
-
-                final EditText codigo = new EditText(LoginActivity.this);
-
-                popUp.setView(codigo);
-
-
-                popUp.setPositiveButton(getString(R.string.pronto), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Verifica o código enviado por telefone para efetuar o login.
-                    }
-                });
-                popUp.setNegativeButton(getString(R.string.cancelar), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //Fecha o pop-up.
-                    }
-                });
-                AlertDialog janela = popUp.create();
-                janela.show();
-
+                mostrarPopUp(v);
             }
         });
         /*btnEntrar.setOnClickListener(new View.OnClickListener() {
@@ -199,6 +183,29 @@ public class LoginActivity extends AppCompatActivity {
         });*/
     }
 
+    public void mostrarPopUp(View v){
+        janela.setContentView(R.layout.custom_pop_up);
+        EditText codigo =(EditText) janela.findViewById(R.id.editCodigo);
+        Button confirma =(Button) janela.findViewById(R.id.btnConfirma);
+        Button cancela =(Button) janela.findViewById(R.id.btnCancela);
+
+        confirma.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //confirma o codigo
+            }
+        });
+
+        cancela.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //fecha o pop-up
+                janela.dismiss();
+            }
+        });
+        janela.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        janela.show();
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (a == 1) {
