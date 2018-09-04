@@ -287,6 +287,7 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser user = mAuth.getCurrentUser();
                             Log.e("email", user.getEmail());
                             Log.e("numero", user.getPhoneNumber());
+                            startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -315,6 +316,7 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Log.e("email", user.getEmail());
+                            startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
