@@ -15,9 +15,6 @@ public class PrincipalActivity extends AppCompatActivity {
 
     private BottomNavigationView mMainNav;
     private FrameLayout mMainFrame;
-    private HomeFragment homeFragment;
-    private SearchFragment searchFragment;
-    private MenuFragment menuFragment;
 
 
     @Override
@@ -25,21 +22,22 @@ public class PrincipalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
-        mMainFrame =(FrameLayout)findViewById(R.id.main_frame);
-        mMainNav = (BottomNavigationView) findViewById(R.id.main_nav);
+        mMainFrame = findViewById(R.id.main_frame);
+        mMainNav = findViewById(R.id.main_nav);
+        mMainNav.setOnNavigationItemSelectedListener(navListener);
 
-        homeFragment = new HomeFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new HomeFragment()).commit();
+
+        /*homeFragment = new HomeFragment();
         searchFragment = new SearchFragment();
         menuFragment = new MenuFragment();
 
-        setFragment(homeFragment);
 
         mMainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 switch (item.getItemId()){
-
                     case R.id.nav_home:
                         setFragment(homeFragment);
                         return true;
@@ -54,8 +52,32 @@ public class PrincipalActivity extends AppCompatActivity {
                 }
 
             }
-        });
+        });*/
     }
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Fragment selectedFragment = null;
+
+                    switch (item.getItemId()) {
+                        case R.id.nav_search:
+                            selectedFragment = new SearchFragment();
+                            break;
+                        case R.id.nav_home:
+                            selectedFragment = new HomeFragment();
+                            break;
+                        case R.id.nav_menu:
+                            selectedFragment = new MenuFragment();
+                            break;
+                    }
+                    getSupportFragmentManager().beginTransaction().replace(R.id.main_frame,
+                            selectedFragment).commit();
+                    return true;
+                }
+            };
+
+
 
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
