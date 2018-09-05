@@ -1,8 +1,6 @@
 package com.arbresystems.appoint;
 
 import com.arbresystems.appoint.servicos.Usuario;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import java.security.cert.CertificateException;
 
@@ -20,15 +18,11 @@ public class RetrofitConfig {
     private final Retrofit retrofit;
 
     public RetrofitConfig(){
-        Gson gson = new GsonBuilder()
-                .serializeNulls()
-                .setLenient()
-                .create();
 
         this.retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.appoint.arbresystems.com/")
                 .client(getUnsafeOkHttpClient())
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 
