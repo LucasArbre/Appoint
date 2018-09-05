@@ -8,7 +8,6 @@
     android:background="@drawable/edit_fundo"
     tools:layout_editor_absoluteY="25dp">
 
-
     <EditText
         android:id="@+id/txtName"
         android:layout_width="0dp"
@@ -17,7 +16,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="@color/colorPrimary"
         android:ems="10"
         android:hint="@string/nome"
@@ -27,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/txtTel"
@@ -47,17 +46,17 @@
     <Button
         android:id="@+id/btnEntrar"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_marginEnd="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/edit_btn"
-        android:text="@string/loginTel"
+        android:text="@string/login"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTel" />
 
@@ -85,21 +84,17 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
+            android:background="@color/colorPrimary"
             android:layout_marginStart="16dp"
-            android:layout_toLeftOf="@id/tvText"
-            android:layout_toStartOf="@id/tvText"
-            android:background="@color/colorPrimary" />
+            android:layout_toStartOf="@id/tvText" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_centerVertical="true"
-            android:layout_marginRight="16dp"
+            android:background="@color/colorPrimary"
             android:layout_marginEnd="16dp"
-            android:layout_toRightOf="@id/tvText"
-            android:layout_toEndOf="@id/tvText"
-            android:background="@color/colorPrimary" />
+            android:layout_toEndOf="@id/tvText" />
 
     </RelativeLayout>
 
@@ -107,13 +102,12 @@
         android:id="@+id/frameLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/frameLayout2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
 
@@ -128,30 +122,30 @@
             tools:layout_editor_absoluteY="388dp" />
 
         <Button
-            android:id="@+id/btnFacebook"
+            android:id="@+id/fb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_btn2"
             android:gravity="center"
             android:text="@string/cd_fb"
             android:textAllCaps="false"
-            android:textColor="@color/fb_color"
-            android:backgroundTint="@color/fb_color"
-            android:textSize="16sp" />
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/frameLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout">
+        app:layout_constraintStart_toEndOf="@+id/frameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
@@ -160,32 +154,16 @@
             android:visibility="invisible" />
 
         <Button
-            android:id="@+id/btnGoogle"
+            android:id="@+id/gl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_btn2"
             android:gravity="center"
             android:text="@string/cd_gl"
             android:textAllCaps="false"
+            android:textColor="@color/colorPrimary"
             android:textSize="16sp"
-            android:textColor="@color/gl_color"
-            android:backgroundTint="@color/gl_color"/>
+            android:textStyle="bold" />
     </FrameLayout>
-
-    <ImageView
-        android:contentDescription="@string/app_name"
-        android:id="@+id/imageView4"
-        android:layout_width="95dp"
-        android:layout_height="95dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logoappoint" />
 
 </android.support.constraint.ConstraintLayout>
