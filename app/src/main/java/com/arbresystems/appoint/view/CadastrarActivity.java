@@ -307,7 +307,7 @@ public class CadastrarActivity extends AppCompatActivity {
                                         @Override
                                         public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                                             if (response.isSuccessful()) {
-                                                if (response.body().getErro()) {
+                                                if (true) {
                                                     if (response.body().getDescricao().equals("usuario ja existe")) {
                                                         dialog.dismiss();
 

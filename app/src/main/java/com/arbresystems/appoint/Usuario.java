@@ -19,7 +19,7 @@ public class Usuario {
     private String telefone;
     @SerializedName("erro")
     @Expose
-    private Boolean erro;
+    private String erro;
     @SerializedName("descricao")
     @Expose
     private String descricao;
@@ -52,7 +52,7 @@ public class Usuario {
      * @param nome
      * @param descricao
      */
-    public Usuario(String idUsuario, String nome, String id, String telefone, Boolean erro, String descricao, String token, String ultimaLocalizacao, String email) {
+    public Usuario(String idUsuario, String nome, String id, String telefone, String erro, String descricao, String token, String ultimaLocalizacao, String email) {
         super();
         this.idUsuario = idUsuario;
         this.nome = nome;
@@ -97,11 +97,11 @@ public class Usuario {
         this.telefone = telefone;
     }
 
-    public Boolean getErro() {
+    public String getErro() {
         return erro;
     }
 
-    public void setErro(Boolean erro) {
+    public void setErro(String erro) {
         this.erro = erro;
     }
 
@@ -140,11 +140,11 @@ public class Usuario {
     @Override
     public String toString() {
         return "Usuario{" +
-                "idUsuario=" + idUsuario +
+                "idUsuario='" + idUsuario + '\'' +
                 ", nome='" + nome + '\'' +
                 ", id='" + id + '\'' +
                 ", telefone='" + telefone + '\'' +
-                ", erro=" + erro +
+                ", erro='" + erro + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", token='" + token + '\'' +
                 ", ultimaLocalizacao='" + ultimaLocalizacao + '\'' +

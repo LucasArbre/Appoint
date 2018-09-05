@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.arbresystems.appoint.R;
+import com.arbresystems.appoint.RetrofitConfig;
+import com.arbresystems.appoint.Usuario;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -37,6 +39,10 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.arbresystems.appoint.view.MainActivity.PREF_NAME;
 
@@ -61,6 +67,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private Dialog janela;
 
+    private SharedPreferences sp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,6 +82,8 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         mSignInButton = (SignInButton) findViewById(R.id.sign_in_button);
+
+        sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -285,9 +295,12 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Log.e("email", user.getEmail());
-                            Log.e("numero", user.getPhoneNumber());
-                            startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
+                            Usuario usuario = new Usuario();
+                            usuario.setEmail(user.getEmail());
+                            usuario.setNome(user.getDisplayName());
+                            usuario.setId(user.getUid());
+                            cadastrarUsuario(usuario);
+                            //startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -315,8 +328,12 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Log.e("email", user.getEmail());
-                            startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
+                            Usuario usuario = new Usuario();
+                            usuario.setEmail(user.getEmail());
+                            usuario.setNome(user.getDisplayName());
+                            usuario.setId(user.getUid());
+                            cadastrarUsuario(usuario);
+                            //startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -325,5 +342,44 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void cadastrarUsuario(Usuario usuario) {
+        Log.e("usuario", usuario.toString());
+        Log.e("batata", "batata");
+
+        new RetrofitConfig().getCadastroService().cadastro(usuario).enqueue(
+                new Callback<Usuario>() {
+                    @Override
+                    public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                        if (response.isSuccessful()) {
+                            if (Boolean.valueOf(response.body().getErro())) {
+                                if (response.body().getDescricao().equals("usuario ja existe")) {
+                                    Toast.makeText(getApplicationContext(), "Usuário ja existe!",
+                                            Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Erro cadastrar usuário!",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                SharedPreferences.Editor editor = sp.edit();
+                                editor.putString("token", response.body().getToken());
+                                editor.apply();
+                                Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!",
+                                        Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
+                                finish();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Usuario> call, Throwable t) {
+                        Log.e("erro", t.getMessage());
+                        Toast.makeText(getApplicationContext(), "Impossível cadastrar usuário!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
     }
 }

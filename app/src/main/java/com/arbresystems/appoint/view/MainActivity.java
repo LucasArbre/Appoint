@@ -12,7 +12,7 @@ import com.facebook.appevents.AppEventsLogger;
 
 public class MainActivity extends AppCompatActivity {
     public static String PREF_NAME = "SP";
-    public static  int SPLASH_TIME_OUT = 2000;
+    public static int SPLASH_TIME_OUT = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -20,14 +20,6 @@
             android:summary="#Email Atual">
         </EditTextPreference>
         <EditTextPreference
-            android:dialogTitle="@string/Senha"
-            android:dialogMessage="@string/novaSenha"
-            android:inputType="textPassword"
-            android:key="key_senha_usr"
-            android:title="@string/Senha"
-            android:summary="#*******">
-        </EditTextPreference>
-        <EditTextPreference
             android:dialogTitle="@string/Telefone"
             android:dialogMessage="@string/novoTelefone"
             android:inputType="phone"
