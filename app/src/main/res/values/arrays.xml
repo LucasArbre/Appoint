@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tempo_notif">
+        <item>5 @string/minutos</item>
+        <item>15 @string/minutos</item>
+        <item>30 @string/minutos</item>
+        <item>1 @string/hora</item>
+        <item>12 @string/horas</item>
+        <item>1 @string/dia</item>
+    </string-array>
+    <string-array name="tempo_notif_values">
+        <item>5</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>720</item>
+        <item>1440</item>
+    </string-array>
+</resources>

@@ -29,5 +29,27 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="usuario">Usuário</string>
+    <string name="seuNome">Seu Nome</string>
+    <string name="novoNome">Entre seu novo nome</string>
+    <string name="Nome">Nome</string>
+    <string name="Email">Email</string>
+    <string name="seuEmail">Seu Email</string>
+    <string name="novoEmail">Entre seu novo email</string>
+    <string name="Senha">Senha</string>
+    <string name="novaSenha">Insira uma nova senha</string>
+    <string name="Telefone">Telefone</string>
+    <string name="novoTelefone">Insira o novo número de telefone</string>
+    <string name="notificacoes">Notificações</string>
+    <string name="novoPlano">Alterar Plano</string>
+    <string name="conta">Conta</string>
+    <string name="minutos">minutos</string>
+    <string name="hora">hora</string>
+    <string name="horas">horas</string>
+    <string name="dia">dia</string>
+    <string name="tempoNotificacao">Selecione o tempo de antecedencia para sua notificação</string>
+    <string name="tempoAntecedencia">Antecedência das notificações</string>
+    <string name="sair">Sair</string>
+    <string name="ativarNotif">Ativar notificações</string>
 
 </resources>
