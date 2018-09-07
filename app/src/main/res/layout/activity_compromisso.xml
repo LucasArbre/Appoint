@@ -1,9 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".view.CompromissoActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/ic_back"
+            android:backgroundTint="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/textView2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="7dp"
+            android:background="@drawable/ic_excluir"
+            android:backgroundTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/button2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="60dp"
+            android:text="Nome Compromisso"
+            android:textColor="@color/white"
+            android:textFontWeight="bold"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:drawableLeft="@drawable/ic_horario"
+        android:id="@+id/txtHorario"
+        android:padding="10dp"
+        android:gravity="center|start"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="13:00 - 15:00 (12/05)"
+        android:drawablePadding="5dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:drawableLeft="@drawable/ic_local"
+        android:drawablePadding="5dp"
+        android:padding="10dp"
+        android:gravity="center|start"
+        android:id="@+id/txtEndereco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rua Garcia, número 39, bairro Real Madrir, Goioerê, Paraná, Brasil"
+        android:textSize="16sp" />
+
+    <TextView
+        android:drawablePadding="5dp"
+        android:gravity="center|start"
+        android:drawableLeft="@drawable/ic_pessoa"
+        android:padding="10dp"
+        android:id="@+id/txtNomeEstabelecimento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cabelos Cabeludos"
+        android:textSize="16sp" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="15dp"
+        android:background="@color/colorPrimary" />
+
+    <Button
+        android:id="@+id/button3"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_editar"
+        android:drawablePadding="-35dp"
+        android:gravity="center"
+        android:text="Editar"
+        android:textAlignment="center" />
+</LinearLayout>

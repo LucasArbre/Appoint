@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.LoginActivity"
-    android:background="@drawable/edit_fundo"
     tools:layout_editor_absoluteY="25dp">
 
     <EditText
@@ -135,7 +134,8 @@
             android:gravity="center"
             android:text="@string/cd_fb"
             android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/fb_color"
+            android:backgroundTint="@color/fb_color"
             android:textSize="16sp"
             android:textStyle="bold" />
     </FrameLayout>
@@ -169,7 +169,8 @@
             android:gravity="center"
             android:text="@string/cd_gl"
             android:textAllCaps="false"
-            android:textColor="@color/colorPrimary"
+            android:textColor="@color/gl_color"
+            android:backgroundTint="@color/gl_color"
             android:textSize="16sp"
             android:textStyle="bold" />
     </FrameLayout>

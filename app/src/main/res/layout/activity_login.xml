@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.LoginActivity"
-    android:background="@drawable/edit_fundo"
     tools:layout_editor_absoluteY="25dp">
+    <!--android:background="@drawable/edit_fundo"-->
 
 
     <EditText
+        android:background="ed"
         android:id="@+id/txtName"
         android:layout_width="0dp"
         android:layout_height="43dp"
@@ -180,7 +181,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:contentDescription="@string/app_name"
         app:layout_constraintBottom_toTopOf="@+id/txtName"
         app:layout_constraintEnd_toEndOf="parent"
