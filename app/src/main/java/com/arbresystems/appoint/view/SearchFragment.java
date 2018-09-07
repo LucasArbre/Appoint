@@ -4,11 +4,21 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.arbresystems.appoint.R;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -51,7 +61,8 @@ public class SearchFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
+    private ListView pesquisaAdm;
+    private ArrayAdapter<String> adapter;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +70,39 @@ public class SearchFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        pesquisaAdm = pesquisaAdm.findViewById(R.id.pesquisaAdm);
+        ArrayList<String> estabelecimentos = new ArrayList<>();
+        estabelecimentos.addAll(Arrays.asList(getResources().getStringArray(R.array.my_estabelecimentos)));
+        adapter = new ArrayAdapter<String>(
+                getActivity().getApplicationContext(),
+                android.R.layout.simple_list_item_1,
+                estabelecimentos
+        );
+        pesquisaAdm.setAdapter(adapter);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        //MenuInflater inflater1 = getMenuInflater();
+        inflater.inflate(R.menu.search_menu, menu);
+        MenuItem item = menu.findItem(R.id.pesquisaAdm);
+        SearchView searchView = (SearchView) item.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        //return super.onCreateOptionsMenu(menu);
     }
 
     @Override

@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.CadastrarActivity" />
-        <activity android:name=".view.ConfigActivity"/>
+        <activity android:name=".view.ConfigActivity" />
         <activity android:name=".view.PrincipalActivity" />
         <activity android:name=".view.LoginActivity" />
 
@@ -45,6 +45,12 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
+        <activity android:name=".view.PerfilAdmActivity" />
+        <activity android:name=".view.CompromissoActivity" />
+        <activity android:name=".view.EditCompromissoActivity" />
+        <activity
+            android:name=".view.AgendarActivity"
+            android:label="@string/title_activity_agendar"></activity>
     </application>
 
 </manifest>
