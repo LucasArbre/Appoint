@@ -9,7 +9,7 @@
             android:inputType="textCapWords"
             android:key="key_nome_usr"
             android:title="@string/Nome"
-            android:summary="#Nome Atual">
+            android:summary="Lucas Garcia">
         </EditTextPreference>
         <EditTextPreference
             android:dialogTitle="@string/seuEmail"
@@ -17,7 +17,7 @@
             android:inputType="textEmailAddress"
             android:key="key_email_usr"
             android:title="@string/Email"
-            android:summary="#Email Atual">
+            android:summary="lucas@arbresystems.com">
         </EditTextPreference>
         <EditTextPreference
             android:dialogTitle="@string/Telefone"
@@ -25,7 +25,7 @@
             android:inputType="phone"
             android:key="key_telefone_usr"
             android:title="@string/Telefone"
-            android:summary="#+55(44)9998-8877">
+            android:summary="+55(44)9998-8877">
         </EditTextPreference>
     </PreferenceCategory>
     <PreferenceCategory
@@ -34,6 +34,7 @@
         <SwitchPreference
             android:key="key_notificacoes_habilitar"
             android:editable="true"
+            android:defaultValue="true"
             android:title="@string/ativarNotif">
 
         </SwitchPreference>
@@ -41,7 +42,8 @@
             android:dialogTitle="@string/tempoNotificacao"
             android:key="key_tempo_config"
             android:title="@string/tempoAntecedencia"
-            android:summary="#1 hora"
+            android:summary="1 hora"
+            android:dependency="key_notificacoes_habilitar"
             android:entries="@array/tempo_notif"
             android:entryValues="@array/tempo_notif_values">
 

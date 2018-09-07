@@ -17,7 +17,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="48dp"
         android:backgroundTint="@color/colorPrimary"
         android:ems="10"
         android:hint="@string/nome"
@@ -111,7 +111,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -132,11 +132,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_btn2"
+            android:backgroundTint="@color/fb_color"
             android:gravity="center"
             android:text="@string/cd_fb"
             android:textAllCaps="false"
             android:textColor="@color/fb_color"
-            android:backgroundTint="@color/fb_color"
             android:textSize="16sp" />
     </FrameLayout>
 
@@ -164,16 +164,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_btn2"
+            android:backgroundTint="@color/gl_color"
             android:gravity="center"
             android:text="@string/cd_gl"
             android:textAllCaps="false"
-            android:textSize="16sp"
             android:textColor="@color/gl_color"
-            android:backgroundTint="@color/gl_color"/>
+            android:textSize="16sp" />
     </FrameLayout>
 
     <ImageView
-        android:contentDescription="@string/app_name"
         android:id="@+id/imageView4"
         android:layout_width="95dp"
         android:layout_height="95dp"
@@ -181,7 +180,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintBottom_toTopOf="@+id/txtName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"

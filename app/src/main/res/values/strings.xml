@@ -51,5 +51,8 @@
     <string name="tempoAntecedencia">Antecedência das notificações</string>
     <string name="sair">Sair</string>
     <string name="ativarNotif">Ativar notificações</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="todo">TODO</string>
+
 
 </resources>
