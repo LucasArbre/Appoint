@@ -319,9 +319,9 @@ public class CadastrarActivity extends AppCompatActivity {
                                                                 Toast.LENGTH_SHORT).show();
                                                     }
                                                 } else {
-                                                    SharedPreferences.Editor editor = sp.edit();
-                                                    editor.putString("token", response.body().getToken());
-                                                    editor.apply();
+                                                    //SharedPreferences.Editor editor = sp.edit();
+                                                    //editor.putString("token", response.body().getToken());
+                                                    //editor.apply();
 
                                                     dialog.dismiss();
 

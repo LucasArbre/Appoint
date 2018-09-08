@@ -9,8 +9,8 @@
     <!--android:background="@drawable/edit_fundo"-->
 
 
+    <!--android:background="ed"-->
     <EditText
-        android:background="ed"
         android:id="@+id/txtName"
         android:layout_width="0dp"
         android:layout_height="43dp"

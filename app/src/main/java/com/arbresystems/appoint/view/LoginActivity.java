@@ -362,9 +362,9 @@ public class LoginActivity extends AppCompatActivity {
                                             Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                SharedPreferences.Editor editor = sp.edit();
-                                editor.putString("token", response.body().getToken());
-                                editor.apply();
+                                //SharedPreferences.Editor editor = sp.edit();
+                                //editor.putString("token", response.body().getToken());
+                                //editor.apply();
                                 Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!",
                                         Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
@@ -375,7 +375,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Usuario> call, Throwable t) {
-                        Log.e("erro", t.getMessage());
+                        Log.e("erro1", t.getMessage());
                         Toast.makeText(getApplicationContext(), "Impossível cadastrar usuário!",
                                 Toast.LENGTH_SHORT).show();
                     }

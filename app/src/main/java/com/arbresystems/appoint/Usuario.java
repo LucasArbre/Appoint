@@ -5,9 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class Usuario {
 
-    @SerializedName("idUsuario")
-    @Expose
-    private String idUsuario;
     @SerializedName("nome")
     @Expose
     private String nome;
@@ -17,21 +14,18 @@ public class Usuario {
     @SerializedName("telefone")
     @Expose
     private String telefone;
-    @SerializedName("erro")
-    @Expose
-    private String erro;
-    @SerializedName("descricao")
-    @Expose
-    private String descricao;
-    @SerializedName("token")
-    @Expose
-    private String token;
-    @SerializedName("ultimaLocalizacao")
-    @Expose
-    private String ultimaLocalizacao;
     @SerializedName("email")
     @Expose
     private String email;
+    @SerializedName("erro")
+    @Expose
+    private Boolean erro;
+    @SerializedName("descricao")
+    @Expose
+    private String descricao;
+    @SerializedName("idUsuario")
+    @Expose
+    private Integer idUsuario;
 
     /**
      * No args constructor for use in serialization
@@ -44,32 +38,20 @@ public class Usuario {
      *
      * @param id
      * @param idUsuario
-     * @param email
-     * @param token
      * @param erro
+     * @param email
      * @param telefone
-     * @param ultimaLocalizacao
      * @param nome
      * @param descricao
      */
-    public Usuario(String idUsuario, String nome, String id, String telefone, String erro, String descricao, String token, String ultimaLocalizacao, String email) {
+    public Usuario(String nome, String id, String telefone, String email, Boolean erro, String descricao, Integer idUsuario) {
         super();
-        this.idUsuario = idUsuario;
         this.nome = nome;
         this.id = id;
         this.telefone = telefone;
+        this.email = email;
         this.erro = erro;
         this.descricao = descricao;
-        this.token = token;
-        this.ultimaLocalizacao = ultimaLocalizacao;
-        this.email = email;
-    }
-
-    public String getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(String idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -97,11 +79,19 @@ public class Usuario {
         this.telefone = telefone;
     }
 
-    public String getErro() {
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Boolean getErro() {
         return erro;
     }
 
-    public void setErro(String erro) {
+    public void setErro(Boolean erro) {
         this.erro = erro;
     }
 
@@ -113,42 +103,12 @@ public class Usuario {
         this.descricao = descricao;
     }
 
-    public String getToken() {
-        return token;
+    public Integer getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public String getUltimaLocalizacao() {
-        return ultimaLocalizacao;
-    }
-
-    public void setUltimaLocalizacao(String ultimaLocalizacao) {
-        this.ultimaLocalizacao = ultimaLocalizacao;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "idUsuario='" + idUsuario + '\'' +
-                ", nome='" + nome + '\'' +
-                ", id='" + id + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", erro='" + erro + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", token='" + token + '\'' +
-                ", ultimaLocalizacao='" + ultimaLocalizacao + '\'' +
-                ", email='" + email + '\'' +
-                '}';
-    }
 }
