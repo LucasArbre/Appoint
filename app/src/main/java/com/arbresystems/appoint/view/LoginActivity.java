@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.arbresystems.appoint.R;
-import com.arbresystems.appoint.RetrofitConfig;
 import com.arbresystems.appoint.Usuario;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -39,10 +38,13 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.gson.GsonBuilder;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.arbresystems.appoint.view.MainActivity.PREF_NAME;
 
@@ -329,10 +331,12 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             Usuario usuario = new Usuario();
-                            usuario.setEmail(user.getEmail());
-                            usuario.setNome(user.getDisplayName());
-                            usuario.setId(user.getUid());
-                            cadastrarUsuario(usuario);
+                            if (user != null) {
+                                usuario.setEmail(user.getEmail());
+                                usuario.setNome(user.getDisplayName());
+                                usuario.setId(user.getUid());
+                                cadastrarUsuario(usuario);
+                            }
                             //startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
@@ -347,39 +351,47 @@ public class LoginActivity extends AppCompatActivity {
     public void cadastrarUsuario(Usuario usuario) {
         Log.e("usuario", usuario.toString());
         Log.e("batata", "batata");
+        usuario.setNome("teste");
+        usuario.setEmail("teste");
+        usuario.setId("teste");
 
-        new RetrofitConfig().getCadastroService().cadastro(usuario).enqueue(
-                new Callback<Usuario>() {
-                    @Override
-                    public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                        if (response.isSuccessful()) {
-                            if (Boolean.valueOf(response.body().getErro())) {
-                                if (response.body().getDescricao().equals("usuario ja existe")) {
-                                    Toast.makeText(getApplicationContext(), "Usuário ja existe!",
-                                            Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "Erro cadastrar usuário!",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                //SharedPreferences.Editor editor = sp.edit();
-                                //editor.putString("token", response.body().getToken());
-                                //editor.apply();
-                                Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!",
-                                        Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
-                                finish();
-                            }
+        Usuario usuario1 = new Usuario("sdcsd", "sdf", "dfefd", "ffew", "fewfwefwe", "efewfew", "efwefew", false, "fwefew", 0);
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.appoint.arbresystems.com/")
+                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setLenient().create())).build();
+        com.arbresystems.appoint.servicos.Usuario usuarioService = retrofit.create(com.arbresystems.appoint.servicos.Usuario.class);
+
+        Call<Usuario> usuarioCall = usuarioService.cadastro(usuario1);
+        usuarioCall.enqueue(new Callback<Usuario>() {
+            @Override
+            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                if (response.isSuccessful()) {
+                    if (Boolean.valueOf(response.body().getErro())) {
+                        if (response.body().getDescricao().equals("usuario ja existe")) {
+                            Toast.makeText(getApplicationContext(), "Usuário ja existe!",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Erro cadastrar usuário!",
+                                    Toast.LENGTH_SHORT).show();
                         }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Usuario> call, Throwable t) {
-                        Log.e("erro1", t.getMessage());
-                        Toast.makeText(getApplicationContext(), "Impossível cadastrar usuário!",
+                    } else {
+                        //SharedPreferences.Editor editor = sp.edit();
+                        //editor.putString("token", response.body().getToken());
+                        //editor.apply();
+                        Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!",
                                 Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
+                        finish();
                     }
                 }
-        );
+            }
+
+            @Override
+            public void onFailure(Call<Usuario> call, Throwable t) {
+                Log.e("erro1", t.getMessage());
+                Toast.makeText(getApplicationContext(), "Impossível cadastrar usuário!",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

@@ -1,12 +1,10 @@
 package com.arbresystems.appoint;
 
 import com.arbresystems.appoint.servicos.Usuario;
-import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.security.cert.CertificateException;
-import java.text.DateFormat;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
@@ -25,17 +23,10 @@ public class RetrofitConfig {
 
         Gson gson = new GsonBuilder()
                 .setLenient()
-                .enableComplexMapKeySerialization()
-                .serializeNulls()
-                .setDateFormat(DateFormat.LONG)
-                .setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE)
-                .setPrettyPrinting()
-                .setVersion(1.0)
                 .create();
 
         this.retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.appoint.arbresystems.com/")
-                .client(getUnsafeOkHttpClient())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
     }

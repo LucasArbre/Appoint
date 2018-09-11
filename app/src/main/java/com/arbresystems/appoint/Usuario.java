@@ -5,18 +5,27 @@ import com.google.gson.annotations.SerializedName;
 
 public class Usuario {
 
-    @SerializedName("nome")
-    @Expose
-    private String nome;
     @SerializedName("id")
     @Expose
     private String id;
-    @SerializedName("telefone")
+    @SerializedName("nome")
     @Expose
-    private String telefone;
+    private String nome;
     @SerializedName("email")
     @Expose
     private String email;
+    @SerializedName("telefone")
+    @Expose
+    private String telefone;
+    @SerializedName("senha")
+    @Expose
+    private String senha;
+    @SerializedName("CPF")
+    @Expose
+    private String cPF;
+    @SerializedName("dataNascimento")
+    @Expose
+    private String dataNascimento;
     @SerializedName("erro")
     @Expose
     private Boolean erro;
@@ -41,26 +50,24 @@ public class Usuario {
      * @param erro
      * @param email
      * @param telefone
+     * @param dataNascimento
      * @param nome
+     * @param senha
      * @param descricao
+     * @param cPF
      */
-    public Usuario(String nome, String id, String telefone, String email, Boolean erro, String descricao, Integer idUsuario) {
+    public Usuario(String id, String nome, String email, String telefone, String senha, String cPF, String dataNascimento, Boolean erro, String descricao, Integer idUsuario) {
         super();
-        this.nome = nome;
         this.id = id;
-        this.telefone = telefone;
+        this.nome = nome;
         this.email = email;
+        this.telefone = telefone;
+        this.senha = senha;
+        this.cPF = cPF;
+        this.dataNascimento = dataNascimento;
         this.erro = erro;
         this.descricao = descricao;
         this.idUsuario = idUsuario;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getId() {
@@ -71,12 +78,12 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getNome() {
+        return nome;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEmail() {
@@ -85,6 +92,38 @@ public class Usuario {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getCPF() {
+        return cPF;
+    }
+
+    public void setCPF(String cPF) {
+        this.cPF = cPF;
+    }
+
+    public String getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public Boolean getErro() {
