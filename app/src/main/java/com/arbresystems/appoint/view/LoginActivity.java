@@ -33,12 +33,19 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseException;
+import com.google.firebase.FirebaseTooManyRequestsException;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthProvider;
+
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -68,6 +75,13 @@ public class LoginActivity extends AppCompatActivity {
 
     private SharedPreferences sp;
 
+    private String nome;
+    private String telefone;
+    private EditText txtName;
+    private EditText txtTel;
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks verificationCallbacks;
+    private String phoneVerificationId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +91,8 @@ public class LoginActivity extends AppCompatActivity {
 
         btnFacebook = findViewById(R.id.btnFacebook);
         btnGoogle = findViewById(R.id.btnGoogle);
+        txtName = findViewById(R.id.txtName);
+        txtTel = findViewById(R.id.txtTel);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -266,6 +282,128 @@ public class LoginActivity extends AppCompatActivity {
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    public void sendCode(View view) {
+        telefone = txtTel.getText().toString();
+        nome = txtName.getText().toString(); //
+
+        if (telefone.length() == 0 || nome.length() == 0) {
+            Toast.makeText(getApplicationContext(), "Digite um nome e um número de telefone!",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(getApplicationContext(), "Enviando código...",
+                    Toast.LENGTH_LONG).show();
+
+            setUpVerificatonCallbacks();
+
+            //btnVerificarCodigo.setEnabled(true);
+            //txtCod.setEnabled(true);
+
+            PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                    telefone,        // Phone number to verify
+                    60,                 // Timeout duration
+                    TimeUnit.SECONDS,   // Unit of timeout
+                    this,               // Activity (for callback binding)
+                    verificationCallbacks);        // OnVerificationStateChangedCallbacks
+        }
+    }
+
+    private void setUpVerificatonCallbacks() {
+        verificationCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+
+            @Override
+            public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+                //se td der certo
+                signInWhithPhoneAuthCredential(phoneAuthCredential);
+            }
+
+            @Override
+            public void onVerificationFailed(FirebaseException e) {
+                //se td der errado
+                Toast.makeText(getApplicationContext(), "Erro ao processar o envio!",
+                        Toast.LENGTH_SHORT).show();
+                if (e instanceof FirebaseAuthInvalidCredentialsException) {
+                    Log.e(TAG, "Crendencial inválida: " + e.getLocalizedMessage());
+                } else if (e instanceof FirebaseTooManyRequestsException) {
+                    Log.e(TAG, "Cota de SMS excedida!");
+                }
+            }
+
+            @Override
+            public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                phoneVerificationId = s;
+            }
+        };
+    }
+
+    private void signInWhithPhoneAuthCredential(PhoneAuthCredential credential) {
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            //acho que deu certo
+                            FirebaseUser user = task.getResult().getUser();
+                            Toast.makeText(getApplicationContext(), "Código correto!", Toast.LENGTH_SHORT).show();
+
+                            dialog.setContentView(R.layout.load);
+                            dialog.show();
+
+                            final Usuario usuario = new Usuario();
+                            usuario.setNome(nome);
+                            usuario.setId(user.getUid());
+                            usuario.setTelefone(telefone);
+
+                            Log.e("usuario", usuario.toString());
+                            new RetrofitConfig().getCadastroService().cadastro(usuario).enqueue(
+                                    new Callback<Usuario>() {
+
+                                        @Override
+                                        public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                                            if (response.isSuccessful()) {
+                                                if (true) {
+                                                    if (response.body().getDescricao().equals("usuario ja existe")) {
+                                                        dialog.dismiss();
+
+                                                        Toast.makeText(getApplicationContext(), "Usuário ja existe!",
+                                                                Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        dialog.dismiss();
+                                                        Toast.makeText(getApplicationContext(), "Erro cadastrar usuário!",
+                                                                Toast.LENGTH_SHORT).show();
+                                                    }
+                                                } else {
+                                                    //SharedPreferences.Editor editor = sp.edit();
+                                                    //editor.putString("token", response.body().getToken());
+                                                    //editor.apply();
+
+                                                    dialog.dismiss();
+
+                                                    Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!",
+                                                            Toast.LENGTH_SHORT).show();
+                                                    startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
+                                                    onDestroy();
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<Usuario> call, Throwable t) {
+                                            Log.e("erro", t.getMessage());
+                                            Toast.makeText(getApplicationContext(), "Impossível cadastrar usuário!",
+                                                    Toast.LENGTH_SHORT).show();
+                                            dialog.dismiss();
+                                        }
+                                    });
+                        } else {
+                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                //o código de verificação inserido era inválido
+                                Toast.makeText(getApplicationContext(), "Código inválido", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
