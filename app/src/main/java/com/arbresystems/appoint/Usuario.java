@@ -5,9 +5,18 @@ import com.google.gson.annotations.SerializedName;
 
 public class Usuario {
 
-    @SerializedName("id")
+    @SerializedName("erro")
     @Expose
-    private String id;
+    private boolean erro;
+    @SerializedName("descricao")
+    @Expose
+    private String descricao;
+    @SerializedName("idUsuario")
+    @Expose
+    private String idUsuario;
+    @SerializedName("token")
+    @Expose
+    private String token;
     @SerializedName("nome")
     @Expose
     private String nome;
@@ -17,24 +26,12 @@ public class Usuario {
     @SerializedName("telefone")
     @Expose
     private String telefone;
-    @SerializedName("senha")
-    @Expose
-    private String senha;
-    @SerializedName("CPF")
-    @Expose
-    private String cPF;
     @SerializedName("dataNascimento")
     @Expose
     private String dataNascimento;
-    @SerializedName("erro")
+    @SerializedName("id")
     @Expose
-    private Boolean erro;
-    @SerializedName("descricao")
-    @Expose
-    private String descricao;
-    @SerializedName("idUsuario")
-    @Expose
-    private Integer idUsuario;
+    private String id;
 
     /**
      * No args constructor for use in serialization
@@ -47,35 +44,57 @@ public class Usuario {
      *
      * @param id
      * @param idUsuario
-     * @param erro
      * @param email
+     * @param token
+     * @param erro
      * @param telefone
      * @param dataNascimento
      * @param nome
-     * @param senha
      * @param descricao
-     * @param cPF
      */
-    public Usuario(String id, String nome, String email, String telefone, String senha, String cPF, String dataNascimento, Boolean erro, String descricao, Integer idUsuario) {
+    public Usuario(boolean erro, String descricao, String idUsuario, String token, String nome, String email, String telefone, String dataNascimento, String id) {
         super();
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.telefone = telefone;
-        this.senha = senha;
-        this.cPF = cPF;
-        this.dataNascimento = dataNascimento;
         this.erro = erro;
         this.descricao = descricao;
         this.idUsuario = idUsuario;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
+        this.token = token;
+        this.nome = nome;
+        this.email = email;
+        this.telefone = telefone;
+        this.dataNascimento = dataNascimento;
         this.id = id;
+    }
+
+    public boolean isErro() {
+        return erro;
+    }
+
+    public void setErro(boolean erro) {
+        this.erro = erro;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getNome() {
@@ -102,22 +121,6 @@ public class Usuario {
         this.telefone = telefone;
     }
 
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public String getCPF() {
-        return cPF;
-    }
-
-    public void setCPF(String cPF) {
-        this.cPF = cPF;
-    }
-
     public String getDataNascimento() {
         return dataNascimento;
     }
@@ -126,28 +129,12 @@ public class Usuario {
         this.dataNascimento = dataNascimento;
     }
 
-    public Boolean getErro() {
-        return erro;
+    public String getId() {
+        return id;
     }
 
-    public void setErro(Boolean erro) {
-        this.erro = erro;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public Integer getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setId(String id) {
+        this.id = id;
     }
 
 }

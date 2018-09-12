@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.arbresystems.appoint.R;
+import com.arbresystems.appoint.RetrofitConfig;
 import com.arbresystems.appoint.Usuario;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -38,13 +39,10 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.gson.GsonBuilder;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.arbresystems.appoint.view.MainActivity.PREF_NAME;
 
@@ -355,8 +353,22 @@ public class LoginActivity extends AppCompatActivity {
         usuario.setEmail("teste");
         usuario.setId("teste");
 
-        Usuario usuario1 = new Usuario("sdcsd", "sdf", "dfefd", "ffew", "fewfwefwe", "efewfew", "efwefew", false, "fwefew", 0);
+        Usuario usuario1 = new Usuario("eropgrg", "oiouhg", "Oiuhy", "OIyu", "Kiu", false, "iohuigy", "iohug");
 
+        new RetrofitConfig().getCadastroService().cadastro(usuario1).enqueue(
+                new Callback<Usuario>() {
+                    @Override
+                    public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Usuario> call, Throwable t) {
+                        Log.e("erro", t.getMessage());
+                    }
+                }
+        );
+        /*
         Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.appoint.arbresystems.com/")
                 .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setLenient().create())).build();
         com.arbresystems.appoint.servicos.Usuario usuarioService = retrofit.create(com.arbresystems.appoint.servicos.Usuario.class);
@@ -392,6 +404,6 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Impossível cadastrar usuário!",
                         Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
     }
 }
