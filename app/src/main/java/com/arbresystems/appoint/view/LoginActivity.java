@@ -333,6 +333,7 @@ public class LoginActivity extends AppCompatActivity {
                                 usuario.setEmail(user.getEmail());
                                 usuario.setNome(user.getDisplayName());
                                 usuario.setId(user.getUid());
+                                usuario.setTelefone(user.getPhoneNumber());
                                 cadastrarUsuario(usuario);
                             }
                             //startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
@@ -348,62 +349,41 @@ public class LoginActivity extends AppCompatActivity {
 
     public void cadastrarUsuario(Usuario usuario) {
         Log.e("usuario", usuario.toString());
-        Log.e("batata", "batata");
-        usuario.setNome("teste");
-        usuario.setEmail("teste");
-        usuario.setId("teste");
 
-        Usuario usuario1 = new Usuario("eropgrg", "oiouhg", "Oiuhy", "OIyu", "Kiu", false, "iohuigy", "iohug");
 
-        new RetrofitConfig().getCadastroService().cadastro(usuario1).enqueue(
+        new RetrofitConfig().getCadastroService().cadastro(usuario).enqueue(
                 new Callback<Usuario>() {
                     @Override
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-
+                        Log.e("resposta", response.body().toString());
+                        if (response.isSuccessful()) {
+                            if (Boolean.valueOf(response.body().isErro())) {
+                                if (response.body().getDescricao().equals("usuario ja existe")) {
+                                    Toast.makeText(getApplicationContext(), "Usuário ja existe!",
+                                            Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Erro cadastrar usuário!",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                SharedPreferences.Editor editor = sp.edit();
+                                editor.putString("token", response.body().getToken());
+                                editor.apply();
+                                Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!",
+                                        Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
+                                finish();
+                            }
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<Usuario> call, Throwable t) {
                         Log.e("erro", t.getMessage());
+                        Toast.makeText(getApplicationContext(), "Impossível cadastrar usuário!",
+                                Toast.LENGTH_SHORT).show();
                     }
                 }
         );
-        /*
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.appoint.arbresystems.com/")
-                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().setLenient().create())).build();
-        com.arbresystems.appoint.servicos.Usuario usuarioService = retrofit.create(com.arbresystems.appoint.servicos.Usuario.class);
-
-        Call<Usuario> usuarioCall = usuarioService.cadastro(usuario1);
-        usuarioCall.enqueue(new Callback<Usuario>() {
-            @Override
-            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                if (response.isSuccessful()) {
-                    if (Boolean.valueOf(response.body().getErro())) {
-                        if (response.body().getDescricao().equals("usuario ja existe")) {
-                            Toast.makeText(getApplicationContext(), "Usuário ja existe!",
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Erro cadastrar usuário!",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        //SharedPreferences.Editor editor = sp.edit();
-                        //editor.putString("token", response.body().getToken());
-                        //editor.apply();
-                        Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!",
-                                Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
-                        finish();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Usuario> call, Throwable t) {
-                Log.e("erro1", t.getMessage());
-                Toast.makeText(getApplicationContext(), "Impossível cadastrar usuário!",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });*/
     }
 }

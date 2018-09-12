@@ -137,4 +137,18 @@ public class Usuario {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "erro=" + erro +
+                ", descricao='" + descricao + '\'' +
+                ", idUsuario='" + idUsuario + '\'' +
+                ", token='" + token + '\'' +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", telefone='" + telefone + '\'' +
+                ", dataNascimento='" + dataNascimento + '\'' +
+                ", id='" + id + '\'' +
+                '}';
+    }
 }
