@@ -295,7 +295,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Enviando código...",
                     Toast.LENGTH_LONG).show();
 
-            setUpVerificatonCallbacks();
+            setUpVerificatonCallbacks(view);
 
             //btnVerificarCodigo.setEnabled(true);
             //txtCod.setEnabled(true);
@@ -309,13 +309,13 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void setUpVerificatonCallbacks() {
+    private void setUpVerificatonCallbacks(final View v) {
         verificationCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
             @Override
             public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
                 //se td der certo
-                signInWhithPhoneAuthCredential(phoneAuthCredential);
+                signInWhithPhoneAuthCredential(phoneAuthCredential, v);
             }
 
             @Override
@@ -337,7 +337,7 @@ public class LoginActivity extends AppCompatActivity {
         };
     }
 
-    private void signInWhithPhoneAuthCredential(PhoneAuthCredential credential) {
+    private void signInWhithPhoneAuthCredential(PhoneAuthCredential credential, final View v) {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -347,8 +347,6 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser user = task.getResult().getUser();
                             Toast.makeText(getApplicationContext(), "Código correto!", Toast.LENGTH_SHORT).show();
 
-                            dialog.setContentView(R.layout.load);
-                            dialog.show();
 
                             final Usuario usuario = new Usuario();
                             usuario.setNome(nome);
