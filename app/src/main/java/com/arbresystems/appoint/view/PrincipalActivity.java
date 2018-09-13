@@ -30,7 +30,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
         /*homeFragment = new HomeFragment();
         searchFragment = new SearchFragment();
-        menuFragment = new MenuFragment();
+        menuFragment = new PromocoesFragment();
 
 
         mMainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -67,8 +67,8 @@ public class PrincipalActivity extends AppCompatActivity {
                         case R.id.nav_home:
                             selectedFragment = new HomeFragment();
                             break;
-                        case R.id.nav_menu:
-                            selectedFragment = new MenuFragment();
+                        case R.id.nav_promos:
+                            selectedFragment = new PromocoesFragment();
                             break;
                     }
                     getSupportFragmentManager().beginTransaction().replace(R.id.main_frame,

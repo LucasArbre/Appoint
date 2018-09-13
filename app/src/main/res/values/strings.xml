@@ -164,6 +164,7 @@
     <string name="promos">Promoções</string>
     <string name="configs">Configurações</string>
     <string name="sobre">Sobre</string>
+    <string name="title_activity_promocoes">PromocoesActivity</string>
 
 
 </resources>
