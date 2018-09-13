@@ -362,12 +362,12 @@ public class LoginActivity extends AppCompatActivity {
                                             if (response.isSuccessful()) {
                                                 if (true) {
                                                     if (response.body().getDescricao().equals("usuario ja existe")) {
-                                                        dialog.dismiss();
+                                                       // dialog.dismiss();
 
                                                         Toast.makeText(getApplicationContext(), "Usuário ja existe!",
                                                                 Toast.LENGTH_SHORT).show();
                                                     } else {
-                                                        dialog.dismiss();
+                                                     //   dialog.dismiss();
                                                         Toast.makeText(getApplicationContext(), "Erro cadastrar usuário!",
                                                                 Toast.LENGTH_SHORT).show();
                                                     }
@@ -376,7 +376,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     //editor.putString("token", response.body().getToken());
                                                     //editor.apply();
 
-                                                    dialog.dismiss();
+                                                    //dialog.dismiss();
 
                                                     Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!",
                                                             Toast.LENGTH_SHORT).show();
@@ -391,7 +391,7 @@ public class LoginActivity extends AppCompatActivity {
                                             Log.e("erro", t.getMessage());
                                             Toast.makeText(getApplicationContext(), "Impossível cadastrar usuário!",
                                                     Toast.LENGTH_SHORT).show();
-                                            dialog.dismiss();
+                                            //dialog.dismiss();
                                         }
                                     });
                         } else {

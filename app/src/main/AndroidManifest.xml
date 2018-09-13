@@ -47,7 +47,6 @@
         </activity>
         <activity android:name=".view.PerfilAdmActivity" />
         <activity android:name=".view.CompromissoActivity" />
-        <activity android:name=".view.EditCompromissoActivity" />
         <activity
             android:name=".view.AgendarActivity"
             android:label="@string/title_activity_agendar"></activity>

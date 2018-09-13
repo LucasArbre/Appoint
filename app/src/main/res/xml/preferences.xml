@@ -11,22 +11,6 @@
             android:title="@string/Nome"
             android:summary="Lucas Garcia">
         </EditTextPreference>
-        <EditTextPreference
-            android:dialogTitle="@string/seuEmail"
-            android:dialogMessage="@string/novoEmail"
-            android:inputType="textEmailAddress"
-            android:key="key_email_usr"
-            android:title="@string/Email"
-            android:summary="lucas@arbresystems.com">
-        </EditTextPreference>
-        <EditTextPreference
-            android:dialogTitle="@string/Telefone"
-            android:dialogMessage="@string/novoTelefone"
-            android:inputType="phone"
-            android:key="key_telefone_usr"
-            android:title="@string/Telefone"
-            android:summary="+55(44)9998-8877">
-        </EditTextPreference>
     </PreferenceCategory>
     <PreferenceCategory
         android:key="categoria_notficacoes"
@@ -53,9 +37,21 @@
     <PreferenceCategory
         android:key="categoria_conta"
         android:title="@string/conta">
-        <Preference
-            android:title="@string/sair"
-            android:key="key_sair_conta">
-        </Preference>
+        <EditTextPreference
+            android:dialogTitle="@string/seuEmail"
+            android:dialogMessage="@string/novoEmail"
+            android:inputType="textEmailAddress"
+            android:key="key_email_usr"
+            android:title="@string/Email"
+            android:summary="lucas@arbresystems.com">
+        </EditTextPreference>
+        <EditTextPreference
+            android:dialogTitle="@string/Telefone"
+            android:dialogMessage="@string/novoTelefone"
+            android:inputType="phone"
+            android:key="key_telefone_usr"
+            android:title="@string/Telefone"
+            android:summary="+55(44)9998-8877">
+        </EditTextPreference>
     </PreferenceCategory>
 </PreferenceScreen>

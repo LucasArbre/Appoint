@@ -30,7 +30,6 @@ public class ConfigActivity extends PreferenceActivity {
             bindSummaryValue(findPreference("key_telefone_usr"));
             bindSummaryValue(findPreference("key_tempo_config"));
 
-            btnDesloga(findPreference("key_sair_conta"));
         }
     }
 
@@ -60,15 +59,4 @@ public class ConfigActivity extends PreferenceActivity {
         }
     };
 
-    private static void btnDesloga(Preference preference){
-        preference.setOnPreferenceClickListener(actListener);
-    }
-
-    private static Preference.OnPreferenceClickListener actListener = new Preference.OnPreferenceClickListener() {
-        @Override
-        public boolean onPreferenceClick(Preference preference) {
-            //codigo de deslogar
-            return false;
-        }
-    };
 }
