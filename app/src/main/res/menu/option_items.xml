@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Configurações" />
-    <item android:title="Sobre" />
-    <item android:title="Sair" />
+    <item
+        android:id="@+id/opt_configs"
+        android:title="@string/configs" />
+    <item
+        android:id="@+id/opt_sobre"
+        android:title="@string/sobre" />
+    <item
+        android:id="@+id/opt_sair"
+        android:title="@string/sair" />
 </menu>

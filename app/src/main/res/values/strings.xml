@@ -162,6 +162,8 @@
     <string name="pesquisar_estabelecimentos">Pesquisar estabelecimentos...</string>
     <string name="slogan">Deixe seus horários mais organizados.</string>
     <string name="promos">Promoções</string>
+    <string name="configs">Configurações</string>
+    <string name="sobre">Sobre</string>
 
 
 </resources>
