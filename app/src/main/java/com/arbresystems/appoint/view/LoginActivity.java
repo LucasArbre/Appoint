@@ -387,7 +387,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void cadastrarUsuario(final Usuario usuario) {
-        Log.e("usuario", usuario.toString());
+        Log.e("usuarioCadastrar", usuario.toString());
 
 
         new RetrofitConfig().getUsuarioService().cadastro(usuario).enqueue(
@@ -426,10 +426,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void logarUsuario(Usuario usuario) {
-        Log.e("usuario", usuario.toString());
+        Log.e("usuarioLogar", usuario.toString());
 
 
-        new RetrofitConfig().getUsuarioService().login(usuario).enqueue(
+        new RetrofitConfig().getUsuarioService().login(usuario.getEmail(), usuario.getTelefone(), usuario.getId()).enqueue(
                 new Callback<Usuario>() {
                     @Override
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
