@@ -81,6 +81,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText txtTel;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks verificationCallbacks;
     private String phoneVerificationId;
+    private Usuario usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -246,7 +247,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Usuario usuario = new Usuario();
+                            usuario = new Usuario();
                             usuario.setEmail(user.getEmail());
                             usuario.setNome(user.getDisplayName());
                             usuario.setId(user.getUid());
@@ -330,8 +331,7 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser user = task.getResult().getUser();
                             Toast.makeText(getApplicationContext(), "Código correto!", Toast.LENGTH_SHORT).show();
 
-
-                            Usuario usuario = new Usuario();
+                            usuario = new Usuario();
                             usuario.setNome(nome);
                             usuario.setId(user.getUid());
                             usuario.setTelefone(telefone);
@@ -366,8 +366,9 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            Usuario usuario = new Usuario();
                             if (user != null) {
+                                Log.e("user", user.toString());
+                                usuario = new Usuario();
                                 usuario.setEmail(user.getEmail());
                                 usuario.setNome(user.getDisplayName());
                                 usuario.setId(user.getUid());
