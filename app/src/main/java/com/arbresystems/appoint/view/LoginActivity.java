@@ -429,7 +429,8 @@ public class LoginActivity extends AppCompatActivity {
         Log.e("usuarioLogar", usuario.toString());
 
 
-        new RetrofitConfig().getUsuarioService().login(usuario.getEmail(), usuario.getTelefone(), usuario.getId()).enqueue(
+        //new RetrofitConfig().getUsuarioService().login(usuario.getEmail(), usuario.getTelefone(), usuario.getId()).enqueue(
+        new RetrofitConfig().getUsuarioService().login(usuario).enqueue(
                 new Callback<Usuario>() {
                     @Override
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
