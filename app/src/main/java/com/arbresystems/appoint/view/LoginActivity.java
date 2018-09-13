@@ -83,12 +83,16 @@ public class LoginActivity extends AppCompatActivity {
     private String phoneVerificationId;
     private Usuario usuario;
 
+    private Dialog load;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
+
         janela = new Dialog(this);
+        load = new Dialog(this);
 
         btnFacebook = findViewById(R.id.btnFacebook);
         btnGoogle = findViewById(R.id.btnGoogle);
@@ -387,13 +391,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void cadastrarUsuario(final Usuario usuario) {
+        load();
         Log.e("usuarioCadastrar", usuario.toString());
-
 
         new RetrofitConfig().getUsuarioService().cadastro(usuario).enqueue(
                 new Callback<Usuario>() {
                     @Override
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                        load.dismiss();
                         Log.e("resposta", response.body().toString());
                         if (response.isSuccessful()) {
                             if (response.body().isErro()) {
@@ -417,6 +422,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Usuario> call, Throwable t) {
+                        load.dismiss();
                         Log.e("erro", t.getMessage());
                         Toast.makeText(getApplicationContext(), "Impossível cadastrar usuário!",
                                 Toast.LENGTH_SHORT).show();
@@ -426,6 +432,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void logarUsuario(Usuario usuario) {
+        load();
         Log.e("usuarioLogar", usuario.toString());
 
 
@@ -434,6 +441,7 @@ public class LoginActivity extends AppCompatActivity {
                 new Callback<Usuario>() {
                     @Override
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                        load.dismiss();
                         Log.e("resposta", response.body().toString());
                         if (response.isSuccessful()) {
                             if (response.body().isErro()) {
@@ -458,11 +466,18 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Usuario> call, Throwable t) {
+                        load.dismiss();
                         Log.e("erro", t.getMessage());
                         Toast.makeText(getApplicationContext(), "Impossível logar usuário!",
                                 Toast.LENGTH_SHORT).show();
                     }
                 }
         );
+    }
+
+    public void load() {
+        load.setContentView(R.layout.load);
+        load.show();
+        load.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 }
