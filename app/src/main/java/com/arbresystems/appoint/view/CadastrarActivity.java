@@ -183,7 +183,7 @@ public class CadastrarActivity extends AppCompatActivity {
                             usuario.setTelefone(telefone);
 
                             Log.e("usuario", usuario.toString());
-                            new RetrofitConfig().getCadastroService().cadastro(usuario).enqueue(
+                            new RetrofitConfig().getUsuarioService().cadastro(usuario).enqueue(
                                     new Callback<Usuario>() {
 
                                         @Override

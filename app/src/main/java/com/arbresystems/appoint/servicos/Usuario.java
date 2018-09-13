@@ -1,6 +1,5 @@
 package com.arbresystems.appoint.servicos;
 
-import android.content.SharedPreferences;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -8,8 +7,6 @@ import retrofit2.http.DELETE;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
-import static android.content.Context.MODE_PRIVATE;
-import static com.arbresystems.appoint.view.MainActivity.PREF_NAME;
 
 public interface Usuario {
     //SharedPreferences sp =  getSharedPreferences(PREF_NAME, MODE_PRIVATE);

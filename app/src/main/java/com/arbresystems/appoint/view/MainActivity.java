@@ -12,7 +12,7 @@ import com.facebook.appevents.AppEventsLogger;
 
 public class MainActivity extends AppCompatActivity {
     public static String PREF_NAME = "SP";
-    public static int SPLASH_TIME_OUT = 1000;
+    public static int SPLASH_TIME_OUT = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,21 +27,21 @@ public class MainActivity extends AppCompatActivity {
         //GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         //updateUI(account);
 
-        SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-        if (sp.getString("token", null) == null){
-            //login
-            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-            finish();
-        }else{
-            //continua no app
-            new Handler().postDelayed(new Runnable() {
-                @Override
-                public void run() {
+        final SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+
+        //continua no app
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (sp.getString("token", null) == null) {
+                    //login
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    finish();
+                } else {
                     startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
                     finish();
                 }
-            }, SPLASH_TIME_OUT);
-        }
-
+            }
+        }, SPLASH_TIME_OUT);
     }
 }

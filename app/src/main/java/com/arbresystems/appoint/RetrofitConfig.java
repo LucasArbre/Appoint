@@ -24,7 +24,7 @@ public class RetrofitConfig {
                 .build();
     }
 
-    public Usuario getCadastroService(){
+    public Usuario getUsuarioService() {
         return this.retrofit.create(Usuario.class);
     }
 

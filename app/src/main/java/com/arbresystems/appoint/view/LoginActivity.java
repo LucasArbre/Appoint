@@ -182,7 +182,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public void mostrarPopUp(View v){
         janela.setContentView(R.layout.custom_pop_up);
-        EditText codigo =(EditText) janela.findViewById(R.id.editCodigo);
+        final EditText codigo = (EditText) janela.findViewById(R.id.editCodigo);
         Button confirma =(Button) janela.findViewById(R.id.btnConfirma);
         Button cancela =(Button) janela.findViewById(R.id.btnCancela);
 
@@ -190,6 +190,12 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //confirma o codigo
+                if (codigo.getText().length() > 0) {
+                    verifyCode(codigo.getText().toString(), v);
+                } else {
+                    Toast.makeText(getApplicationContext(), "Digite um codigo...",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -227,29 +233,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
-
-    /*private void executeGraphRequest(String userId){
-        GraphRequest request = new GraphRequest(AccessToken.getCurrentAccessToken(), userId, null, HttpMethod.GET, new GraphRequest.Callback() {
-            @Override
-            public void onCompleted(GraphResponse response) {
-                Log.i("FACEBOOK", response.getJSONObject().toString());
-                String teste[] = Profile.getCurrentProfile().toString().split(",");
-                String nome = Profile.getCurrentProfile().getName();
-                String id = Profile.getCurrentProfile().getId();
-                Log.i("nome", nome);
-                Log.i("id", id);
-                Log.i("teste", teste.toString());
-                for (String a : teste){
-                    Log.i("a", a);
-                }
-            }
-        });
-
-        Bundle parameters = new Bundle();
-        parameters.putString("fields", "id, name, email, gender, birthday");
-        request.setParameters(parameters);
-        request.executeAsync();
-    }*/
 
     private void handleFacebookAccessToken(AccessToken token) {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
@@ -348,52 +331,13 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Código correto!", Toast.LENGTH_SHORT).show();
 
 
-                            final Usuario usuario = new Usuario();
+                            Usuario usuario = new Usuario();
                             usuario.setNome(nome);
                             usuario.setId(user.getUid());
                             usuario.setTelefone(telefone);
+                            usuario.setTelefone(user.getPhoneNumber());
 
-                            Log.e("usuario", usuario.toString());
-                            new RetrofitConfig().getCadastroService().cadastro(usuario).enqueue(
-                                    new Callback<Usuario>() {
-
-                                        @Override
-                                        public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                                            if (response.isSuccessful()) {
-                                                if (true) {
-                                                    if (response.body().getDescricao().equals("usuario ja existe")) {
-                                                       // dialog.dismiss();
-
-                                                        Toast.makeText(getApplicationContext(), "Usuário ja existe!",
-                                                                Toast.LENGTH_SHORT).show();
-                                                    } else {
-                                                     //   dialog.dismiss();
-                                                        Toast.makeText(getApplicationContext(), "Erro cadastrar usuário!",
-                                                                Toast.LENGTH_SHORT).show();
-                                                    }
-                                                } else {
-                                                    //SharedPreferences.Editor editor = sp.edit();
-                                                    //editor.putString("token", response.body().getToken());
-                                                    //editor.apply();
-
-                                                    //dialog.dismiss();
-
-                                                    Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!",
-                                                            Toast.LENGTH_SHORT).show();
-                                                    startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
-                                                    onDestroy();
-                                                }
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<Usuario> call, Throwable t) {
-                                            Log.e("erro", t.getMessage());
-                                            Toast.makeText(getApplicationContext(), "Impossível cadastrar usuário!",
-                                                    Toast.LENGTH_SHORT).show();
-                                            //dialog.dismiss();
-                                        }
-                                    });
+                            cadastrarUsuario(usuario);
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 //o código de verificação inserido era inválido
@@ -402,6 +346,12 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void verifyCode(String code, View view) {
+        //verifica o codigo
+        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(phoneVerificationId, code);
+        signInWhithPhoneAuthCredential(credential, view);
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
@@ -435,20 +385,19 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    public void cadastrarUsuario(Usuario usuario) {
+    public void cadastrarUsuario(final Usuario usuario) {
         Log.e("usuario", usuario.toString());
 
 
-        new RetrofitConfig().getCadastroService().cadastro(usuario).enqueue(
+        new RetrofitConfig().getUsuarioService().cadastro(usuario).enqueue(
                 new Callback<Usuario>() {
                     @Override
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                         Log.e("resposta", response.body().toString());
                         if (response.isSuccessful()) {
-                            if (Boolean.valueOf(response.body().isErro())) {
+                            if (response.body().isErro()) {
                                 if (response.body().getDescricao().equals("usuario ja existe")) {
-                                    Toast.makeText(getApplicationContext(), "Usuário ja existe!",
-                                            Toast.LENGTH_SHORT).show();
+                                    logarUsuario(usuario);
                                 } else {
                                     Toast.makeText(getApplicationContext(), "Erro cadastrar usuário!",
                                             Toast.LENGTH_SHORT).show();
@@ -469,6 +418,46 @@ public class LoginActivity extends AppCompatActivity {
                     public void onFailure(Call<Usuario> call, Throwable t) {
                         Log.e("erro", t.getMessage());
                         Toast.makeText(getApplicationContext(), "Impossível cadastrar usuário!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+    }
+
+    public void logarUsuario(Usuario usuario) {
+        Log.e("usuario", usuario.toString());
+
+
+        new RetrofitConfig().getUsuarioService().login(usuario).enqueue(
+                new Callback<Usuario>() {
+                    @Override
+                    public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                        Log.e("resposta", response.body().toString());
+                        if (response.isSuccessful()) {
+                            if (response.body().isErro()) {
+                                if (response.body().getDescricao().equals("usuario nao existe")) {
+                                    Toast.makeText(getApplicationContext(), "Usuário não existe!",
+                                            Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getApplicationContext(), "Erro logar usuário!",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                if (response.body().getDescricao().equals("usuario logado")) {
+                                    SharedPreferences.Editor editor = sp.edit();
+                                    editor.putString("token", response.body().getToken());
+                                    editor.apply();
+                                    startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
+                                    finish();
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Usuario> call, Throwable t) {
+                        Log.e("erro", t.getMessage());
+                        Toast.makeText(getApplicationContext(), "Impossível logar usuário!",
                                 Toast.LENGTH_SHORT).show();
                     }
                 }
