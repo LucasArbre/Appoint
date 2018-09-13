@@ -240,6 +240,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
+        load();
         Log.d(TAG, "handleFacebookAccessToken:" + token);
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
@@ -359,6 +360,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+        load();
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -391,24 +393,24 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void cadastrarUsuario(final Usuario usuario) {
-        load();
         Log.e("usuarioCadastrar", usuario.toString());
 
         new RetrofitConfig().getUsuarioService().cadastro(usuario).enqueue(
                 new Callback<Usuario>() {
                     @Override
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                        load.dismiss();
                         Log.e("resposta", response.body().toString());
                         if (response.isSuccessful()) {
                             if (response.body().isErro()) {
                                 if (response.body().getDescricao().equals("usuario ja existe")) {
                                     logarUsuario(usuario);
                                 } else {
+                                    load.dismiss();
                                     Toast.makeText(getApplicationContext(), "Erro cadastrar usuário!",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             } else {
+                                load.dismiss();
                                 SharedPreferences.Editor editor = sp.edit();
                                 editor.putString("token", response.body().getToken());
                                 editor.apply();
@@ -432,7 +434,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void logarUsuario(Usuario usuario) {
-        load();
         Log.e("usuarioLogar", usuario.toString());
 
 
