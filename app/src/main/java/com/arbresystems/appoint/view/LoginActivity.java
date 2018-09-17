@@ -62,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnEntrar;
     private Button btnFacebook;
     private Button btnGoogle;
+    private Button btnTestarApp;
 
     private CallbackManager callbackManager;
     private LoginButton loginButton;
@@ -98,6 +99,16 @@ public class LoginActivity extends AppCompatActivity {
         btnGoogle = findViewById(R.id.btnGoogle);
         txtName = findViewById(R.id.txtName);
         txtTel = findViewById(R.id.txtTel);
+
+        btnTestarApp = findViewById(R.id.btnTestarApp);
+        btnTestarApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, PrincipalActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         mAuth = FirebaseAuth.getInstance();
 

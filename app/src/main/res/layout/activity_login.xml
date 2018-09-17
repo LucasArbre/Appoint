@@ -191,4 +191,13 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/logoappoint" />
 
+    <Button
+        android:id="@+id/btnTestarApp"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
