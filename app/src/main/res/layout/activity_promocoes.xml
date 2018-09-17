@@ -18,7 +18,8 @@
             android:id="@+id/bottomNavView_Bar"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:menu="@menu/nav_items">
+            app:menu="@menu/nav_items"
+            android:background="@color/white">
 
         </android.support.design.widget.BottomNavigationView>
     </LinearLayout>

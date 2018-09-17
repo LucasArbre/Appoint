@@ -4,7 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ActivityPesquisar">
+    tools:context=".view.ActivityPesquisar"
+    >
+
+    <ListView
+        android:id="@+id/pesquisaAdm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ListView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,8 +32,10 @@
             android:id="@+id/bottomNavView_Bar"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:menu="@menu/nav_items">
+            app:menu="@menu/nav_items"
+            android:background="@color/white">
 
         </android.support.design.widget.BottomNavigationView>
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
