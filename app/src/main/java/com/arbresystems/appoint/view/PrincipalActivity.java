@@ -35,7 +35,7 @@ public class PrincipalActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_search:
-                        Intent intent0 = new Intent(PrincipalActivity.this, ActivityPesquisar.class);
+                        Intent intent0 = new Intent(PrincipalActivity.this, PesquisarActivity.class);
                         startActivity(intent0);
                         break;
 

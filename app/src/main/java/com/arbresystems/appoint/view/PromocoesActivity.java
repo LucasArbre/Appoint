@@ -28,7 +28,7 @@ public class PromocoesActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_search:
-                        Intent intent2 = new Intent(PromocoesActivity.this, ActivityPesquisar.class);
+                        Intent intent2 = new Intent(PromocoesActivity.this, PesquisarActivity.class);
                         startActivity(intent2);
                         break;
 

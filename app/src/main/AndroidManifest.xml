@@ -25,7 +25,7 @@
         <activity android:name=".view.PrincipalActivity" android:theme="@style/noAnimTheme"/>
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.PromocoesActivity" android:theme="@style/noAnimTheme"/>
-        <activity android:name=".view.ActivityPesquisar" android:theme="@style/noAnimTheme"/>
+        <activity android:name=".view.PesquisarActivity" android:theme="@style/noAnimTheme"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
