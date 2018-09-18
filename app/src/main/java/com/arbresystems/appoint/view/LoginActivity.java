@@ -62,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnEntrar;
     private Button btnFacebook;
     private Button btnGoogle;
-    private Button btnTestarApp;
 
     private CallbackManager callbackManager;
     private LoginButton loginButton;
@@ -89,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getSupportActionBar().hide();
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
 
         janela = new Dialog(this);
@@ -99,16 +98,6 @@ public class LoginActivity extends AppCompatActivity {
         btnGoogle = findViewById(R.id.btnGoogle);
         txtName = findViewById(R.id.txtName);
         txtTel = findViewById(R.id.txtTel);
-
-        btnTestarApp = findViewById(R.id.btnTestarApp);
-        btnTestarApp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, PrincipalActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -267,7 +256,7 @@ public class LoginActivity extends AppCompatActivity {
                             usuario.setEmail(user.getEmail());
                             usuario.setNome(user.getDisplayName());
                             usuario.setId(user.getUid());
-                            cadastrarUsuario(usuario);
+                            logarUsuario(usuario);
                             //startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
                         } else {
                             // If sign in fails, display a message to the user.
@@ -353,7 +342,7 @@ public class LoginActivity extends AppCompatActivity {
                             usuario.setTelefone(telefone);
                             usuario.setTelefone(user.getPhoneNumber());
 
-                            cadastrarUsuario(usuario);
+                            logarUsuario(usuario);
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                 //o código de verificação inserido era inválido
@@ -390,7 +379,7 @@ public class LoginActivity extends AppCompatActivity {
                                 usuario.setNome(user.getDisplayName());
                                 usuario.setId(user.getUid());
                                 usuario.setTelefone(user.getPhoneNumber());
-                                cadastrarUsuario(usuario);
+                                logarUsuario(usuario);
                             }
                             //startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
                         } else {
@@ -410,18 +399,17 @@ public class LoginActivity extends AppCompatActivity {
                 new Callback<Usuario>() {
                     @Override
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                        load.dismiss();
                         Log.e("resposta", response.body().toString());
                         if (response.isSuccessful()) {
                             if (response.body().isErro()) {
                                 if (response.body().getDescricao().equals("usuario ja existe")) {
                                     logarUsuario(usuario);
                                 } else {
-                                    load.dismiss();
                                     Toast.makeText(getApplicationContext(), "Erro cadastrar usuário!",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                load.dismiss();
                                 SharedPreferences.Editor editor = sp.edit();
                                 editor.putString("token", response.body().getToken());
                                 editor.apply();
@@ -444,7 +432,7 @@ public class LoginActivity extends AppCompatActivity {
         );
     }
 
-    public void logarUsuario(Usuario usuario) {
+    public void logarUsuario(final Usuario usuario) {
         Log.e("usuarioLogar", usuario.toString());
 
 
@@ -453,18 +441,18 @@ public class LoginActivity extends AppCompatActivity {
                 new Callback<Usuario>() {
                     @Override
                     public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                        load.dismiss();
                         Log.e("resposta", response.body().toString());
                         if (response.isSuccessful()) {
                             if (response.body().isErro()) {
                                 if (response.body().getDescricao().equals("usuario nao existe")) {
-                                    Toast.makeText(getApplicationContext(), "Usuário não existe!",
-                                            Toast.LENGTH_SHORT).show();
+                                    cadastrarUsuario(usuario);
                                 } else {
+                                    load.dismiss();
                                     Toast.makeText(getApplicationContext(), "Erro logar usuário!",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             } else {
+                                load.dismiss();
                                 if (response.body().getDescricao().equals("usuario logado")) {
                                     SharedPreferences.Editor editor = sp.edit();
                                     editor.putString("token", response.body().getToken());
