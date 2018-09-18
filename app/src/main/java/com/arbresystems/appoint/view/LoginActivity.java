@@ -270,8 +270,29 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void sendCode(View view) {
-        telefone = txtTel.getText().toString();
-        nome = txtName.getText().toString(); //
+        String telefonePuro = txtTel.getText().toString();
+
+        if(telefonePuro.charAt(0) == '+'){
+            Log.e("uau", "uau");
+            if(telefonePuro.length() == 14){
+                Log.e("uau", "uau1");
+                String cod = telefonePuro.substring(3, 5);
+                telefone = telefonePuro.substring(3, telefonePuro.length());
+            }
+            telefone = telefonePuro;
+        }else{
+            if(telefonePuro.length() == 11){
+                String cod = telefonePuro.substring(0, 2);
+                String tel = telefonePuro.substring(3, telefonePuro.length());
+                telefone = "+55" + cod + tel;
+            }else{
+                Log.e("uau", "uau4");
+                telefone = "+55" + telefonePuro;
+            }
+        }
+
+        Log.e("telefone", telefone);
+        nome = txtName.getText().toString();
 
         if (telefone.length() == 0 || nome.length() == 0) {
             Toast.makeText(getApplicationContext(), "Digite um nome e um número de telefone!",
