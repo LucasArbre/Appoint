@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ProgressBar;
 
 import com.arbresystems.appoint.R;
 import com.facebook.FacebookSdk;
@@ -14,14 +15,17 @@ public class MainActivity extends AppCompatActivity {
     public static String PREF_NAME = "SP";
     public static int SPLASH_TIME_OUT = 3000;
 
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        progressBar = findViewById(R.id.pb);
+
         FacebookSdk.sdkInitialize(getApplicationContext());
         AppEventsLogger.activateApp(this);
-
 
         // Check for existing Google Sign In account, if the user is already signed in
         // the GoogleSignInAccount will be non-null.
@@ -34,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+                for (int i = 0; i < 100; i++){
+                    progressBar.setProgress(i);
+                }
                 if (sp.getString("token", null) == null) {
                     //login
                     startActivity(new Intent(getApplicationContext(), LoginActivity.class));

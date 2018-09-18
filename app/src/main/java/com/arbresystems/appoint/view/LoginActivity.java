@@ -3,15 +3,20 @@ package com.arbresystems.appoint.view;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.arbresystems.appoint.R;
@@ -45,6 +50,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
@@ -97,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         btnGoogle = findViewById(R.id.btnGoogle);
         txtName = findViewById(R.id.txtName);
         txtTel = findViewById(R.id.txtTel);
+        btnEntrar = findViewById(R.id.btnEntrar);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -163,14 +171,10 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
-        btnEntrar = findViewById(R.id.btnEntrar);
-
-        final SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sendCode(v);
                 mostrarPopUp(v);
             }
         });
@@ -333,7 +337,10 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             //acho que deu certo
                             FirebaseUser user = task.getResult().getUser();
+
+                            janela.dismiss();
                             Toast.makeText(getApplicationContext(), "Código correto!", Toast.LENGTH_SHORT).show();
+                            load();
 
                             usuario = new Usuario();
                             usuario.setNome(nome);
