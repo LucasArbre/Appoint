@@ -286,7 +286,6 @@ public class LoginActivity extends AppCompatActivity {
                 String tel = telefonePuro.substring(3, telefonePuro.length());
                 telefone = "+55" + cod + tel;
             }else{
-                Log.e("uau", "uau4");
                 telefone = "+55" + telefonePuro;
             }
         }
