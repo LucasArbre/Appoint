@@ -22,10 +22,10 @@
         </activity>
         <activity android:name=".view.CadastrarActivity" />
         <activity android:name=".view.ConfigActivity" />
-        <activity android:name=".view.PrincipalActivity" />
+        <activity android:name=".view.PrincipalActivity" android:theme="@style/noAnimTheme"/>
         <activity android:name=".view.LoginActivity" />
-        <activity android:name=".view.PromocoesActivity"/>
-        <activity android:name=".view.ActivityPesquisar"/>
+        <activity android:name=".view.PromocoesActivity" android:theme="@style/noAnimTheme"/>
+        <activity android:name=".view.ActivityPesquisar" android:theme="@style/noAnimTheme"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
