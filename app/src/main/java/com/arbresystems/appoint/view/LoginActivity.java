@@ -277,7 +277,10 @@ public class LoginActivity extends AppCompatActivity {
             if(telefonePuro.length() == 14){
                 Log.e("uau", "uau1");
                 String cod = telefonePuro.substring(3, 5);
-                telefone = telefonePuro.substring(3, telefonePuro.length());
+                String tel = telefonePuro.substring(3, telefonePuro.length());
+                StringBuilder builder = new StringBuilder(tel);
+                builder.insert(1, cod);
+                telefone = builder.toString();
             }
             telefone = telefonePuro;
         }else{
