@@ -22,10 +22,13 @@
         </activity>
         <activity android:name=".view.CadastrarActivity" />
         <activity android:name=".view.ConfigActivity" />
-        <activity android:name=".view.PrincipalActivity" android:theme="@style/noAnimTheme"/>
+        <activity
+            android:name=".view.PrincipalActivity" />
         <activity android:name=".view.LoginActivity" />
-        <activity android:name=".view.PromocoesActivity" android:theme="@style/noAnimTheme"/>
-        <activity android:name=".view.PesquisarActivity" android:theme="@style/noAnimTheme"/>
+        <activity
+            android:name=".view.PromocoesActivity" />
+        <activity
+            android:name=".view.PesquisarActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -52,6 +55,7 @@
         <activity
             android:name=".view.AgendarActivity"
             android:label="@string/title_activity_agendar" />
+        <activity android:name=".view.SobreActivity"></activity>
     </application>
 
 </manifest>

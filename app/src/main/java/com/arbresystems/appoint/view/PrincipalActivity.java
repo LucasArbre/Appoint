@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.arbresystems.appoint.BottomNavigationViewHelper;
 import com.arbresystems.appoint.R;
@@ -53,66 +54,30 @@ public class PrincipalActivity extends AppCompatActivity {
                 return false;
             }
         });
-        //mMainFrame = findViewById(R.id.main_frame);
-        //mMainNav = findViewById(R.id.main_nav);
-        //mMainNav.setOnNavigationItemSelectedListener(navListener);
 
-       // getSupportFragmentManager().beginTransaction().replace(R.id.main_frame, new HomeFragment()).commit();
-
-        /*homeFragment = new HomeFragment();
-        searchFragment = new SearchFragment();
-        menuFragment = new PromocoesFragment();
-
-
-        mMainNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch (item.getItemId()){
-                    case R.id.nav_home:
-                        setFragment(homeFragment);
-                        return true;
-                    case R.id.nav_menu:
-                        setFragment(menuFragment);
-                        return true;
-                    case R.id.nav_search:
-                        setFragment(searchFragment);
-                        return true;
-
-                        default: return false;
-                }
-
-            }
-        });*/
     }
-/*    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Fragment selectedFragment = null;
 
-                    switch (item.getItemId()) {
-                        case R.id.nav_search:
-                            selectedFragment = new SearchFragment();
-                            break;
-                        case R.id.nav_home:
-                            selectedFragment = new HomeFragment();
-                            break;
-                        case R.id.nav_promos:
-                            selectedFragment = new PromocoesFragment();
-                            break;
-                    }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.main_frame,
-                            selectedFragment).commit();
-                    return true;
-                }
-            };
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.option_items, menu);
+        return true;
+    }
 
-
-
-    private void setFragment(Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.main_frame, fragment);
-        fragmentTransaction.commit();
-    }*/
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id==R.id.opt_configs){
+            Intent intent = new Intent(PrincipalActivity.this, ConfigActivity.class);
+            startActivity(intent);
+        }
+        if(id==R.id.opt_sobre){
+            Intent intent = new Intent(PrincipalActivity.this, SobreActivity.class);
+            startActivity(intent);
+        }
+        if(id==R.id.opt_sair){
+            //codigo de logout
+            Toast.makeText(this,  "Você esta preso aqui", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
