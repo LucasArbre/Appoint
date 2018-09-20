@@ -28,6 +28,8 @@ public class PromocoesActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_search:
+                        startActivity(new Intent(PromocoesActivity.this, PesquisarActivity.class));
+                        finish();
                         break;
 
                     case R.id.nav_home:
@@ -36,10 +38,10 @@ public class PromocoesActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_promos:
-                        startActivity(new Intent(PromocoesActivity.this, PromocoesActivity.class));
-                        finish();
                         break;
                 }
+
+
                 return false;
             }
         });

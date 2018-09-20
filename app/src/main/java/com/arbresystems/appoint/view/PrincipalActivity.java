@@ -49,11 +49,12 @@ public class PrincipalActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_search:
+                        startActivity(new Intent(PrincipalActivity.this, PesquisarActivity.class));
+                        finish();
                         break;
 
                     case R.id.nav_home:
-                        startActivity(new Intent(PrincipalActivity.this, PrincipalActivity.class));
-                        finish();
+
                         break;
 
                     case R.id.nav_promos:
@@ -61,6 +62,8 @@ public class PrincipalActivity extends AppCompatActivity {
                         finish();
                         break;
                 }
+
+
                 return false;
             }
         });
