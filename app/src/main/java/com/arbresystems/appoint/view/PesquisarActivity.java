@@ -20,6 +20,7 @@ import com.arbresystems.appoint.model.Estabelecimento;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,6 +32,7 @@ public class PesquisarActivity extends AppCompatActivity {
 
     ArrayAdapter<String> adapter;
     private SharedPreferences sp;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +41,7 @@ public class PesquisarActivity extends AppCompatActivity {
 
         sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
-        ListView lv = findViewById(R.id.pesquisaAdm);
-        ArrayList<String> arrayEstabelecimentos = new ArrayList<>();
-        arrayEstabelecimentos.addAll(Arrays.asList(getResources().getStringArray(R.array.my_estabelecimentos)));
-        adapter = new ArrayAdapter<>(PesquisarActivity.this, android.R.layout.simple_list_item_1, arrayEstabelecimentos);
-        lv.setAdapter(adapter);
+        listView = findViewById(R.id.pesquisaAdm);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -81,18 +79,19 @@ public class PesquisarActivity extends AppCompatActivity {
         SearchView searchView = (SearchView) item.getActionView();
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSubmitButtonEnabled(true);
-
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                new RetrofitConfig().getEstabelecimentoService().pesquisar(sp.getString("token", null), s).enqueue(new Callback<Estabelecimento>() {
+                new RetrofitConfig().getEstabelecimentoService().pesquisar(sp.getString("token", null), s).enqueue(new Callback<List<Estabelecimento>>() {
                     @Override
-                    public void onResponse(Call<Estabelecimento> call, Response<Estabelecimento> response) {
-
+                    public void onResponse(Call<List<Estabelecimento>> call, Response<List<Estabelecimento>> response) {
+                        List<Estabelecimento> estabelecimentos = response.body();
+                        AdapterItemPesquisaEstabelecimento adapter = new AdapterItemPesquisaEstabelecimento(getApplicationContext(), estabelecimentos);
+                        listView.setAdapter(adapter);
                     }
 
                     @Override
-                    public void onFailure(Call<Estabelecimento> call, Throwable t) {
+                    public void onFailure(Call<List<Estabelecimento>> call, Throwable t) {
 
                     }
                 });
