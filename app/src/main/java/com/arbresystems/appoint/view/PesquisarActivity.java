@@ -81,6 +81,7 @@ public class PesquisarActivity extends AppCompatActivity {
         SearchView searchView = (SearchView) item.getActionView();
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSubmitButtonEnabled(true);
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
