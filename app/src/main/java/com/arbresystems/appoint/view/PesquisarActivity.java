@@ -47,17 +47,15 @@ public class PesquisarActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_home:
-                        Intent intent0 = new Intent(PesquisarActivity.this, PrincipalActivity.class);
-                        startActivity(intent0);
+                        startActivity(new Intent(PesquisarActivity.this, PrincipalActivity.class));
+                        finish();
                         break;
 
                     case R.id.nav_promos:
-                        Intent intent2 = new Intent(PesquisarActivity.this, PromocoesActivity.class);
-                        startActivity(intent2);
+                        startActivity(new Intent(PesquisarActivity.this, PromocoesActivity.class));
+                        finish();
                         break;
                 }
-
-
                 return false;
             }
         });

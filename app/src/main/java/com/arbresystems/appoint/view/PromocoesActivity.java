@@ -28,20 +28,18 @@ public class PromocoesActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_search:
-                        Intent intent2 = new Intent(PromocoesActivity.this, PesquisarActivity.class);
-                        startActivity(intent2);
                         break;
 
                     case R.id.nav_home:
-                        Intent intent0 = new Intent(PromocoesActivity.this, PrincipalActivity.class);
-                        startActivity(intent0);
+                        startActivity(new Intent(PromocoesActivity.this, PrincipalActivity.class));
+                        finish();
                         break;
 
                     case R.id.nav_promos:
+                        startActivity(new Intent(PromocoesActivity.this, PromocoesActivity.class));
+                        finish();
                         break;
                 }
-
-
                 return false;
             }
         });

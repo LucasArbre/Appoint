@@ -38,9 +38,9 @@ public class Estabelecimento {
     @SerializedName("descricao")
     @Expose
     private String descricao;
-    @SerializedName("id")
+    @SerializedName("idEstabelecimento")
     @Expose
-    private String id;
+    private String idEstabelecimento;
     @SerializedName("token")
     @Expose
     private String token;
@@ -59,7 +59,7 @@ public class Estabelecimento {
      * @param senha
      * @param plano
      * @param descricao
-     * @param id
+     * @param idEstabelecimento
      * @param cidade
      * @param estado
      * @param token
@@ -68,7 +68,7 @@ public class Estabelecimento {
      * @param nome
      * @param endereco
      */
-    public Estabelecimento(String nome, String email, String telefone, String senha, String cNPJ, String endereco, String cidade, String estado, String plano, boolean erro, String descricao, String id, String token) {
+    public Estabelecimento(String nome, String email, String telefone, String senha, String cNPJ, String endereco, String cidade, String estado, String plano, boolean erro, String descricao, String idEstabelecimento, String token) {
         super();
         this.nome = nome;
         this.email = email;
@@ -81,7 +81,7 @@ public class Estabelecimento {
         this.plano = plano;
         this.erro = erro;
         this.descricao = descricao;
-        this.id = id;
+        this.idEstabelecimento = idEstabelecimento;
         this.token = token;
     }
 
@@ -173,12 +173,12 @@ public class Estabelecimento {
         this.descricao = descricao;
     }
 
-    public String getId() {
-        return id;
+    public String getIdEstabelecimento() {
+        return idEstabelecimento;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdEstabelecimento(String idEstabelecimento) {
+        this.idEstabelecimento = idEstabelecimento;
     }
 
     public String getToken() {
@@ -203,7 +203,7 @@ public class Estabelecimento {
                 ", plano='" + plano + '\'' +
                 ", erro=" + erro +
                 ", descricao='" + descricao + '\'' +
-                ", id='" + id + '\'' +
+                ", idEstabelecimento='" + idEstabelecimento + '\'' +
                 ", token='" + token + '\'' +
                 '}';
     }

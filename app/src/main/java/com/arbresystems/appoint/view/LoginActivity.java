@@ -448,6 +448,7 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.apply();
                                 Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!",
                                         Toast.LENGTH_SHORT).show();
+                                System.gc();
                                 startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
                                 finish();
                             }
@@ -490,6 +491,7 @@ public class LoginActivity extends AppCompatActivity {
                                     SharedPreferences.Editor editor = sp.edit();
                                     editor.putString("token", response.body().getToken());
                                     editor.apply();
+                                    System.gc();
                                     startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
                                     finish();
                                 }

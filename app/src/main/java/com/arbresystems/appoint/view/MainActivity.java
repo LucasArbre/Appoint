@@ -44,9 +44,11 @@ public class MainActivity extends AppCompatActivity {
                 if (sp.getString("token", null) == null) {
                     //login
                     startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                    System.gc();
                     finish();
                 } else {
                     startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
+                    System.gc();
                     finish();
                 }
             }

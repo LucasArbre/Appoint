@@ -30,6 +30,11 @@ public class PrincipalActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
+
+        System.gc();
+        System.gc();
+        System.gc();
+
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         Menu menu = bottomNavigationView.getMenu();
@@ -44,21 +49,18 @@ public class PrincipalActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_search:
-                        Intent intent0 = new Intent(PrincipalActivity.this, PesquisarActivity.class);
-                        startActivity(intent0);
                         break;
 
                     case R.id.nav_home:
-
+                        startActivity(new Intent(PrincipalActivity.this, PrincipalActivity.class));
+                        finish();
                         break;
 
                     case R.id.nav_promos:
-                        Intent intent2 = new Intent(PrincipalActivity.this, PromocoesActivity.class);
-                        startActivity(intent2);
+                        startActivity(new Intent(PrincipalActivity.this, PromocoesActivity.class));
+                        finish();
                         break;
                 }
-
-
                 return false;
             }
         });
