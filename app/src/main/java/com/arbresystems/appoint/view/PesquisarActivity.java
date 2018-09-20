@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
-import com.arbresystems.appoint.BottomNavigationViewHelper;
 import com.arbresystems.appoint.R;
 
 import java.util.ArrayList;

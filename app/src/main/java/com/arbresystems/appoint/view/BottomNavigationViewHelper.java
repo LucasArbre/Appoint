@@ -1,4 +1,4 @@
-package com.arbresystems.appoint;
+package com.arbresystems.appoint.view;
 
 import android.annotation.SuppressLint;
 import android.support.design.internal.BottomNavigationItemView;

@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.arbresystems.appoint.Estabelecimento;
+import com.arbresystems.appoint.model.Estabelecimento;
+import com.arbresystems.appoint.view.PerfilAdmActivity;
 
 import java.util.List;
 

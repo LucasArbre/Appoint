@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.arbresystems.appoint.BottomNavigationViewHelper;
 import com.arbresystems.appoint.R;
 
 public class PromocoesActivity extends AppCompatActivity {

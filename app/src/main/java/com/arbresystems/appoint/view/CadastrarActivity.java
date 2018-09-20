@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.arbresystems.appoint.R;
 import com.arbresystems.appoint.RetrofitConfig;
-import com.arbresystems.appoint.Usuario;
+import com.arbresystems.appoint.model.Usuario;
 import com.facebook.CallbackManager;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.common.SignInButton;

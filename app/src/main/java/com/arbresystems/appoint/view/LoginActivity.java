@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.arbresystems.appoint.R;
 import com.arbresystems.appoint.RetrofitConfig;
-import com.arbresystems.appoint.Usuario;
+import com.arbresystems.appoint.model.Usuario;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;

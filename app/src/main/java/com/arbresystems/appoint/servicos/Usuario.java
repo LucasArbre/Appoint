@@ -17,7 +17,7 @@ public interface Usuario {
             "x-id: apiAppoint"
     })
     @POST("/inserirUsuario")
-    Call<com.arbresystems.appoint.Usuario> cadastro(@Body com.arbresystems.appoint.Usuario usuario);
+    Call<com.arbresystems.appoint.model.Usuario> cadastro(@Body com.arbresystems.appoint.model.Usuario usuario);
 
     @Headers({
             "x-authentication: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6ImFwaUFwcG9pbnQifQ.eyJpc3MiOiJodHRwOlwvXC9hcmJyZXN5c3RlbXMuY29tIiwiYXVkIjoiaHR0cDpcL1wvYXBpLmFwcG9pbnQuYXJicmVzeXN0ZW1zLmNvbSIsImp0aSI6ImFwaUFwcG9pbnQiLCJpYXQiOjE1MzEwMjcwNTksIm5iZiI6MTUzMTAyNzA2OSwibG9naW4iOiJvayJ9.LJwCf-0FQ395Fm4C0eihc_41c_cb3qEY41505UzZzb8",
@@ -25,8 +25,8 @@ public interface Usuario {
             "x-id: apiAppoint"
     })
     @POST("/logar")
-        //Call<com.arbresystems.appoint.Usuario> login(@Field("email") String email, @Field("telefone") String telefone, @Field("id") String id);
-    Call<com.arbresystems.appoint.Usuario> login(@Body com.arbresystems.appoint.Usuario usuario);
+        //Call<com.arbresystems.appoint.model.Usuario> login(@Field("email") String email, @Field("telefone") String telefone, @Field("id") String id);
+    Call<com.arbresystems.appoint.model.Usuario> login(@Body com.arbresystems.appoint.model.Usuario usuario);
 
     @Headers({
             "x-authentication: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6ImFwaUFwcG9pbnQifQ.eyJpc3MiOiJodHRwOlwvXC9hcmJyZXN5c3RlbXMuY29tIiwiYXVkIjoiaHR0cDpcL1wvYXBpLmFwcG9pbnQuYXJicmVzeXN0ZW1zLmNvbSIsImp0aSI6ImFwaUFwcG9pbnQiLCJpYXQiOjE1MzEwMjcwNTksIm5iZiI6MTUzMTAyNzA2OSwibG9naW4iOiJvayJ9.LJwCf-0FQ395Fm4C0eihc_41c_cb3qEY41505UzZzb8",
@@ -34,5 +34,5 @@ public interface Usuario {
             "x-id: apiAppoint"
     })
     @DELETE("/apagarUsuario")
-    Call<com.arbresystems.appoint.Usuario> apagar(@Body com.arbresystems.appoint.Usuario usuario);
+    Call<com.arbresystems.appoint.model.Usuario> apagar(@Body com.arbresystems.appoint.model.Usuario usuario);
 }

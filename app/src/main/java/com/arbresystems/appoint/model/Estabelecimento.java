@@ -1,4 +1,4 @@
-package com.arbresystems.appoint;
+package com.arbresystems.appoint.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

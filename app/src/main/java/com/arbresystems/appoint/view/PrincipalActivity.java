@@ -10,9 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
-import com.arbresystems.appoint.BottomNavigationViewHelper;
 import com.arbresystems.appoint.R;
-import com.google.android.gms.common.SignInButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 import static com.arbresystems.appoint.view.MainActivity.PREF_NAME;
