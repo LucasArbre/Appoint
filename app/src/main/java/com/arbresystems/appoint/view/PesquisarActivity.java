@@ -30,7 +30,6 @@ import static com.arbresystems.appoint.view.MainActivity.PREF_NAME;
 
 public class PesquisarActivity extends AppCompatActivity {
 
-    ArrayAdapter<String> adapter;
     private SharedPreferences sp;
     private ListView listView;
 
@@ -100,7 +99,6 @@ public class PesquisarActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
-                adapter.getFilter().filter(s);
                 return false;
             }
         });
