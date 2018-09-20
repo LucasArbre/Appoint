@@ -1,5 +1,8 @@
 package com.arbresystems.appoint;
 
+import com.arbresystems.appoint.servicos.Atendimento;
+import com.arbresystems.appoint.servicos.Estabelecimento;
+import com.arbresystems.appoint.servicos.Pesquisa;
 import com.arbresystems.appoint.servicos.Usuario;
 
 import java.security.cert.CertificateException;
@@ -26,6 +29,18 @@ public class RetrofitConfig {
 
     public Usuario getUsuarioService() {
         return this.retrofit.create(Usuario.class);
+    }
+
+    public Estabelecimento getEstabelecimentoService(){
+        return this.retrofit.create(Estabelecimento.class);
+    }
+
+    public Pesquisa getPesquisaService(){
+        return this.retrofit.create(Pesquisa.class);
+    }
+
+    public Atendimento getAtendimentoService(){
+        return this.retrofit.create(Atendimento.class);
     }
 
     public static OkHttpClient getUnsafeOkHttpClient() {
