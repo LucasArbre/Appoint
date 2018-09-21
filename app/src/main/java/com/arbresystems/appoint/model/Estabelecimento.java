@@ -23,15 +23,18 @@ public class Estabelecimento {
     @SerializedName("endereco")
     @Expose
     private String endereco;
-    @SerializedName("Cidade")
+    @SerializedName("cidade")
     @Expose
     private String cidade;
-    @SerializedName("Estado")
+    @SerializedName("estado")
     @Expose
     private String estado;
     @SerializedName("plano")
     @Expose
     private String plano;
+    @SerializedName("CEP")
+    @Expose
+    private String cEP;
     @SerializedName("erro")
     @Expose
     private boolean erro;
@@ -54,6 +57,7 @@ public class Estabelecimento {
 
     /**
      *
+     * @param cEP
      * @param erro
      * @param cNPJ
      * @param senha
@@ -68,7 +72,7 @@ public class Estabelecimento {
      * @param nome
      * @param endereco
      */
-    public Estabelecimento(String nome, String email, String telefone, String senha, String cNPJ, String endereco, String cidade, String estado, String plano, boolean erro, String descricao, String idEstabelecimento, String token) {
+    public Estabelecimento(String nome, String email, String telefone, String senha, String cNPJ, String endereco, String cidade, String estado, String plano, String cEP, boolean erro, String descricao, String idEstabelecimento, String token) {
         super();
         this.nome = nome;
         this.email = email;
@@ -79,6 +83,7 @@ public class Estabelecimento {
         this.cidade = cidade;
         this.estado = estado;
         this.plano = plano;
+        this.cEP = cEP;
         this.erro = erro;
         this.descricao = descricao;
         this.idEstabelecimento = idEstabelecimento;
@@ -157,6 +162,14 @@ public class Estabelecimento {
         this.plano = plano;
     }
 
+    public String getCEP() {
+        return cEP;
+    }
+
+    public void setCEP(String cEP) {
+        this.cEP = cEP;
+    }
+
     public boolean isErro() {
         return erro;
     }
@@ -201,6 +214,7 @@ public class Estabelecimento {
                 ", cidade='" + cidade + '\'' +
                 ", estado='" + estado + '\'' +
                 ", plano='" + plano + '\'' +
+                ", cEP='" + cEP + '\'' +
                 ", erro=" + erro +
                 ", descricao='" + descricao + '\'' +
                 ", idEstabelecimento='" + idEstabelecimento + '\'' +

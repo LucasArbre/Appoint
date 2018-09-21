@@ -1,5 +1,6 @@
 package com.arbresystems.appoint.servicos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -18,7 +19,16 @@ public interface Estabelecimento {
             "x-id: apiAppoint"
     })
     @GET("/pesquisarEstabelecimento/{busca}")
-    Call<List<com.arbresystems.appoint.model.Estabelecimento>> pesquisar (
+    Call<ArrayList<com.arbresystems.appoint.model.Estabelecimento>> pesquisar (
+            @Header("x-authentication") String token,
+            @Path("busca") String busca);
+
+    @Headers({
+            "x-audience: http://api.appoint.arbresystems.com",
+            "x-id: apiAppoint"
+    })
+    @GET("/pesquisarEstabelecimento/{busca}")
+    Call<Object> pesquisarr (
             @Header("x-authentication") String token,
             @Path("busca") String busca);
 

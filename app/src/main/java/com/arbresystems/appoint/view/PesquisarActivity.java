@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -32,6 +33,7 @@ public class PesquisarActivity extends AppCompatActivity {
 
     private SharedPreferences sp;
     private ListView listView;
+    private AdapterItemPesquisaEstabelecimento adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,21 +81,40 @@ public class PesquisarActivity extends AppCompatActivity {
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSubmitButtonEnabled(true);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
             @Override
             public boolean onQueryTextSubmit(String s) {
-                new RetrofitConfig().getEstabelecimentoService().pesquisar(sp.getString("token", null), s).enqueue(new Callback<List<Estabelecimento>>() {
+
+                new RetrofitConfig().getEstabelecimentoService().pesquisar(sp.getString("token", null), s).enqueue(new Callback<ArrayList<Estabelecimento>>() {
                     @Override
-                    public void onResponse(Call<List<Estabelecimento>> call, Response<List<Estabelecimento>> response) {
+                    public void onResponse(Call<ArrayList<Estabelecimento>> call, Response<ArrayList<Estabelecimento>> response) {
                         List<Estabelecimento> estabelecimentos = response.body();
-                        AdapterItemPesquisaEstabelecimento adapter = new AdapterItemPesquisaEstabelecimento(getApplicationContext(), estabelecimentos);
+                        Log.e("resposta", estabelecimentos.toString());
+                        adapter = new AdapterItemPesquisaEstabelecimento(getApplicationContext(), estabelecimentos);
                         listView.setAdapter(adapter);
                     }
 
                     @Override
-                    public void onFailure(Call<List<Estabelecimento>> call, Throwable t) {
-
+                    public void onFailure(Call<ArrayList<Estabelecimento>> call, Throwable t) {
+                        Log.e("erro", t.getMessage());
+                        //Log.e("respostaErrada", call.request())
                     }
                 });
+
+                /*
+                new RetrofitConfig().getEstabelecimentoService().pesquisarr(sp.getString("token", null), s).enqueue(new Callback<Object>() {
+                    @Override
+                    public void onResponse(Call<Object> call, Response<Object> response) {
+                        Log.e("resposta", response.body().toString());
+                    }
+
+                    @Override
+                    public void onFailure(Call<Object> call, Throwable t) {
+                        Log.e("erro", t.getMessage());
+                    }
+                });
+                */
+
                 return false;
             }
 

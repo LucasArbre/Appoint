@@ -4,6 +4,8 @@ import com.arbresystems.appoint.servicos.Atendimento;
 import com.arbresystems.appoint.servicos.Estabelecimento;
 import com.arbresystems.appoint.servicos.Pesquisa;
 import com.arbresystems.appoint.servicos.Usuario;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.security.cert.CertificateException;
 
@@ -20,10 +22,14 @@ public class RetrofitConfig {
     private final Retrofit retrofit;
 
     public RetrofitConfig(){
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+
         this.retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.appoint.arbresystems.com/")
                 .client(getUnsafeOkHttpClient())
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
     }
 
