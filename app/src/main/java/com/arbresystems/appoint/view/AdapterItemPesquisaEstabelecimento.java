@@ -22,6 +22,7 @@ public class AdapterItemPesquisaEstabelecimento extends BaseAdapter{
         this.context = context;
         this.estabelecimentos = estabelecimentos;
         mInflater = LayoutInflater.from(context);
+        notifyDataSetChanged();
     }
 
     @Override
