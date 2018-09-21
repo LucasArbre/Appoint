@@ -79,7 +79,7 @@ public class PesquisarActivity extends AppCompatActivity {
         MenuItem item = menu.findItem(R.id.menuPesquisa);
         SearchView searchView = (SearchView) item.getActionView();
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
-        searchView.setSubmitButtonEnabled(true);
+        searchView.setSubmitButtonEnabled(false);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override
