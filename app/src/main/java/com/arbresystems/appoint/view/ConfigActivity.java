@@ -1,5 +1,6 @@
 package com.arbresystems.appoint.view;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
@@ -7,6 +8,7 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.arbresystems.appoint.R;
 
@@ -30,6 +32,10 @@ public class ConfigActivity extends PreferenceActivity {
             bindSummaryValue(findPreference("key_email_usr"));
             bindSummaryValue(findPreference("key_telefone_usr"));
             bindSummaryValue(findPreference("key_tempo_config"));
+
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
+            String nome = sp.getString("key_nome_usr", null);
+
 
         }
     }
