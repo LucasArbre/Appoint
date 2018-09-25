@@ -1,8 +1,9 @@
+//noinspection GradleDependency
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     buildToolsVersion '28.0.2'
     defaultConfig {
         applicationId "com.arbresystems.appoint"
@@ -26,8 +27,8 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:support-v4:28.0.0-rc02'
-    implementation 'com.android.support:support-vector-drawable:28.0.0-rc02'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:support-vector-drawable:28.0.0'
     testImplementation 'junit:junit:4.12'
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
