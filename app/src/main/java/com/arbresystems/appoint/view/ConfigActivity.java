@@ -20,10 +20,6 @@ public class ConfigActivity extends PreferenceActivity {
         //carrega o fragmento
         getFragmentManager().beginTransaction().replace(android.R.id.content,
                 new Configuracoes()).commit();
-
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        String nome = sp.getString("key_nome_usr", null);
-        Log.e("testeNome", nome);
     }
 
     public static class Configuracoes extends PreferenceFragment{

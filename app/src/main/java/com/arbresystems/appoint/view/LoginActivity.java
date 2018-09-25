@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -143,7 +144,7 @@ public class LoginActivity extends AppCompatActivity {
         // Initialize Facebook Login button
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("email", "public_profile");
+        loginButton.setReadPermissions("email");
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
@@ -445,6 +446,9 @@ public class LoginActivity extends AppCompatActivity {
                             } else {
                                 SharedPreferences.Editor editor = sp.edit();
                                 editor.putString("token", response.body().getToken());
+                                editor.putString("nomeUser",response.body().getNome());
+                                editor.putString("emailUser", response.body().getEmail());
+                                editor.putString("telefoneUser", response.body().getTelefone());
                                 editor.apply();
                                 Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!",
                                         Toast.LENGTH_SHORT).show();
@@ -490,6 +494,9 @@ public class LoginActivity extends AppCompatActivity {
                                 if (response.body().getDescricao().equals("usuario logado")) {
                                     SharedPreferences.Editor editor = sp.edit();
                                     editor.putString("token", response.body().getToken());
+                                    editor.putString("nomeUser",response.body().getNome());
+                                    editor.putString("emailUser", response.body().getEmail());
+                                    editor.putString("telefoneUser", response.body().getTelefone());
                                     editor.apply();
                                     System.gc();
                                     startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
