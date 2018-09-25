@@ -20,6 +20,10 @@ public class ConfigActivity extends PreferenceActivity {
         //carrega o fragmento
         getFragmentManager().beginTransaction().replace(android.R.id.content,
                 new Configuracoes()).commit();
+
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String nome = sp.getString("key_nome_usr", null);
+        Log.e("testeNome", nome);
     }
 
     public static class Configuracoes extends PreferenceFragment{
@@ -32,10 +36,6 @@ public class ConfigActivity extends PreferenceActivity {
             bindSummaryValue(findPreference("key_email_usr"));
             bindSummaryValue(findPreference("key_telefone_usr"));
             bindSummaryValue(findPreference("key_tempo_config"));
-
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity().getBaseContext());
-            String nome = sp.getString("key_nome_usr", null);
-
 
         }
     }
