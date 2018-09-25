@@ -4,6 +4,7 @@ package com.arbresystems.appoint.servicos;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
@@ -35,4 +36,11 @@ public interface Usuario {
     })
     @DELETE("/apagarUsuario")
     Call<com.arbresystems.appoint.model.Usuario> apagar(@Body com.arbresystems.appoint.model.Usuario usuario);
+
+    @Headers({
+            "x-audience: http://api.appoint.arbresystems.com",
+            "x-id: apiAppoint"
+    })
+    @POST("/atualizarUsuario")
+    Call<com.arbresystems.appoint.model.Usuario> atualizar(@Header("x-authentication") String token, @Body com.arbresystems.appoint.model.Usuario usuario);
 }
