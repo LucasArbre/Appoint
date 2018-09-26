@@ -1,4 +1,4 @@
-package com.arbresystems.appoint.segundoPlano.alterarConfiguracoes;
+package com.arbresystems.appoint.segundoPlano.atualizarConfiguracoes;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -16,10 +16,10 @@ import retrofit2.Response;
 
 import static com.arbresystems.appoint.view.MainActivity.PREF_NAME;
 
-public class ServiceAlterarConfiguracoes  extends IntentService {
+public class ServiceAtualizarConfiguracoes  extends IntentService {
 
-    public ServiceAlterarConfiguracoes() {
-        super("ServiceAlterarConfiguracoes");
+    public ServiceAtualizarConfiguracoes() {
+        super("ServiceAtualizarConfiguracoes");
     }
 
     @Override

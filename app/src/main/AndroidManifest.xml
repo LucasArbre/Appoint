@@ -3,6 +3,8 @@
     package="com.arbresystems.appoint">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -13,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service android:name=".segundoPlano.alterarConfiguracoes.ServiceAlterarConfiguracoes" />
+        <service android:name=".segundoPlano.atualizarConfiguracoes.ServiceAtualizarConfiguracoes" />
+        <service android:name=".segundoPlano.atualizarLocalizacao.ServiceAtualizarLocalizacao" />
         <activity android:name=".view.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

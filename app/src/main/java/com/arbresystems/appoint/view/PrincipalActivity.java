@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.arbresystems.appoint.R;
+import com.arbresystems.appoint.segundoPlano.atualizarLocalizacao.ServiceAtualizarLocalizacao;
 import com.facebook.login.LoginManager;
 import com.facebook.login.widget.LoginButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +37,8 @@ public class PrincipalActivity extends AppCompatActivity {
         System.gc();
         System.gc();
         System.gc();
+
+        startService(new Intent(this, ServiceAtualizarLocalizacao.class));
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
