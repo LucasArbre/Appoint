@@ -18,7 +18,10 @@ public class ServiceAtualizarLocalizacao extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         GetLocalizacao localizacao = new GetLocalizacao(getApplicationContext());
-        Log.e("localizacao", String.valueOf(localizacao.getLocalizacao()));
+        if (localizacao.isGPSEnabled){
+            Log.e("latitude", String.valueOf(localizacao.getLatitude()));
+            Log.e("longitude", String.valueOf(localizacao.getLongitude()));
+        }
     }
 
     @Override
