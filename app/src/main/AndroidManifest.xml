@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
@@ -17,6 +18,7 @@
         android:theme="@style/AppTheme">
         <service android:name=".segundoPlano.atualizarConfiguracoes.ServiceAtualizarConfiguracoes" />
         <service android:name=".segundoPlano.atualizarLocalizacao.ServiceAtualizarLocalizacao" />
+        <service android:name=".segundoPlano.ServiceStart" />
 
         <activity android:name=".view.MainActivity">
             <intent-filter>
@@ -58,8 +60,16 @@
             android:name=".view.AgendarActivity"
             android:label="@string/title_activity_agendar" />
         <activity android:name=".view.SobreActivity" />
-        <activity android:name=".view.Promocao_tela_individual" />
-        <activity android:name=".view.Perfil_Adm"></activity>
+        <activity android:name=".view.PromocaoTelaIndividualActivity" />
+
+        <receiver android:enabled="true"
+            android:name=".segundoPlano.StartBoot"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

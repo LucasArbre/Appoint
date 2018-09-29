@@ -7,6 +7,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 
 
 public interface Usuario {
@@ -41,6 +42,6 @@ public interface Usuario {
             "x-audience: http://api.appoint.arbresystems.com",
             "x-id: apiAppoint"
     })
-    @POST("/atualizarUsuario")
+    @PUT("/atualizarUsuario")
     Call<com.arbresystems.appoint.model.Usuario> atualizar(@Header("x-authentication") String token, @Body com.arbresystems.appoint.model.Usuario usuario);
 }

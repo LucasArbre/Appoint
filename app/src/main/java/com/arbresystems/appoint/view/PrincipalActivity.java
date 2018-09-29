@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.arbresystems.appoint.R;
+import com.arbresystems.appoint.segundoPlano.ServiceStart;
 import com.arbresystems.appoint.segundoPlano.atualizarLocalizacao.GetLocalizacao;
 import com.arbresystems.appoint.segundoPlano.atualizarLocalizacao.ServiceAtualizarLocalizacao;
 import com.facebook.login.LoginManager;
@@ -43,6 +44,8 @@ public class PrincipalActivity extends AppCompatActivity {
         GetLocalizacao localizacao = new GetLocalizacao(getApplicationContext());
             Log.e("latitude2", String.valueOf(localizacao.getLatitude()));
             Log.e("longitude2", String.valueOf(localizacao.getLongitude()));
+
+        startService(new Intent(this, ServiceStart.class));
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);

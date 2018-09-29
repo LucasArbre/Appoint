@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.arbresystems.appoint.R;
 
-public class Promocao_tela_individual extends AppCompatActivity {
+public class PromocaoTelaIndividualActivity extends AppCompatActivity {
 
     private TextView txtTitulo;
     private TextView txtDescricao;
