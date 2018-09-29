@@ -419,6 +419,12 @@ public class LoginActivity extends AppCompatActivity {
     public void cadastrarUsuario(final Usuario usuario) {
         Log.e("usuarioCadastrar", usuario.toString());
 
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("nomeUser", usuario.getNome());
+        editor.putString("emailUser", usuario.getEmail());
+        editor.putString("telefoneUser", usuario.getTelefone());
+        editor.apply();
+
         new RetrofitConfig().getUsuarioService().cadastro(usuario).enqueue(
                 new Callback<Usuario>() {
                     @Override
@@ -436,10 +442,8 @@ public class LoginActivity extends AppCompatActivity {
                             } else {
                                 SharedPreferences.Editor editor = sp.edit();
                                 editor.putString("token", response.body().getToken());
-                                editor.putString("nomeUser",response.body().getNome());
-                                editor.putString("emailUser", response.body().getEmail());
-                                editor.putString("telefoneUser", response.body().getTelefone());
                                 editor.apply();
+
                                 Toast.makeText(getApplicationContext(), "Usuário cadastrado com sucesso!",
                                         Toast.LENGTH_SHORT).show();
                                 System.gc();
@@ -463,6 +467,11 @@ public class LoginActivity extends AppCompatActivity {
     public void logarUsuario(final Usuario usuario) {
         Log.e("usuarioLogar", usuario.toString());
 
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("nomeUser", usuario.getNome());
+        editor.putString("emailUser", usuario.getEmail());
+        editor.putString("telefoneUser", usuario.getTelefone());
+        editor.apply();
 
         //new RetrofitConfig().getUsuarioService().login(usuario.getEmail(), usuario.getTelefone(), usuario.getId()).enqueue(
         new RetrofitConfig().getUsuarioService().login(usuario).enqueue(
@@ -484,10 +493,8 @@ public class LoginActivity extends AppCompatActivity {
                                 if (response.body().getDescricao().equals("usuario logado")) {
                                     SharedPreferences.Editor editor = sp.edit();
                                     editor.putString("token", response.body().getToken());
-                                    editor.putString("nomeUser",response.body().getNome());
-                                    editor.putString("emailUser", response.body().getEmail());
-                                    editor.putString("telefoneUser", response.body().getTelefone());
                                     editor.apply();
+
                                     System.gc();
                                     startActivity(new Intent(getApplicationContext(), PrincipalActivity.class));
                                     finish();

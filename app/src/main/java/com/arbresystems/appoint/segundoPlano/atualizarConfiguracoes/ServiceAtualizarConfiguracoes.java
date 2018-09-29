@@ -3,6 +3,7 @@ package com.arbresystems.appoint.segundoPlano.atualizarConfiguracoes;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
@@ -30,10 +31,17 @@ public class ServiceAtualizarConfiguracoes  extends IntentService {
     }
 
     @Override
-    protected void onHandleIntent( Intent intent) {
+    protected void onHandleIntent(Intent intent) {
         //codigo alterar configuracoes
+        Usuario usuario = (Usuario) intent.getSerializableExtra("usuario");
         SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-        Usuario usuario = intent.getParcelableExtra("usuario");
+        /*SharedPreferences spM = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        Usuario usuario = new Usuario();
+        usuario.setEmail(spM.getString("key_email_usr", ""));
+        usuario.setNome(spM.getString("key_nome_usr", ""));
+        usuario.setTelefone(spM.getString("key_telefone_usr", ""));*/
+
+        Log.d("usuarioAlterar", usuario.toString());
 
         new RetrofitConfig().getUsuarioService().atualizar(sp.getString("token", null), usuario).enqueue(new Callback<Usuario>() {
             @Override
