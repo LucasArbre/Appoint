@@ -17,6 +17,7 @@ public class ConfigActivity extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getActionBar().hide();
         //carrega o fragmento
         getFragmentManager().beginTransaction().replace(android.R.id.content,
                 new Configuracoes()).commit();
