@@ -15,4 +15,9 @@
     <color name="gradientDark">#001021</color>
     <color name="gradientLight">#002247</color>
 
+    <color name="green">#29ef2d</color>
+    <color name="yellow">#cfd61c</color>
+    <color name="orange">#ff591d</color>
+    <color name="red">#e90505</color>
+    <color name="purple">#300070</color>
 </resources>
