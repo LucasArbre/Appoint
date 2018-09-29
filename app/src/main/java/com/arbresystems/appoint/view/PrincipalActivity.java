@@ -17,7 +17,6 @@ import com.arbresystems.appoint.segundoPlano.ServiceStart;
 import com.arbresystems.appoint.segundoPlano.atualizarLocalizacao.GetLocalizacao;
 import com.arbresystems.appoint.segundoPlano.atualizarLocalizacao.ServiceAtualizarLocalizacao;
 import com.facebook.login.LoginManager;
-import com.facebook.login.widget.LoginButton;
 import com.google.firebase.auth.FirebaseAuth;
 
 import static com.arbresystems.appoint.view.MainActivity.PREF_NAME;
@@ -46,6 +45,7 @@ public class PrincipalActivity extends AppCompatActivity {
             Log.e("longitude2", String.valueOf(localizacao.getLongitude()));
 
         startService(new Intent(this, ServiceStart.class));
+        //start de serviço que controla tudo em segundo plano
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);

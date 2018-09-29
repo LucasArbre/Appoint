@@ -1,19 +1,17 @@
 package com.arbresystems.appoint.view;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import com.arbresystems.appoint.R;
+import com.arbresystems.appoint.segundoPlano.ServiceStart;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class PromocoesActivity extends AppCompatActivity {
@@ -21,6 +19,9 @@ public class PromocoesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        startService(new Intent(this, ServiceStart.class));
+        //start de serviço que controla tudo em segundo plano
 
         ListView listView = findViewById(R.id.lista_promos);
 

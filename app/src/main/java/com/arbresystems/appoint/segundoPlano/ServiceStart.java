@@ -4,7 +4,6 @@ import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.arbresystems.appoint.model.Usuario;
@@ -30,10 +29,16 @@ public class ServiceStart extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
+        atualizarConfiguracoesUsuario();
+
+        Log.d("ServiceStart", "Start");
+    }
+
+    private void atualizarConfiguracoesUsuario() {
         SharedPreferences sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         SharedPreferences spM = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        StringBuilder infoM = new StringBuilder();
+        /*StringBuilder infoM = new StringBuilder();
         infoM.append("Nome: " + spM.getString("key_nome_usr", ""));
         infoM.append("\nEmail: " + spM.getString("key_email_usr", ""));
         infoM.append("\nTelefone: " + spM.getString("key_telefone_usr", ""));
@@ -43,21 +48,34 @@ public class ServiceStart extends IntentService {
         info.append("Nome: " + sp.getString("nomeUser", ""));
         info.append("\nEmail: " + sp.getString("emailUser", ""));
         info.append("\nTelefone: " + sp.getString("telefoneUser", ""));
-        Log.d("sp", String.valueOf(info));
+        Log.d("sp", String.valueOf(info));*/
 
-        if(sp.getString("nomeUser", "").equals(spM.getString("key_nome_usr", "")) && sp.getString("emailUser", "").equals(spM.getString("key_email_usr", "")) && sp.getString("telefoneUser", "").equals(spM.getString("key_telefone_usr", ""))){
+        if (sp.getString("nomeUser", "").equals(spM.getString("key_nome_usr", "")) && sp.getString("emailUser", "").equals(spM.getString("key_email_usr", "")) && sp.getString("telefoneUser", "").equals(spM.getString("key_telefone_usr", ""))) {
             Log.d("usuarioAlterado", "não");
-        }else{
+        } else {
             Log.d("usuarioAlterado", "sim");
+
             Usuario usuario = new Usuario();
-            if (spM.getString("key_nome_usr", "").equals("")){
+
+            if (spM.getString("key_nome_usr", "").equals("")) {
                 usuario.setNome(sp.getString("nomeUser", ""));
-            }else{
+            } else {
                 usuario.setNome(spM.getString("key_nome_usr", ""));
             }
+
+            if (spM.getString("key_email_usr", "").equals("")) {
+                usuario.setEmail(sp.getString("emailUser", ""));
+            } else {
+                usuario.setEmail(spM.getString("key_email_usr", ""));
+            }
+
+            if (spM.getString("key_telefone_usr", "").equals("")) {
+                usuario.setTelefone(sp.getString("telefoneUser", ""));
+            } else {
+                usuario.setTelefone(spM.getString("key_telefone_usr", ""));
+            }
+
             startService(new Intent(this, ServiceAtualizarConfiguracoes.class).putExtra("usuario", usuario));
         }
-
-        Log.d("ServiceStart", "Start");
     }
 }

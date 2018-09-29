@@ -9,7 +9,6 @@ import android.view.Window;
 import android.widget.ProgressBar;
 
 import com.arbresystems.appoint.R;
-import com.arbresystems.appoint.segundoPlano.atualizarLocalizacao.ServiceAtualizarLocalizacao;
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 

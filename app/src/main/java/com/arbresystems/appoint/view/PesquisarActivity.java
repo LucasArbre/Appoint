@@ -1,26 +1,24 @@
 package com.arbresystems.appoint.view;
 
-import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
 import com.arbresystems.appoint.R;
 import com.arbresystems.appoint.RetrofitConfig;
 import com.arbresystems.appoint.model.Estabelecimento;
+import com.arbresystems.appoint.segundoPlano.ServiceStart;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -39,6 +37,9 @@ public class PesquisarActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pesquisar);
+
+        startService(new Intent(this, ServiceStart.class));
+        //start de serviço que controla tudo em segundo plano
 
         sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 

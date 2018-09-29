@@ -3,8 +3,6 @@ package com.arbresystems.appoint.segundoPlano.atualizarConfiguracoes;
 import android.app.IntentService;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -25,8 +23,6 @@ public class ServiceAtualizarConfiguracoes  extends IntentService {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(getApplicationContext(), "Atualizando configurações de usuário...",
-                Toast.LENGTH_SHORT).show();
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -43,17 +39,21 @@ public class ServiceAtualizarConfiguracoes  extends IntentService {
 
         Log.d("usuarioAlterar", usuario.toString());
 
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("nomeUser", usuario.getNome());
+        editor.putString("emailUser", usuario.getEmail());
+        editor.putString("telefoneUser", usuario.getTelefone());
+        editor.apply();
+
         new RetrofitConfig().getUsuarioService().atualizar(sp.getString("token", null), usuario).enqueue(new Callback<Usuario>() {
             @Override
             public void onResponse(Call<Usuario> call, Response<Usuario> response) {
                 if (response.body().isErro()){
                     //erro
-                    Toast.makeText(getApplicationContext(), "Erro ao atualizar configurações de usuário!",
-                            Toast.LENGTH_SHORT).show();
+                    Log.e("erro", "erro ao atualizar usuario");
                 }else{
                     //certo
-                    Toast.makeText(getApplicationContext(), "Configurações de usuário atualizadas com sucesso!",
-                            Toast.LENGTH_SHORT).show();
+                    Log.i("usuario", "usuario alterado com sucesso");
                 }
                 onDestroy();
             }
