@@ -11,5 +11,6 @@ public class CompromissoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compromisso);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }

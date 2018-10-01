@@ -18,6 +18,7 @@ public class ConfigActivity extends PreferenceActivity {
         //carrega o fragmento
         getFragmentManager().beginTransaction().replace(android.R.id.content,
                 new Configuracoes()).commit();
+
     }
 
     public static class Configuracoes extends PreferenceFragment{

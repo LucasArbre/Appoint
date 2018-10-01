@@ -42,7 +42,7 @@ public class AdapterItemPesquisaEstabelecimento extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = mInflater.inflate(android.R.layout.simple_list_item_1 ,null);
+        View view = mInflater.inflate(android.R.layout.simple_list_item_activated_1, null);
         TextView nomeEstabelecimento = view.findViewById(android.R.id.text1);
 
         nomeEstabelecimento.setText(estabelecimentos.get(position).getNome());
