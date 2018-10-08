@@ -90,9 +90,10 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         getSupportActionBar().hide();
+        setContentView(R.layout.activity_login);
+
 
         janela = new Dialog(this);
         load = new Dialog(this);
@@ -181,6 +182,18 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.e("teste", "teste");
                 loginButton.performClick();
+            }
+        });
+
+        Button btnTestar = findViewById(R.id.btntestar);
+        btnTestar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                overridePendingTransition(0,0);
+                Intent i = new Intent(LoginActivity.this, PrincipalActivity.class);
+                i.addFlags(i.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(i);
+                finish();
             }
         });
     }

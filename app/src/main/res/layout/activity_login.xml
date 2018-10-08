@@ -10,6 +10,14 @@
 
 
     <!--android:background="ed"-->
+    <Button
+        android:id="@+id/btntestar"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <EditText
         android:id="@+id/txtName"
         android:layout_width="0dp"

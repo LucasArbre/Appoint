@@ -37,12 +37,18 @@ public class PromocoesActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_search:
-                        startActivity(new Intent(PromocoesActivity.this, PesquisarActivity.class));
+                        overridePendingTransition(0,0);
+                        Intent intent = new Intent(PromocoesActivity.this, PesquisarActivity.class);
+                        intent.addFlags(intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent);
                         finish();
                         break;
 
                     case R.id.nav_home:
-                        startActivity(new Intent(PromocoesActivity.this, PrincipalActivity.class));
+                        overridePendingTransition(0,0);
+                        Intent intent1 = new Intent(PromocoesActivity.this, PrincipalActivity.class);
+                        intent1.addFlags(intent1.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent1);
                         finish();
                         break;
 
@@ -55,10 +61,11 @@ public class PromocoesActivity extends AppCompatActivity {
             }
         });
 
-        ArrayList<String> soPraNaoDarErro = new ArrayList<>();
+        //ArrayList<String> soPraNaoDarErro = new ArrayList<String>();
+        //soPraNaoDarErro.add("uau");
 
-        AdapterItemPromocoes adapter = new AdapterItemPromocoes(this, R.layout.adapter_promos, soPraNaoDarErro);
-        listView.setAdapter(adapter);
+        //AdapterItemPromocoes adapter = new AdapterItemPromocoes(this, R.layout.adapter_promos, soPraNaoDarErro);
+        //listView.setAdapter(adapter);
     }
 
 

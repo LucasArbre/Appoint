@@ -1,10 +1,14 @@
 package com.arbresystems.appoint.view;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -16,8 +20,10 @@ import android.widget.SearchView;
 import com.arbresystems.appoint.R;
 import com.arbresystems.appoint.RetrofitConfig;
 import com.arbresystems.appoint.model.Estabelecimento;
+import com.arbresystems.appoint.model.Estabelecimentos;
 import com.arbresystems.appoint.segundoPlano.ServiceStart;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +49,7 @@ public class PesquisarActivity extends AppCompatActivity {
 
         sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
-        listView = findViewById(R.id.pesquisaAdm);
+       // listView = findViewById(R.id.pesquisaAdm);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -59,21 +65,27 @@ public class PesquisarActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_home:
-                        startActivity(new Intent(PesquisarActivity.this, PrincipalActivity.class));
+                        overridePendingTransition(0,0);
+                        Intent intent = new Intent(PesquisarActivity.this, PrincipalActivity.class);
+                        intent.addFlags(intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent);
                         finish();
                         break;
 
                     case R.id.nav_promos:
-                        startActivity(new Intent(PesquisarActivity.this, PromocoesActivity.class));
+                        overridePendingTransition(0,0);
+                        Intent intent1 = new Intent(PesquisarActivity.this, PromocoesActivity.class);
+                        intent1.addFlags(intent1.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(intent1);
                         finish();
                         break;
                 }
                 return false;
             }
         });
-    }
 
-    @Override
+    }
+    /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.search_menu, menu);
@@ -113,7 +125,7 @@ public class PesquisarActivity extends AppCompatActivity {
                         Log.e("erro", t.getMessage());
                     }
                 });
-                */
+
 
                 return false;
             }
@@ -125,5 +137,5 @@ public class PesquisarActivity extends AppCompatActivity {
         });
 
         return super.onCreateOptionsMenu(menu);
-    }
+    }*/
 }

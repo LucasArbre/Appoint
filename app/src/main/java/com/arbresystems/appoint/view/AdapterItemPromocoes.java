@@ -27,7 +27,7 @@ public class AdapterItemPromocoes extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         //metodos pra pegar os dados e coolocar na view
-        //ex String titulouau = getItem(position).getTitulo();
+        //String titulouau = getItem(position).getTitulo();
         //Promocoes promos = new Promocoes(Titulo....);
 
         LayoutInflater inflater = LayoutInflater.from(context);
