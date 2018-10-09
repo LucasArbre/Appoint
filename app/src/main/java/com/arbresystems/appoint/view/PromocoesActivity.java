@@ -5,27 +5,52 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
 import com.arbresystems.appoint.R;
+import com.arbresystems.appoint.adapters.AdapterItemPromocoes;
+import com.arbresystems.appoint.model.Promocao;
 import com.arbresystems.appoint.segundoPlano.ServiceStart;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class PromocoesActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private List<Promocao> listItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView (R.layout.activity_promocoes);
+        recyclerView = (RecyclerView) findViewById(R.id.Rpview);
+
+        //recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        listItem = new ArrayList<>();
+        for(int i = 0; i<=10; i++) {
+            Promocao promocao = new Promocao(
+                    "55%",
+                    "Promoção imperdivel!"+ i+1,
+                    "Essa promoção dura apenas 18horas",
+                    "local dahora");
+            listItem.add(promocao);
+        }
+
+        adapter = new AdapterItemPromocoes(listItem, this);
+        recyclerView.setAdapter(adapter);
 
         startService(new Intent(this, ServiceStart.class));
         //start de serviço que controla tudo em segundo plano
 
-        ListView listView = findViewById(R.id.lista_promos);
+       // ListView listView = findViewById(R.id.lista_promos);
 
-        setContentView(R.layout.activity_promocoes);
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
         Menu menu = bottomNavigationView.getMenu();

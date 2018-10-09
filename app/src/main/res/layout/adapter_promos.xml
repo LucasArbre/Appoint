@@ -33,31 +33,32 @@
         android:layout_marginTop="5dp">
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/txtTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
             android:text="Titulo da promoção"
             android:textSize="14sp"
-            android:paddingLeft="5dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/txtDscrp"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="1dp"
             android:gravity="left|center"
             android:paddingLeft="8dp"
             android:text="breve descrição"
-            app:layout_constraintBottom_toTopOf="@+id/button4"
+            app:layout_constraintBottom_toTopOf="@+id/btnVerMais"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
+            app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btnVerMais"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="match_parent"
             android:layout_height="33dp"
