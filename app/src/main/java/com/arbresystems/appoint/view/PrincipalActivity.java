@@ -7,17 +7,28 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.arbresystems.appoint.R;
+import com.arbresystems.appoint.model.Horario;
 import com.arbresystems.appoint.segundoPlano.ServiceStart;
 import com.arbresystems.appoint.segundoPlano.atualizarLocalizacao.GetLocalizacao;
 import com.arbresystems.appoint.segundoPlano.atualizarLocalizacao.ServiceAtualizarLocalizacao;
+import com.arbresystems.appoint.viewModels.RecyclerViewDataAdapter;
+import com.arbresystems.appoint.viewModels.RecyclerViewDataAdapterHorario;
+import com.arbresystems.appoint.viewModels.SectionDataModel;
+import com.arbresystems.appoint.viewModels.SectionDataModelHorario;
+import com.arbresystems.appoint.viewModels.SingleItemModel;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 import static com.arbresystems.appoint.view.MainActivity.PREF_NAME;
 
@@ -30,10 +41,34 @@ public class PrincipalActivity extends AppCompatActivity {
     private SharedPreferences sp;
     private SharedPreferences spm;
 
+    ArrayList<SectionDataModelHorario> allSampleData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
+
+
+        //recyclerView
+        allSampleData = new ArrayList<SectionDataModelHorario>();
+
+        createDummyData();
+
+
+        RecyclerView my_recycler_view = (RecyclerView) findViewById(R.id.rvCompromissos);
+
+        my_recycler_view.setHasFixedSize(true);
+
+        RecyclerViewDataAdapterHorario adapter = new RecyclerViewDataAdapterHorario(this, allSampleData);
+
+        my_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+        my_recycler_view.setAdapter(adapter);
+
+        //menu
+        startService(new Intent(this, ServiceStart.class));
+        //start de serviço que controla tudo em segundo plano
+
 
         System.gc();
         System.gc();
@@ -89,6 +124,27 @@ public class PrincipalActivity extends AppCompatActivity {
 
     }
 
+    public void createDummyData(){
+        for (int i = 1; i <= 5; i++) {
+
+            Date a = new Date();
+
+            SectionDataModelHorario dm = new SectionDataModelHorario();
+
+            dm.setDia(a);
+            dm.setDiaMes(a);
+
+            ArrayList<Horario> singleItem = new ArrayList<Horario>();
+            for (int j = 1; j <= 5; j++) {
+                singleItem.add(new Horario(a, a, a, "Unhas"));
+            }
+
+            dm.setAllItemsInSection(singleItem);
+
+            allSampleData.add(dm);
+
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.option_items, menu);

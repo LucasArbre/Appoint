@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.arbresystems.appoint.R;
 
@@ -81,7 +80,7 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
         public ItemRowHolder(View view) {
             super(view);
 
-            this.itemTitle = (TextView) view.findViewById(R.id.itemTitle);
+            this.itemTitle = (TextView) view.findViewById(R.id.txtMes);
             this.recycler_view_list = (RecyclerView) view.findViewById(R.id.recycler_view_list);
             //this.btnMore= (Button) view.findViewById(R.id.btnMore);
 
