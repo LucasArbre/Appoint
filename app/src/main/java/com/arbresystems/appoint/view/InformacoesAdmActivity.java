@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.arbresystems.appoint.R;
 
-public class InformacoesAdm extends AppCompatActivity {
+public class InformacoesAdmActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
