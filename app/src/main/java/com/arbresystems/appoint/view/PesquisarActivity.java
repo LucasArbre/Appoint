@@ -1,35 +1,23 @@
 package com.arbresystems.appoint.view;
 
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.Toolbar;
 
 import com.arbresystems.appoint.R;
 import com.arbresystems.appoint.RetrofitConfig;
+import com.arbresystems.appoint.adapters.AdapterItemPesquisaEstabelecimento;
 import com.arbresystems.appoint.model.Estabelecimento;
-import com.arbresystems.appoint.model.Estabelecimentos;
-import com.arbresystems.appoint.segundoPlano.ServiceStart;
-import com.arbresystems.appoint.viewModels.RecyclerViewDataAdapter;
-import com.arbresystems.appoint.viewModels.SectionDataModel;
-import com.arbresystems.appoint.viewModels.SingleItemModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +28,9 @@ import retrofit2.Response;
 import static com.arbresystems.appoint.view.MainActivity.PREF_NAME;
 
 public class PesquisarActivity extends AppCompatActivity {
-    private Toolbar toolbar;
-    ArrayList<SectionDataModel> allSampleData;
+
+    private SharedPreferences sp;
+    private ListView listView;
     private AdapterItemPesquisaEstabelecimento adapter;
 
     @Override
@@ -49,28 +38,9 @@ public class PesquisarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pesquisar);
 
+        sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
-        //recyclerView
-        allSampleData = new ArrayList<SectionDataModel>();
-
-        createDummyData();
-
-
-        RecyclerView my_recycler_view = (RecyclerView) findViewById(R.id.my_recycler_view);
-
-        my_recycler_view.setHasFixedSize(true);
-
-        RecyclerViewDataAdapter adapter = new RecyclerViewDataAdapter(this, allSampleData);
-
-        my_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-
-        my_recycler_view.setAdapter(adapter);
-
-        //menu
-        startService(new Intent(this, ServiceStart.class));
-        //start de serviço que controla tudo em segundo plano
-
-       // listView = findViewById(R.id.pesquisaAdm);
+        listView = findViewById(R.id.pesquisaAdm);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -86,45 +56,21 @@ public class PesquisarActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_home:
-                        overridePendingTransition(0,0);
-                        Intent intent = new Intent(PesquisarActivity.this, PrincipalActivity.class);
-                        intent.addFlags(intent.FLAG_ACTIVITY_NO_ANIMATION);
-                        startActivity(intent);
+                        startActivity(new Intent(PesquisarActivity.this, PrincipalActivity.class));
                         finish();
                         break;
 
                     case R.id.nav_promos:
-                        overridePendingTransition(0,0);
-                        Intent intent1 = new Intent(PesquisarActivity.this, PromocoesActivity.class);
-                        intent1.addFlags(intent1.FLAG_ACTIVITY_NO_ANIMATION);
-                        startActivity(intent1);
+                        startActivity(new Intent(PesquisarActivity.this, PromocoesActivity.class));
                         finish();
                         break;
                 }
                 return false;
             }
         });
-
     }
-    public void createDummyData(){
-        for (int i = 1; i <= 5; i++) {
 
-            SectionDataModel dm = new SectionDataModel();
-
-            dm.setHeaderTitle("Section " + i);
-
-            ArrayList<SingleItemModel> singleItem = new ArrayList<SingleItemModel>();
-            for (int j = 1; j <= 5; j++) {
-                singleItem.add(new SingleItemModel("Item " + j, "URL " + j));
-            }
-
-            dm.setAllItemsInSection(singleItem);
-
-            allSampleData.add(dm);
-
-        }
-    }
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.search_menu, menu);
@@ -164,7 +110,7 @@ public class PesquisarActivity extends AppCompatActivity {
                         Log.e("erro", t.getMessage());
                     }
                 });
-
+                */
 
                 return false;
             }
@@ -176,5 +122,5 @@ public class PesquisarActivity extends AppCompatActivity {
         });
 
         return super.onCreateOptionsMenu(menu);
-    }*/
+    }
 }

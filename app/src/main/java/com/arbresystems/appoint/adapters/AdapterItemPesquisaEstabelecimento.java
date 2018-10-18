@@ -1,4 +1,4 @@
-package com.arbresystems.appoint.view;
+package com.arbresystems.appoint.adapters;
 
 import android.content.Context;
 import android.content.Intent;
