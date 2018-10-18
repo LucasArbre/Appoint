@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -62,6 +63,7 @@
             android:label="@string/title_activity_agendar" />
         <activity android:name=".view.SobreActivity" />
         <activity android:name=".view.PromocaoTelaIndividualActivity" />
+        <activity android:name=".view.InformacoesAdmActivity" />
 
         <receiver
             android:name=".segundoPlano.StartBoot"
@@ -74,7 +76,6 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".view.InformacoesAdm"></activity>
     </application>
 
 </manifest>

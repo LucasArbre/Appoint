@@ -3,7 +3,9 @@ package com.arbresystems.appoint.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Estabelecimento {
+import java.io.Serializable;
+
+public class Estabelecimento implements Serializable {
 
     @SerializedName("nome")
     @Expose

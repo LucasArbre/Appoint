@@ -2,6 +2,7 @@ package com.arbresystems.appoint.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,7 @@ public class AdapterItemPesquisaEstabelecimento extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View view = mInflater.inflate(android.R.layout.simple_list_item_activated_1, null);
         TextView nomeEstabelecimento = view.findViewById(android.R.id.text1);
 
@@ -50,7 +51,7 @@ public class AdapterItemPesquisaEstabelecimento extends BaseAdapter{
         nomeEstabelecimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.startActivity(new Intent(context, PerfilAdmActivity.class));
+                context.startActivity( new Intent(context, PerfilAdmActivity.class).putExtra("estabelecimento", estabelecimentos.get(position)));
             }
         });
 
