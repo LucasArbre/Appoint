@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.arbresystems.appoint.R;
 import com.arbresystems.appoint.model.Estabelecimento;
@@ -27,8 +28,7 @@ public class PerfilAdmActivity extends AppCompatActivity {
     private Button btnAgendarHorario;
     private Button btnIrPara;
     private Button btnSobre;
-
-
+    private TextView txtNome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +45,11 @@ public class PerfilAdmActivity extends AppCompatActivity {
         btnAgendarHorario = findViewById(R.id.btnAgendarHorario);
         btnIrPara = findViewById(R.id.btnIrPara);
         btnSobre = findViewById(R.id.btnSobre);
+        txtNome = findViewById(R.id.txtNome);
 
         Glide.with(this).load("http://goo.gl/gEgYUd").into(imgPerfil);
+
+        txtNome.setText(estabelecimento.getNome());
 
         Log.e("dia", getDia());
 
