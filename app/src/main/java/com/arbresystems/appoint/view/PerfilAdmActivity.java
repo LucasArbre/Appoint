@@ -51,6 +51,7 @@ public class PerfilAdmActivity extends AppCompatActivity {
 
         txtNome.setText(estabelecimento.getNome());
 
+
         Log.e("dia", getDia());
 
         btnLigar.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +92,7 @@ public class PerfilAdmActivity extends AppCompatActivity {
             case Calendar.WEDNESDAY: nome = "Quarta";break;
             case Calendar.THURSDAY: nome = "Quinta";break;
             case Calendar.FRIDAY: nome = "Sexta";break;
-            case Calendar.SATURDAY: nome = "sábado";break;
+            case Calendar.SATURDAY: nome = "Sábado";break;
         }
         return nome;
     }
