@@ -25,18 +25,18 @@ public class Estabelecimento implements Serializable {
     @SerializedName("endereco")
     @Expose
     private String endereco;
-    @SerializedName("cidade")
+    @SerializedName("Cidade")
     @Expose
     private String cidade;
-    @SerializedName("estado")
+    @SerializedName("Estado")
     @Expose
     private String estado;
     @SerializedName("plano")
     @Expose
     private String plano;
-    @SerializedName("CEP")
+    @SerializedName("dataEntrada")
     @Expose
-    private String cEP;
+    private String dataEntrada;
     @SerializedName("erro")
     @Expose
     private boolean erro;
@@ -49,6 +49,15 @@ public class Estabelecimento implements Serializable {
     @SerializedName("token")
     @Expose
     private String token;
+    @SerializedName("avaliacao")
+    @Expose
+    private float avaliacao;
+    @SerializedName("caminhoImgPerfil")
+    @Expose
+    private String caminhoImgPerfil;
+    @SerializedName("descricaoEstabelecimento")
+    @Expose
+    private String descricaoEstabelecimento;
 
     /**
      * No args constructor for use in serialization
@@ -59,12 +68,14 @@ public class Estabelecimento implements Serializable {
 
     /**
      *
-     * @param cEP
+     * @param descricaoEstabelecimento
      * @param erro
      * @param cNPJ
      * @param senha
      * @param plano
      * @param descricao
+     * @param avaliacao
+     * @param dataEntrada
      * @param idEstabelecimento
      * @param cidade
      * @param estado
@@ -72,9 +83,10 @@ public class Estabelecimento implements Serializable {
      * @param email
      * @param telefone
      * @param nome
+     * @param caminhoImgPerfil
      * @param endereco
      */
-    public Estabelecimento(String nome, String email, String telefone, String senha, String cNPJ, String endereco, String cidade, String estado, String plano, String cEP, boolean erro, String descricao, String idEstabelecimento, String token) {
+    public Estabelecimento(String nome, String email, String telefone, String senha, String cNPJ, String endereco, String cidade, String estado, String plano, String dataEntrada, boolean erro, String descricao, String idEstabelecimento, String token, float avaliacao, String caminhoImgPerfil, String descricaoEstabelecimento) {
         super();
         this.nome = nome;
         this.email = email;
@@ -85,11 +97,14 @@ public class Estabelecimento implements Serializable {
         this.cidade = cidade;
         this.estado = estado;
         this.plano = plano;
-        this.cEP = cEP;
+        this.dataEntrada = dataEntrada;
         this.erro = erro;
         this.descricao = descricao;
         this.idEstabelecimento = idEstabelecimento;
         this.token = token;
+        this.avaliacao = avaliacao;
+        this.caminhoImgPerfil = caminhoImgPerfil;
+        this.descricaoEstabelecimento = descricaoEstabelecimento;
     }
 
     public String getNome() {
@@ -164,12 +179,12 @@ public class Estabelecimento implements Serializable {
         this.plano = plano;
     }
 
-    public String getCEP() {
-        return cEP;
+    public String getDataEntrada() {
+        return dataEntrada;
     }
 
-    public void setCEP(String cEP) {
-        this.cEP = cEP;
+    public void setDataEntrada(String dataEntrada) {
+        this.dataEntrada = dataEntrada;
     }
 
     public boolean isErro() {
@@ -204,23 +219,28 @@ public class Estabelecimento implements Serializable {
         this.token = token;
     }
 
-    @Override
-    public String toString() {
-        return "Estabelecimento{" +
-                "nome='" + nome + '\'' +
-                ", email='" + email + '\'' +
-                ", telefone='" + telefone + '\'' +
-                ", senha='" + senha + '\'' +
-                ", cNPJ='" + cNPJ + '\'' +
-                ", endereco='" + endereco + '\'' +
-                ", cidade='" + cidade + '\'' +
-                ", estado='" + estado + '\'' +
-                ", plano='" + plano + '\'' +
-                ", cEP='" + cEP + '\'' +
-                ", erro=" + erro +
-                ", descricao='" + descricao + '\'' +
-                ", idEstabelecimento='" + idEstabelecimento + '\'' +
-                ", token='" + token + '\'' +
-                '}';
+    public float getAvaliacao() {
+        return avaliacao;
     }
+
+    public void setAvaliacao(float avaliacao) {
+        this.avaliacao = avaliacao;
+    }
+
+    public String getCaminhoImgPerfil() {
+        return caminhoImgPerfil;
+    }
+
+    public void setCaminhoImgPerfil(String caminhoImgPerfil) {
+        this.caminhoImgPerfil = caminhoImgPerfil;
+    }
+
+    public String getDescricaoEstabelecimento() {
+        return descricaoEstabelecimento;
+    }
+
+    public void setDescricaoEstabelecimento(String descricaoEstabelecimento) {
+        this.descricaoEstabelecimento = descricaoEstabelecimento;
+    }
+
 }
