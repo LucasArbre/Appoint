@@ -34,14 +34,14 @@ public class PromocoesActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         listItem = new ArrayList<>();
-        for(int i = 0; i<=10; i++) {
+        /*for(int i = 0; i<=10; i++) {
             Promocao promocao = new Promocao(
                     "55%",
                     "Promoção imperdivel!"+ i+1,
                     "Essa promoção dura apenas 18horas",
                     "local dahora");
             listItem.add(promocao);
-        }
+        }*/
 
         adapter = new AdapterItemPromocoes(listItem, this);
         recyclerView.setAdapter(adapter);

@@ -41,7 +41,7 @@ public class AdapterItemPromocoes extends RecyclerView.Adapter<AdapterItemPromoc
         Promocao listItem = listItems.get(i);
         viewHolder.titulo.setText(listItem.getTitulo());
         viewHolder.dscrp.setText(listItem.getDescricao());
-        viewHolder.valor.setText(listItem.getPocentagem());
+        viewHolder.valor.setText(listItem.getPorcentagem());
         //viewHolder.verMais.setOnClickListener();
     }
 
