@@ -1,17 +1,48 @@
 package com.arbresystems.appoint.model;
 
-public class Promocao {
-    private String pocentagem;
-    private String titulo;
-    private String descricao;
-    private String local;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    public String getPocentagem() {
-        return pocentagem;
+public class Promocao {
+
+    @SerializedName("titulo")
+    @Expose
+    private String titulo;
+    @SerializedName("descricao")
+    @Expose
+    private String descricao;
+    @SerializedName("linkImg")
+    @Expose
+    private String linkImg;
+    @SerializedName("porcentagem")
+    @Expose
+    private int porcentagem;
+    @SerializedName("erro")
+    @Expose
+    private boolean erro;
+
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public Promocao() {
     }
 
-    public void setPocentagem(String pocentagem) {
-        this.pocentagem = pocentagem;
+    /**
+     *
+     * @param porcentagem
+     * @param linkImg
+     * @param titulo
+     * @param erro
+     * @param descricao
+     */
+    public Promocao(String titulo, String descricao, String linkImg, int porcentagem, boolean erro) {
+        super();
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.linkImg = linkImg;
+        this.porcentagem = porcentagem;
+        this.erro = erro;
     }
 
     public String getTitulo() {
@@ -30,19 +61,28 @@ public class Promocao {
         this.descricao = descricao;
     }
 
-    public String getLocal() {
-        return local;
+    public String getLinkImg() {
+        return linkImg;
     }
 
-    public void setLocal(String local) {
-        this.local = local;
+    public void setLinkImg(String linkImg) {
+        this.linkImg = linkImg;
     }
 
-    public Promocao(String pocentagem, String titulo, String descricao, String local) {
-
-        this.pocentagem = pocentagem;
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.local = local;
+    public int getPorcentagem() {
+        return porcentagem;
     }
+
+    public void setPorcentagem(int porcentagem) {
+        this.porcentagem = porcentagem;
+    }
+
+    public boolean isErro() {
+        return erro;
+    }
+
+    public void setErro(boolean erro) {
+        this.erro = erro;
+    }
+
 }
