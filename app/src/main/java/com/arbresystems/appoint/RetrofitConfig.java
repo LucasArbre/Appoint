@@ -3,6 +3,7 @@ package com.arbresystems.appoint;
 import com.arbresystems.appoint.servicos.Atendimento;
 import com.arbresystems.appoint.servicos.Estabelecimento;
 import com.arbresystems.appoint.servicos.Pesquisa;
+import com.arbresystems.appoint.servicos.Promocao;
 import com.arbresystems.appoint.servicos.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -47,6 +48,10 @@ public class RetrofitConfig {
 
     public Atendimento getAtendimentoService(){
         return this.retrofit.create(Atendimento.class);
+    }
+
+    public Promocao getPromocaoService(){
+        return this.retrofit.create(Promocao.class);
     }
 
     public static OkHttpClient getUnsafeOkHttpClient() {
