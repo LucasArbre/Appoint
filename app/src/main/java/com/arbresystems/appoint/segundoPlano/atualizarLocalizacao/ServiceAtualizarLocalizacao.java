@@ -13,9 +13,9 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class ServiceAtualizarLocalizacao extends IntentService {
-    private Localizacao loca = new Localizacao();
-    private LocationManager LM = null;
-    private Location l = null;
+    private Localizacao localizacao = new Localizacao();
+    private LocationManager locationManager = null;
+    private Location location = null;
 
     public ServiceAtualizarLocalizacao() {
         super("ServiceAtualizarLocalizacao");
@@ -28,13 +28,13 @@ public class ServiceAtualizarLocalizacao extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        LM = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         String bestProvider = null;
-        if (LM != null) {
-            bestProvider = LM.getBestProvider(new Criteria(), true);
+        if (locationManager != null) {
+            bestProvider = locationManager.getBestProvider(new Criteria(), true);
         }
 
-        if (loca != null) {
+        if (localizacao != null) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
@@ -45,18 +45,18 @@ public class ServiceAtualizarLocalizacao extends IntentService {
                 // for ActivityCompat#requestPermissions for more details.
                 return;
             }
-            LM.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000,
-                    0, loca);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000,
+                    0, localizacao);
         }
 
         if (bestProvider != null){
-            l = LM.getLastKnownLocation(bestProvider);
+            location = locationManager.getLastKnownLocation(bestProvider);
         }
 
-        if (l != null) {
-            Log.d("longitude", String.valueOf(l.getLongitude()));
-            Log.d("latitude", String.valueOf(String.valueOf(l.getLatitude())));
-            Toast.makeText(this, "Latitude: " + l.getLatitude() + " " + "Longitude: " + l.getLongitude(), Toast.LENGTH_LONG).show();
+        if (location != null) {
+            Log.d("longitude", String.valueOf(location.getLongitude()));
+            Log.d("latitude", String.valueOf(String.valueOf(location.getLatitude())));
+            Toast.makeText(this, "Latitude: " + location.getLatitude() + " " + "Longitude: " + location.getLongitude(), Toast.LENGTH_LONG).show();
             //Toast.makeText(this, "Longitude: " + l.getLongitude(), Toast.LENGTH_LONG).show();
         }
     }

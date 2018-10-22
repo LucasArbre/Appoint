@@ -1,9 +1,13 @@
 package com.arbresystems.appoint.view;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -16,10 +20,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.arbresystems.appoint.R;
 import com.arbresystems.appoint.model.Horario;
 import com.arbresystems.appoint.segundoPlano.ServiceStart;
+import com.arbresystems.appoint.segundoPlano.atualizarLocalizacao.Localizacao;
 import com.arbresystems.appoint.segundoPlano.atualizarLocalizacao.ServiceAtualizarLocalizacao;
 import com.arbresystems.appoint.viewModels.RecyclerViewDataAdapterHorario;
 import com.arbresystems.appoint.viewModels.SectionDataModelHorario;
@@ -40,6 +46,10 @@ public class PrincipalActivity extends AppCompatActivity {
     private SharedPreferences sp;
     private SharedPreferences spm;
 
+    private Localizacao localizacao = new Localizacao();
+    private LocationManager locationManager = null;
+    private Location l = null;
+
     ArrayList<SectionDataModelHorario> allSampleData;
 
     @Override
@@ -47,6 +57,7 @@ public class PrincipalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
+        pedirPermissoes();
 
         //recyclerView
         allSampleData = new ArrayList<SectionDataModelHorario>();
@@ -187,25 +198,25 @@ public class PrincipalActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         } else {
 
-            startService(new Intent(this, ServiceAtualizarLocalizacao.class));
+            //startService(new Intent(this, ServiceAtualizarLocalizacao.class));
 
             //LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             //Localizacao localizacao = new Localizacao(locationManager);
 
 
-            /*LM = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             String bestProvider = null;
-            if (LM != null){
-                bestProvider = LM.getBestProvider(new Criteria(), true);
+            if (locationManager != null) {
+                bestProvider = locationManager.getBestProvider(new Criteria(), true);
             }
 
-            if (loca != null){
-                LM.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000,
-                        0, loca);
+            if (localizacao != null) {
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000,
+                        0, localizacao);
             }
 
             if (bestProvider != null){
-                l = LM.getLastKnownLocation(bestProvider);
+                l = locationManager.getLastKnownLocation(bestProvider);
             }
 
             if (l != null) {
@@ -213,7 +224,7 @@ public class PrincipalActivity extends AppCompatActivity {
                 Log.d("latitude", String.valueOf(String.valueOf(l.getLatitude())));
                 Toast.makeText(this, "Latitude: " + l.getLatitude() + " " + "Longitude: " + l.getLongitude(), Toast.LENGTH_LONG).show();
                 //Toast.makeText(this, "Longitude: " + l.getLongitude(), Toast.LENGTH_LONG).show();
-            }*/
+            }
         }
     }
 }

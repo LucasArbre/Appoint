@@ -4,12 +4,12 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
 
-final class Localizacao implements LocationListener {
-    private Location location;
+public final class Localizacao implements LocationListener {
+    private Location l;
 
     @Override
     public void onLocationChanged(Location location) {
-        this.location = location;
+        l = location;
     }
 
     @Override
