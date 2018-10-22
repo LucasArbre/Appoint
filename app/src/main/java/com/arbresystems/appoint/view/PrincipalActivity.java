@@ -1,11 +1,14 @@
 package com.arbresystems.appoint.view;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,13 +20,9 @@ import android.widget.FrameLayout;
 import com.arbresystems.appoint.R;
 import com.arbresystems.appoint.model.Horario;
 import com.arbresystems.appoint.segundoPlano.ServiceStart;
-import com.arbresystems.appoint.segundoPlano.atualizarLocalizacao.GetLocalizacao;
 import com.arbresystems.appoint.segundoPlano.atualizarLocalizacao.ServiceAtualizarLocalizacao;
-import com.arbresystems.appoint.viewModels.RecyclerViewDataAdapter;
 import com.arbresystems.appoint.viewModels.RecyclerViewDataAdapterHorario;
-import com.arbresystems.appoint.viewModels.SectionDataModel;
 import com.arbresystems.appoint.viewModels.SectionDataModelHorario;
-import com.arbresystems.appoint.viewModels.SingleItemModel;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -74,10 +73,6 @@ public class PrincipalActivity extends AppCompatActivity {
         System.gc();
         System.gc();
 
-        startService(new Intent(this, ServiceAtualizarLocalizacao.class));
-        GetLocalizacao localizacao = new GetLocalizacao(getApplicationContext());
-            Log.e("latitude2", String.valueOf(localizacao.getLatitude()));
-            Log.e("longitude2", String.valueOf(localizacao.getLongitude()));
 
         startService(new Intent(this, ServiceStart.class));
         //start de serviço que controla tudo em segundo plano
@@ -95,9 +90,9 @@ public class PrincipalActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.nav_search:
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         Intent i = new Intent(PrincipalActivity.this, PesquisarActivity.class);
                         i.addFlags(i.FLAG_ACTIVITY_NO_ANIMATION);
                         startActivity(i);
@@ -109,7 +104,7 @@ public class PrincipalActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_promos:
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         Intent intent1 = new Intent(PrincipalActivity.this, PromocoesActivity.class);
                         intent1.addFlags(intent1.FLAG_ACTIVITY_NO_ANIMATION);
                         startActivity(intent1);
@@ -124,7 +119,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
     }
 
-    public void createDummyData(){
+    public void createDummyData() {
         for (int i = 1; i <= 5; i++) {
 
             Date a = new Date();
@@ -145,6 +140,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.option_items, menu);
@@ -154,7 +150,7 @@ public class PrincipalActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.opt_configs){
+        if (id == R.id.opt_configs) {
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             StringBuilder info = new StringBuilder();
 
@@ -168,11 +164,11 @@ public class PrincipalActivity extends AppCompatActivity {
             Intent intent = new Intent(PrincipalActivity.this, ConfigActivity.class);
             startActivity(intent);
         }
-        if(id == R.id.opt_sobre){
+        if (id == R.id.opt_sobre) {
             Intent intent = new Intent(PrincipalActivity.this, SobreActivity.class);
             startActivity(intent);
         }
-        if(id == R.id.opt_sair){
+        if (id == R.id.opt_sair) {
             LoginManager.getInstance().logOut();
             spm.edit().clear().commit();
             PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
@@ -182,5 +178,42 @@ public class PrincipalActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void pedirPermissoes() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        } else {
+
+            startService(new Intent(this, ServiceAtualizarLocalizacao.class));
+
+            //LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            //Localizacao localizacao = new Localizacao(locationManager);
+
+
+            /*LM = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            String bestProvider = null;
+            if (LM != null){
+                bestProvider = LM.getBestProvider(new Criteria(), true);
+            }
+
+            if (loca != null){
+                LM.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000,
+                        0, loca);
+            }
+
+            if (bestProvider != null){
+                l = LM.getLastKnownLocation(bestProvider);
+            }
+
+            if (l != null) {
+                Log.d("longitude", String.valueOf(l.getLongitude()));
+                Log.d("latitude", String.valueOf(String.valueOf(l.getLatitude())));
+                Toast.makeText(this, "Latitude: " + l.getLatitude() + " " + "Longitude: " + l.getLongitude(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, "Longitude: " + l.getLongitude(), Toast.LENGTH_LONG).show();
+            }*/
+        }
     }
 }
