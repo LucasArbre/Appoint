@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.LoginActivity"
+    tools:context="com.arbresystems.appoint.view.LoginActivity"
     tools:layout_editor_absoluteY="25dp">
 
     <EditText
@@ -127,7 +127,7 @@
             tools:layout_editor_absoluteY="388dp" />
 
         <Button
-            android:id="@+id/fb"
+            android:id="@+id/btnFacebook"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_btn2"
@@ -162,7 +162,7 @@
             android:visibility="invisible" />
 
         <Button
-            android:id="@+id/gl"
+            android:id="@+id/btnGoogle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_btn2"

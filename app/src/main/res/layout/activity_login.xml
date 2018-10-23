@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.LoginActivity"
-    tools:layout_editor_absoluteY="25dp">
+    tools:context="com.arbresystems.appoint.view.LoginActivity">
     <!--android:background="@drawable/edit_fundo"-->
 
 
