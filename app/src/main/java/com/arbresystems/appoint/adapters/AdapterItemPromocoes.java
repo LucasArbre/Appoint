@@ -19,7 +19,7 @@ import com.arbresystems.appoint.model.Promocao;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterItemPromocoes extends RecyclerView.Adapter {
+public class AdapterItemPromocoes extends RecyclerView.Adapter<AdapterItemPromocoes.ViewHolder> {
 
     private List<Promocao> listItems;
     private Context context;
@@ -31,31 +31,31 @@ public class AdapterItemPromocoes extends RecyclerView.Adapter {
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public AdapterItemPromocoes.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.adapter_promos, viewGroup, false);
         return new ViewHolder(v);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
-    }
-
-    /*@Override
+@Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Promocao listItem = listItems.get(i);
-        viewHolder.titulo.setText(listItem.getTitulo());
-        viewHolder.dscrp.setText(listItem.getDescricao());
-        viewHolder.valor.setText(listItem.getPorcentagem());
-        //viewHolder.verMais.setOnClickListener();
-    }*/
+        viewHolder.txtTitulo.setText(listItem.getTitulo());
+        viewHolder.txtDescricao.setText(listItem.getDescricao());
+        viewHolder.txtValor.setText(listItem.getPorcentagem());
+        viewHolder.btnVerMais.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
 
     @Override
     public int getItemCount() {
         return listItems.size();
     }
 
-    private class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder{
 
         public TextView txtValor;
         public TextView txtTitulo;
