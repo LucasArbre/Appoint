@@ -33,8 +33,7 @@
         <activity android:name=".view.PrincipalActivity" />
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".view.PromocoesActivity" />
-        <activity android:name=".view.PesquisarActivity"/>
-
+        <activity android:name=".view.PesquisarActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -76,6 +75,7 @@
             </intent-filter>
         </receiver>
 
+        <activity android:name=".view.ServicosActivity"></activity>
     </application>
 
 </manifest>

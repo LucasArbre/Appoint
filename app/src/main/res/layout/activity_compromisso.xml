@@ -21,7 +21,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
-            android:background="@drawable/ic_back"
+            android:background="@drawable/ic_excluir"
             android:backgroundTint="@color/white"
             app:layout_constraintEnd_toStartOf="@+id/textView2"
             app:layout_constraintHorizontal_bias="0.0"
@@ -29,15 +29,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="5dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="7dp"
-            android:background="@drawable/ic_excluir"
-            android:backgroundTint="@color/white"
+            android:layout_marginEnd="5dp"
+            android:text="salvar"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/button2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -48,8 +47,8 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
             android:layout_marginBottom="15dp"
-            android:layout_marginTop="60dp"
             android:text="Nome Compromisso"
             android:textColor="@color/white"
             android:textSize="18sp"
@@ -66,13 +65,13 @@
         android:gravity="center|start"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="13:00 - 15:00 (12/05)"
-        android:drawablePadding="5dp"
+        android:text="Inicio1: 3:00 - Termino: 15:00 (12/05)"
+        android:drawablePadding="10dp"
         android:textSize="16sp" />
 
     <TextView
         android:drawableLeft="@drawable/ic_local"
-        android:drawablePadding="5dp"
+        android:drawablePadding="10dp"
         android:padding="10dp"
         android:gravity="center|start"
         android:id="@+id/txtEndereco"
@@ -82,7 +81,7 @@
         android:textSize="16sp" />
 
     <TextView
-        android:drawablePadding="5dp"
+        android:drawablePadding="10dp"
         android:gravity="center|start"
         android:drawableLeft="@drawable/ic_pessoa"
         android:padding="10dp"
@@ -92,6 +91,17 @@
         android:text="Cabelos Cabeludos"
         android:textSize="16sp" />
 
+
+    <TextView
+        android:id="@+id/txtPreco"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_preco"
+        android:gravity="center|start"
+        android:drawablePadding="10dp"
+        android:padding="15dp"
+        android:text="R$ 20,00"
+        android:textSize="18sp" />
 
     <View
         android:layout_width="match_parent"
@@ -107,6 +117,8 @@
         android:drawableLeft="@drawable/ic_editar"
         android:drawablePadding="-35dp"
         android:gravity="center"
-        android:text="Editar"
-        android:textAlignment="center" />
+        android:text="Mudar para próximo horario"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </LinearLayout>
