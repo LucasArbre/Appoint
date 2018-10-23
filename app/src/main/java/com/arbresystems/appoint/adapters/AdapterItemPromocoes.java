@@ -19,7 +19,7 @@ import com.arbresystems.appoint.model.Promocao;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterItemPromocoes extends RecyclerView.Adapter<AdapterItemPromocoes.ViewHolder> {
+public class AdapterItemPromocoes extends RecyclerView.Adapter {
 
     private List<Promocao> listItems;
     private Context context;
@@ -37,32 +37,37 @@ public class AdapterItemPromocoes extends RecyclerView.Adapter<AdapterItemPromoc
     }
 
     @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+
+    }
+
+    /*@Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Promocao listItem = listItems.get(i);
         viewHolder.titulo.setText(listItem.getTitulo());
         viewHolder.dscrp.setText(listItem.getDescricao());
         viewHolder.valor.setText(listItem.getPorcentagem());
         //viewHolder.verMais.setOnClickListener();
-    }
+    }*/
 
     @Override
     public int getItemCount() {
         return listItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    private class ViewHolder extends RecyclerView.ViewHolder{
 
-        public TextView valor;
-        public TextView titulo;
-        public TextView dscrp;
-        public Button verMais;
+        public TextView txtValor;
+        public TextView txtTitulo;
+        public TextView txtDescricao;
+        public Button btnVerMais;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            valor = itemView.findViewById(R.id.valor_promo);
-            titulo = itemView.findViewById(R.id.txtTitulo);
-            dscrp = itemView.findViewById(R.id.txtDscrp);
-            verMais = itemView.findViewById(R.id.btnVerMais);
+            txtValor = itemView.findViewById(R.id.valor_promo);
+            txtTitulo = itemView.findViewById(R.id.txtTitulo);
+            txtDescricao = itemView.findViewById(R.id.txtDscrp);
+            btnVerMais = itemView.findViewById(R.id.btnVerMais);
         }
     }
 }

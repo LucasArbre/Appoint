@@ -56,7 +56,7 @@ public class PromocoesActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ArrayList<Promocao>> call, Throwable t) {
-                Log.e("erro", t.getMessage());
+                Log.e("erroPromocao", t.getMessage());
             }
         });
         /*for(int i = 0; i<=10; i++) {
