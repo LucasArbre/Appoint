@@ -16,13 +16,13 @@ public class Promocao {
     private String endereco;
     @SerializedName("CEP")
     @Expose
-    private Object cEP;
+    private String cEP;
     @SerializedName("estado")
     @Expose
-    private Object estado;
+    private String estado;
     @SerializedName("cidade")
     @Expose
-    private Object cidade;
+    private String cidade;
     @SerializedName("CNPJ")
     @Expose
     private String cNPJ;
@@ -55,7 +55,7 @@ public class Promocao {
     private String porcentagem;
     @SerializedName("linkImg")
     @Expose
-    private Object linkImg;
+    private String linkImg;
     @SerializedName("erro")
     @Expose
     private boolean erro;
@@ -88,7 +88,7 @@ public class Promocao {
      * @param nome
      * @param endereco
      */
-    public Promocao(String idEstabelecimento, String nome, String endereco, Object cEP, Object estado, Object cidade, String cNPJ, String telefone, String linkImgPerfil, String avaliacao, String dataEntrada, String descricaoEstabelecimento, String idPromocao, String titulo, String descricao, String porcentagem, Object linkImg, boolean erro) {
+    public Promocao(String idEstabelecimento, String nome, String endereco, String cEP, String estado, String cidade, String cNPJ, String telefone, String linkImgPerfil, String avaliacao, String dataEntrada, String descricaoEstabelecimento, String idPromocao, String titulo, String descricao, String porcentagem, String linkImg, boolean erro) {
         super();
         this.idEstabelecimento = idEstabelecimento;
         this.nome = nome;
@@ -138,7 +138,7 @@ public class Promocao {
         return cEP;
     }
 
-    public void setCEP(Object cEP) {
+    public void setCEP(String cEP) {
         this.cEP = cEP;
     }
 
@@ -146,7 +146,7 @@ public class Promocao {
         return estado;
     }
 
-    public void setEstado(Object estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
@@ -154,7 +154,7 @@ public class Promocao {
         return cidade;
     }
 
-    public void setCidade(Object cidade) {
+    public void setCidade(String cidade) {
         this.cidade = cidade;
     }
 
@@ -242,7 +242,7 @@ public class Promocao {
         return linkImg;
     }
 
-    public void setLinkImg(Object linkImg) {
+    public void setLinkImg(String linkImg) {
         this.linkImg = linkImg;
     }
 
