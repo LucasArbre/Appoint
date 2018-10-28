@@ -22,7 +22,7 @@ public interface Promocao {
             "x-audience: http://api.appoint.arbresystems.com",
             "x-id: apiAppoint"
     })
-    @GET("/buscarPromocoes/")
+    @GET("/buscarPromocoes")
     Call<ArrayList<com.arbresystems.appoint.model.Promocao>> buscarPromocoes (
             @Header("x-authentication") String token);
 }

@@ -1,5 +1,6 @@
 package com.arbresystems.appoint.adapters;
 
+import android.annotation.SuppressLint;
 import android.app.LauncherActivity;
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -36,12 +37,13 @@ public class AdapterItemPromocoes extends RecyclerView.Adapter<AdapterItemPromoc
         return new ViewHolder(v);
     }
 
+@SuppressLint("SetTextI18n")
 @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         Promocao listItem = listItems.get(i);
         viewHolder.txtTitulo.setText(listItem.getTitulo());
         viewHolder.txtDescricao.setText(listItem.getDescricao());
-        viewHolder.txtValor.setText(listItem.getPorcentagem());
+        viewHolder.txtValor.setText(listItem.getPorcentagem() + "%");
         viewHolder.btnVerMais.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

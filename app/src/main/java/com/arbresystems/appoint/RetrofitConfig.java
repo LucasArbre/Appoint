@@ -16,6 +16,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -23,6 +24,7 @@ public class RetrofitConfig {
     private final Retrofit retrofit;
 
     public RetrofitConfig(){
+
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
@@ -85,8 +87,12 @@ public class RetrofitConfig {
             final SSLSocketFactory sslSocketFactory = sslContext
                     .getSocketFactory();
 
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
             OkHttpClient okHttpClient = new OkHttpClient();
             okHttpClient = okHttpClient.newBuilder()
+                    .addInterceptor(interceptor)
                     .sslSocketFactory(sslSocketFactory)
                     .hostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER).build();
 
