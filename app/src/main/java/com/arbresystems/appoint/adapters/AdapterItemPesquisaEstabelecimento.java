@@ -42,11 +42,40 @@ public class AdapterItemPesquisaEstabelecimento extends RecyclerView.Adapter<Ada
 
     @Override
     public void onBindViewHolder(@NonNull AdapterItemPesquisaEstabelecimento.ViewHolder viewHolder, int i) {
-        Estabelecimento estabelecimento = estabelecimentos.get(i);
+        final Estabelecimento estabelecimento = estabelecimentos.get(i);
         viewHolder.txtNome.setText(estabelecimento.getNome());
         //viewHolder.btnDistancia.setText(estabelecimento.getDistancia());
         viewHolder.rtAvaliacao.setRating(estabelecimento.getAvaliacao());
+
         Glide.with(context).load("http://goo.gl/gEgYUd").into(viewHolder.imgPerfil);
+
+        viewHolder.txtNome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity( new Intent(context, PerfilAdmActivity.class).putExtra("estabelecimento", estabelecimento));
+            }
+        });
+
+        viewHolder.imgPerfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity( new Intent(context, PerfilAdmActivity.class).putExtra("estabelecimento", estabelecimento));
+            }
+        });
+
+        viewHolder.rtAvaliacao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity( new Intent(context, PerfilAdmActivity.class).putExtra("estabelecimento", estabelecimento));
+            }
+        });
+
+        viewHolder.btnDistancia.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity( new Intent(context, PerfilAdmActivity.class).putExtra("estabelecimento", estabelecimento));
+            }
+        });
     }
 
     @Override
