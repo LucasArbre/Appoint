@@ -16,15 +16,15 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btnAgendar"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_margin="5dp"
             android:background="@drawable/edit_btn"
-            android:layout_gravity="center"
-            android:layout_width="300dp"
-            android:textColor="@color/white"
-            android:layout_height="wrap_content"
             android:backgroundTint="@color/green"
-            android:text="Agendar um horário" />
+            android:text="Agendar um horário"
+            android:textColor="@color/white" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvCompromissos"
