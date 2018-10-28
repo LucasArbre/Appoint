@@ -19,6 +19,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -50,7 +52,9 @@ public class PrincipalActivity extends AppCompatActivity {
     private LocationManager locationManager = null;
     private Location l = null;
 
-    ArrayList<SectionDataModelHorario> allSampleData;
+    private ArrayList<SectionDataModelHorario> allSampleData;
+
+    private Button btnAgendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +68,6 @@ public class PrincipalActivity extends AppCompatActivity {
 
         createDummyData();
 
-
         RecyclerView my_recycler_view = (RecyclerView) findViewById(R.id.rvCompromissos);
 
         my_recycler_view.setHasFixedSize(true);
@@ -74,6 +77,14 @@ public class PrincipalActivity extends AppCompatActivity {
         my_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         my_recycler_view.setAdapter(adapter);
+
+        btnAgendar = findViewById(R.id.btnAgendar);
+        btnAgendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity( new Intent(PrincipalActivity.this, ServicosActivity.class));
+            }
+        });
 
         //menu
         startService(new Intent(this, ServiceStart.class));
