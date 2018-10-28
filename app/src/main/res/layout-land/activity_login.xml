@@ -4,18 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.arbresystems.appoint.view.LoginActivity"
-    tools:layout_editor_absoluteY="25dp">
+    tools:context="com.arbresystems.appoint.view.LoginActivity">
+    <!--android:background="@drawable/edit_fundo"-->
+
+
+    <!--android:background="ed"-->
+    <Button
+        android:id="@+id/btntestar"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/txtName"
         android:layout_width="0dp"
         android:layout_height="43dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
         android:backgroundTint="@color/colorPrimary"
         android:ems="10"
         android:hint="@string/nome"
@@ -23,8 +32,7 @@
         android:singleLine="true"
         android:textColorHint="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -45,17 +53,17 @@
     <Button
         android:id="@+id/btnEntrar"
         android:layout_width="0dp"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/edit_btn"
-        android:text="@string/login"
+        android:text="@string/loginTel"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtTel" />
 
@@ -84,20 +92,20 @@
             android:layout_height="1dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
-            android:layout_toLeftOf="@id/tvText"
-            android:background="@color/colorPrimary"
             android:layout_marginStart="16dp"
-            android:layout_toStartOf="@id/tvText" />
+            android:layout_toLeftOf="@id/tvText"
+            android:layout_toStartOf="@id/tvText"
+            android:background="@color/colorPrimary" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_centerVertical="true"
             android:layout_marginRight="16dp"
-            android:layout_toRightOf="@id/tvText"
-            android:background="@color/colorPrimary"
             android:layout_marginEnd="16dp"
-            android:layout_toEndOf="@id/tvText" />
+            android:layout_toRightOf="@id/tvText"
+            android:layout_toEndOf="@id/tvText"
+            android:background="@color/colorPrimary" />
 
     </RelativeLayout>
 
@@ -105,13 +113,9 @@
         android:id="@+id/frameLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toStartOf="@+id/frameLayout2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
@@ -131,26 +135,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_btn2"
+            android:backgroundTint="@color/fb_color"
             android:gravity="center"
             android:text="@string/cd_fb"
             android:textAllCaps="false"
             android:textColor="@color/fb_color"
-            android:backgroundTint="@color/fb_color"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="16sp" />
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/frameLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="32dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/frameLayout"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
@@ -166,13 +165,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edit_btn2"
+            android:backgroundTint="@color/gl_color"
             android:gravity="center"
             android:text="@string/cd_gl"
             android:textAllCaps="false"
             android:textColor="@color/gl_color"
-            android:backgroundTint="@color/gl_color"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="16sp" />
     </FrameLayout>
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="80dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintBottom_toTopOf="@+id/txtName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.016"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/logoappoint" />
 
 </android.support.constraint.ConstraintLayout>
