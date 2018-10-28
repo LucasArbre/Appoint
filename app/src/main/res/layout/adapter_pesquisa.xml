@@ -11,7 +11,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/imgPerfil"
         android:layout_width="65dp"
         android:layout_height="match_parent"
         android:layout_weight="0.1"
@@ -24,13 +24,15 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txtNome"
             android:layout_width="wrap_content"
-            android:padding="2dp"
-            android:textSize="14sp"
             android:layout_height="wrap_content"
-            android:text="Nome do Lugar"/>
+            android:padding="2dp"
+            android:text="Nome do Lugar"
+            android:textSize="14sp" />
 
         <Button
+            android:id="@+id/btnDistancia"
             style="@android:style/Widget.Button.Small"
             android:layout_width="wrap_content"
             android:layout_height="18dp"
@@ -39,11 +41,11 @@
             android:text="2.4km" />
 
         <RatingBar
-            android:id="@+id/ratingBar"
+            android:id="@+id/rtAvaliacao"
             style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
             android:layout_width="80dp"
-            android:editable="false"
-            android:layout_height="20dp" />
+            android:layout_height="20dp"
+            android:editable="false" />
 
     </LinearLayout>
 </LinearLayout>

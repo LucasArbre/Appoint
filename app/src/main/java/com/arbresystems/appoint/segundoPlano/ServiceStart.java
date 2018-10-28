@@ -1,6 +1,7 @@
 package com.arbresystems.appoint.segundoPlano;
 
 import android.app.IntentService;
+import android.app.Notification;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -12,6 +13,7 @@ import com.arbresystems.appoint.segundoPlano.atualizarConfiguracoes.ServiceAtual
 import static com.arbresystems.appoint.view.MainActivity.PREF_NAME;
 
 public class ServiceStart extends IntentService {
+
 
     public ServiceStart() {
         super("ServiceStart");

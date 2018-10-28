@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -32,6 +34,7 @@ public class PesquisarActivity extends AppCompatActivity {
     private SharedPreferences sp;
     private ListView listView;
     private AdapterItemPesquisaEstabelecimento adapter;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +43,11 @@ public class PesquisarActivity extends AppCompatActivity {
 
         sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
 
-        listView = findViewById(R.id.pesquisaAdm);
+        //listView = findViewById(R.id.pesquisaAdm);
+
+        recyclerView = findViewById(R.id.rvPesquisa);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //adapter = new RecyclerViewDataAdapterServicos(this, servicos);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -88,7 +95,8 @@ public class PesquisarActivity extends AppCompatActivity {
                         List<Estabelecimento> estabelecimentos = response.body();
                         Log.e("resposta", estabelecimentos.toString());
                         adapter = new AdapterItemPesquisaEstabelecimento(getApplicationContext(), estabelecimentos);
-                        listView.setAdapter(adapter);
+                        //listView.setAdapter(adapter);
+                        recyclerView.setAdapter(adapter);
                     }
 
                     @Override

@@ -3,18 +3,25 @@ package com.arbresystems.appoint.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.arbresystems.appoint.R;
 import com.arbresystems.appoint.model.Estabelecimento;
 import com.arbresystems.appoint.view.PerfilAdmActivity;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-public class AdapterItemPesquisaEstabelecimento extends BaseAdapter{
+public class AdapterItemPesquisaEstabelecimento extends RecyclerView.Adapter<AdapterItemPesquisaEstabelecimento.ViewHolder> {
     private LayoutInflater mInflater;
     private Context context;
     private List<Estabelecimento> estabelecimentos;
@@ -26,35 +33,40 @@ public class AdapterItemPesquisaEstabelecimento extends BaseAdapter{
         notifyDataSetChanged();
     }
 
+    @NonNull
     @Override
-    public int getCount() {
+    public AdapterItemPesquisaEstabelecimento.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.adapter_pesquisa, viewGroup, false);
+        return new ViewHolder(v);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull AdapterItemPesquisaEstabelecimento.ViewHolder viewHolder, int i) {
+        Estabelecimento estabelecimento = estabelecimentos.get(i);
+        viewHolder.txtNome.setText(estabelecimento.getNome());
+        //viewHolder.btnDistancia.setText(estabelecimento.getDistancia());
+        viewHolder.rtAvaliacao.setRating(estabelecimento.getAvaliacao());
+        Glide.with(context).load("http://goo.gl/gEgYUd").into(viewHolder.imgPerfil);
+    }
+
+    @Override
+    public int getItemCount() {
         return estabelecimentos.size();
     }
 
-    @Override
-    public Object getItem(int position) {
-        return estabelecimentos.get(position);
-    }
+    public class ViewHolder extends RecyclerView.ViewHolder{
 
-    @Override
-    public long getItemId(int position) {
-        return Long.parseLong(estabelecimentos.get(position).getIdEstabelecimento());
-    }
+        public TextView txtNome;
+        public Button btnDistancia;
+        public ImageView imgPerfil;
+        public RatingBar rtAvaliacao;
 
-    @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        View view = mInflater.inflate(android.R.layout.simple_list_item_activated_1, null);
-        TextView nomeEstabelecimento = view.findViewById(android.R.id.text1);
-
-        nomeEstabelecimento.setText(estabelecimentos.get(position).getNome());
-
-        nomeEstabelecimento.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                context.startActivity( new Intent(context, PerfilAdmActivity.class).putExtra("estabelecimento", estabelecimentos.get(position)));
-            }
-        });
-
-        return view;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            txtNome = itemView.findViewById(R.id.txtNome);
+            imgPerfil = itemView.findViewById(R.id.imgPerfil);
+            btnDistancia = itemView.findViewById(R.id.btnDistancia);
+            rtAvaliacao = itemView.findViewById(R.id.rtAvaliacao);
+        }
     }
 }
