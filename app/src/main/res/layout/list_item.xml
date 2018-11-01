@@ -38,6 +38,9 @@
         android:id="@+id/recycler_view_list"
         android:layout_width="match_parent"
         android:layout_height="160dp"
+        android:outlineProvider="bounds"
+        android:clipToPadding="false"
+        android:elevation="8dp"
         android:layout_gravity="center_vertical"
         android:orientation="horizontal" />
 

@@ -24,6 +24,9 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/Rpview"
+            android:outlineProvider="bounds"
+            android:clipToPadding="false"
+            android:elevation="8dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
