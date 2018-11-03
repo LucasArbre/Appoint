@@ -25,17 +25,23 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.arbresystems.appoint.R;
+import com.arbresystems.appoint.RetrofitConfig;
+import com.arbresystems.appoint.adapters.AdapterItemHorario;
+import com.arbresystems.appoint.model.Atendimento;
 import com.arbresystems.appoint.model.Horario;
 import com.arbresystems.appoint.segundoPlano.ServiceStart;
 import com.arbresystems.appoint.segundoPlano.atualizarLocalizacao.Localizacao;
 import com.arbresystems.appoint.segundoPlano.atualizarLocalizacao.ServiceAtualizarLocalizacao;
-import com.arbresystems.appoint.viewModels.RecyclerViewDataAdapterHorario;
 import com.arbresystems.appoint.viewModels.SectionDataModelHorario;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.Date;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.arbresystems.appoint.view.MainActivity.PREF_NAME;
 
@@ -56,12 +62,18 @@ public class PrincipalActivity extends AppCompatActivity {
 
     private Button btnAgendar;
 
+    private ArrayList<Atendimento> atendimentos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
 
         pedirPermissoes();
+
+        mAuth = FirebaseAuth.getInstance();
+        sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        spm = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         //recyclerView
         allSampleData = new ArrayList<SectionDataModelHorario>();
@@ -72,11 +84,11 @@ public class PrincipalActivity extends AppCompatActivity {
 
         my_recycler_view.setHasFixedSize(true);
 
-        RecyclerViewDataAdapterHorario adapter = new RecyclerViewDataAdapterHorario(this, allSampleData);
+        AdapterItemHorario adapterItemHorario = new AdapterItemHorario(this, allSampleData);
 
         my_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        my_recycler_view.setAdapter(adapter);
+        my_recycler_view.setAdapter(adapterItemHorario);
 
         btnAgendar = findViewById(R.id.btnAgendar);
         btnAgendar.setOnClickListener(new View.OnClickListener() {
@@ -104,10 +116,6 @@ public class PrincipalActivity extends AppCompatActivity {
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(1);
         menuItem.setChecked(true);
-
-        mAuth = FirebaseAuth.getInstance();
-        sp = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-        spm = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -142,6 +150,22 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     public void createDummyData() {
+
+        Log.d("token", sp.getString("token", null));
+
+        new RetrofitConfig().getAtendimentoService().buscarAceitosENaoConcluidosPorUsuario(sp.getString("token", null)).enqueue(new Callback<ArrayList<Atendimento>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Atendimento>> call, Response<ArrayList<Atendimento>> response) {
+                atendimentos = response.body();
+                Log.d("resposta", atendimentos.toString());
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Atendimento>> call, Throwable t) {
+                Log.e("erroBuscarAtendimentos", t.getMessage());
+            }
+        });
+
         for (int i = 1; i <= 5; i++) {
 
             Date a = new Date();
@@ -151,12 +175,7 @@ public class PrincipalActivity extends AppCompatActivity {
             dm.setDia(a);
             dm.setDiaMes(a);
 
-            ArrayList<Horario> singleItem = new ArrayList<Horario>();
-            for (int j = 1; j <= 5; j++) {
-                singleItem.add(new Horario(a, a, a, "Unhas"));
-            }
-
-            dm.setAllItemsInSection(singleItem);
+            dm.setAllItemsInSection(atendimentos);
 
             allSampleData.add(dm);
 

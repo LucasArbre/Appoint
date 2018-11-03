@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arbresystems.appoint.R;
+import com.arbresystems.appoint.model.Atendimento;
 import com.arbresystems.appoint.model.Horario;
 
 import java.text.SimpleDateFormat;
@@ -17,11 +18,11 @@ import java.util.ArrayList;
 
 
 public class SectionListDataAdapterHorario extends RecyclerView.Adapter<SectionListDataAdapterHorario.SingleItemRowHolder> {
-    private ArrayList<Horario> itemsList;
+    private ArrayList<Atendimento> atendimentos;
     private Context mContext;
 
-    public SectionListDataAdapterHorario(Context context, ArrayList<Horario> itemsList) {
-        this.itemsList = itemsList;
+    public SectionListDataAdapterHorario(Context context, ArrayList<Atendimento> atendimentos) {
+        this.atendimentos = atendimentos;
         this.mContext = context;
     }
 
@@ -35,15 +36,16 @@ public class SectionListDataAdapterHorario extends RecyclerView.Adapter<SectionL
     @Override
     public void onBindViewHolder(SingleItemRowHolder holder, int i) {
 
-        Horario singleItem = itemsList.get(i);
+        Atendimento atendimento = atendimentos.get(i);
 
-        holder.nomeServico.setText(singleItem.getServico());
+        holder.nomeServico.setText(atendimento.getDescricao());
+        //holder.nomeServico.setText(atendimento.getNomeAtendimento());
 
         SimpleDateFormat formatoHora = new SimpleDateFormat("h:mm a");
 
 
-        String in = formatoHora.format(singleItem.getHoraInicio());
-        String tr = formatoHora.format(singleItem.getHoraTermino());
+        String in = formatoHora.format(atendimento.getDataHorarioInicio());
+        String tr = formatoHora.format(atendimento.getDataHorarioFim());
 
 
         String total = String.valueOf(in+" _ "+tr);
@@ -52,7 +54,7 @@ public class SectionListDataAdapterHorario extends RecyclerView.Adapter<SectionL
 
     @Override
     public int getItemCount() {
-        return (null != itemsList ? itemsList.size() : 0);
+        return (null != atendimentos ? atendimentos.size() : 0);
     }
 
     public class SingleItemRowHolder extends RecyclerView.ViewHolder {

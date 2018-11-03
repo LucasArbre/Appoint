@@ -1,4 +1,4 @@
-package com.arbresystems.appoint.viewModels;
+package com.arbresystems.appoint.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,16 +9,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.arbresystems.appoint.R;
+import com.arbresystems.appoint.viewModels.SectionDataModelHorario;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class RecyclerViewDataAdapterHorario extends  RecyclerView.Adapter<RecyclerViewDataAdapterHorario.ItemRowHolder>{
-    private ArrayList<SectionDataModelHorario> dataList;
+public class AdapterItemHorario extends  RecyclerView.Adapter<AdapterItemHorario.ItemRowHolder>{
+    private ArrayList<SectionDataModelHorario> horarios;
     private Context mContext;
 
-    public RecyclerViewDataAdapterHorario(Context context, ArrayList<SectionDataModelHorario> dataList) {
-        this.dataList = dataList;
+    public AdapterItemHorario(Context context, ArrayList<SectionDataModelHorario> dataList) {
+        this.horarios = dataList;
         this.mContext = context;
     }
 
@@ -34,10 +35,10 @@ public class RecyclerViewDataAdapterHorario extends  RecyclerView.Adapter<Recycl
         SimpleDateFormat formatoDia = new SimpleDateFormat("E");
         SimpleDateFormat formatoDiaMes = new SimpleDateFormat("d");
 
-        final String sectionDia = formatoDia.format(dataList.get(i).getDia());
-        final String sectionMes = formatoDiaMes.format(dataList.get(i).getDiaMes());
+        final String sectionDia = formatoDia.format(horarios.get(i).getDia());
+        final String sectionMes = formatoDiaMes.format(horarios.get(i).getDiaMes());
 
-        ArrayList singleSectionItems = dataList.get(i).getAllItemsInSection();
+        ArrayList singleSectionItems = horarios.get(i).getAllItemsInSection();
 
 
 
@@ -53,7 +54,7 @@ public class RecyclerViewDataAdapterHorario extends  RecyclerView.Adapter<Recycl
 
     @Override
     public int getItemCount() {
-        return (null != dataList ? dataList.size() : 0);
+        return (null != horarios ? horarios.size() : 0);
     }
 
     public class ItemRowHolder extends RecyclerView.ViewHolder {

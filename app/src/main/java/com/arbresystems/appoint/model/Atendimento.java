@@ -3,6 +3,8 @@ package com.arbresystems.appoint.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.sql.Date;
+
 public class Atendimento {
 
     @SerializedName("idEstabelecimento")
@@ -10,10 +12,10 @@ public class Atendimento {
     private String idEstabelecimento;
     @SerializedName("dataHorarioInicio")
     @Expose
-    private String dataHorarioInicio;
+    private Date dataHorarioInicio;
     @SerializedName("dataHorarioFim")
     @Expose
-    private String dataHorarioFim;
+    private Date dataHorarioFim;
     @SerializedName("valor")
     @Expose
     private int valor;
@@ -35,6 +37,9 @@ public class Atendimento {
     @SerializedName("idAtendimento")
     @Expose
     private String idAtendimento;
+    @SerializedName("dia")
+    @Expose
+    private Date dia;
 
     /**
      * No args constructor for use in serialization
@@ -56,7 +61,7 @@ public class Atendimento {
      * @param descricao
      * @param concluido
      */
-    public Atendimento(String idEstabelecimento, String dataHorarioInicio, String dataHorarioFim, int valor, int concluido, int aceito, int avisoEmMinutos, boolean erro, String descricao, String idAtendimento) {
+    public Atendimento(String idEstabelecimento, Date dataHorarioInicio, Date dataHorarioFim, int valor, int concluido, int aceito, int avisoEmMinutos, boolean erro, String descricao, String idAtendimento, Date dia) {
         super();
         this.idEstabelecimento = idEstabelecimento;
         this.dataHorarioInicio = dataHorarioInicio;
@@ -78,19 +83,19 @@ public class Atendimento {
         this.idEstabelecimento = idEstabelecimento;
     }
 
-    public String getDataHorarioInicio() {
+    public Date getDataHorarioInicio() {
         return dataHorarioInicio;
     }
 
-    public void setDataHorarioInicio(String dataHorarioInicio) {
+    public void setDataHorarioInicio(Date dataHorarioInicio) {
         this.dataHorarioInicio = dataHorarioInicio;
     }
 
-    public String getDataHorarioFim() {
+    public Date getDataHorarioFim() {
         return dataHorarioFim;
     }
 
-    public void setDataHorarioFim(String dataHorarioFim) {
+    public void setDataHorarioFim(Date dataHorarioFim) {
         this.dataHorarioFim = dataHorarioFim;
     }
 

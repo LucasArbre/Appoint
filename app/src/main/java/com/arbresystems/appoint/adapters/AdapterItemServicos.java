@@ -1,12 +1,10 @@
-package com.arbresystems.appoint.viewModels;
+package com.arbresystems.appoint.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.arbresystems.appoint.R;
@@ -16,11 +14,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class RecyclerViewDataAdapterServicos extends RecyclerView.Adapter<RecyclerViewDataAdapterServicos.ItemRowHolder>{
+public class AdapterItemServicos extends RecyclerView.Adapter<AdapterItemServicos.ItemRowHolder>{
     private ArrayList<Servicos> dataList;
     private Context mContext;
 
-    public RecyclerViewDataAdapterServicos(Context context, ArrayList<Servicos> dataList) {
+    public AdapterItemServicos(Context context, ArrayList<Servicos> dataList) {
         this.dataList = dataList;
         this.mContext = context;
     }

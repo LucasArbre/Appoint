@@ -1,5 +1,6 @@
 package com.arbresystems.appoint.viewModels;
 
+import com.arbresystems.appoint.model.Atendimento;
 import com.arbresystems.appoint.model.Horario;
 
 import java.util.ArrayList;
@@ -8,17 +9,17 @@ import java.util.Date;
 public class SectionDataModelHorario {
     private Date diaMes;
     private Date dia;
-    private ArrayList<Horario> allItemsInSection;
+    private ArrayList<Atendimento> atendimentos;
 
 
     public SectionDataModelHorario() {
 
     }
 
-    public SectionDataModelHorario(Date diaMes, Date dia, ArrayList<Horario> allItemsInSection) {
+    public SectionDataModelHorario(Date diaMes, Date dia, ArrayList<Atendimento> allItemsInSection) {
         this.diaMes = diaMes;
         this.dia = dia;
-        this.allItemsInSection = allItemsInSection;
+        this.atendimentos = atendimentos;
     }
 
     public Date getDiaMes() {
@@ -37,11 +38,11 @@ public class SectionDataModelHorario {
         this.dia = dia;
     }
 
-    public ArrayList<Horario> getAllItemsInSection() {
-        return allItemsInSection;
+    public ArrayList<Atendimento> getAllItemsInSection() {
+        return atendimentos;
     }
 
-    public void setAllItemsInSection(ArrayList<Horario> allItemsInSection) {
-        this.allItemsInSection = allItemsInSection;
+    public void setAllItemsInSection(ArrayList<Atendimento> atendimentos) {
+        this.atendimentos = atendimentos;
     }
 }

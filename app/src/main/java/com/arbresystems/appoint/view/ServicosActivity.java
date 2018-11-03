@@ -1,6 +1,5 @@
 package com.arbresystems.appoint.view;
 
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,19 +9,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.arbresystems.appoint.R;
+import com.arbresystems.appoint.adapters.AdapterItemServicos;
 import com.arbresystems.appoint.model.Servicos;
-import com.arbresystems.appoint.viewModels.RecyclerViewDataAdapter;
-import com.arbresystems.appoint.viewModels.RecyclerViewDataAdapterHorario;
-import com.arbresystems.appoint.viewModels.RecyclerViewDataAdapterServicos;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ServicosActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private RecyclerView recyclerView;
     private ArrayList<Servicos> servicos;
-    private RecyclerViewDataAdapterServicos adapter = new RecyclerViewDataAdapterServicos(this, servicos);
+    private AdapterItemServicos adapterItemServicos = new AdapterItemServicos(this, servicos);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +28,7 @@ public class ServicosActivity extends AppCompatActivity implements SearchView.On
         recyclerView = findViewById(R.id.rvServicos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //adapter = new RecyclerViewDataAdapterServicos(this, servicos);
-        recyclerView.setAdapter(adapter);
+        recyclerView.setAdapter(adapterItemServicos);
     }
 
     @Override
@@ -60,7 +56,7 @@ public class ServicosActivity extends AppCompatActivity implements SearchView.On
                 newList.add(servico);
             }
         }
-        adapter.updateList(newList);
+        adapterItemServicos.updateList(newList);
         return false;
     }
 }
