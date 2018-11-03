@@ -4,6 +4,7 @@ import com.arbresystems.appoint.servicos.Atendimento;
 import com.arbresystems.appoint.servicos.Estabelecimento;
 import com.arbresystems.appoint.servicos.Pesquisa;
 import com.arbresystems.appoint.servicos.Promocao;
+import com.arbresystems.appoint.servicos.Servico;
 import com.arbresystems.appoint.servicos.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -54,6 +55,10 @@ public class RetrofitConfig {
 
     public Promocao getPromocaoService(){
         return this.retrofit.create(Promocao.class);
+    }
+
+    public Servico getServicoService(){
+        return this.retrofit.create(Servico.class);
     }
 
     public static OkHttpClient getUnsafeOkHttpClient() {
