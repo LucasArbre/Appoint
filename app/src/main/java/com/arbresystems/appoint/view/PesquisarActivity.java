@@ -40,7 +40,7 @@ public class PesquisarActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager manager;
     private boolean isScrolling = false;
-    private List<Estabelecimento> estabelecimentos;
+    private ArrayList<Estabelecimento> estabelecimentos;
     private int currentItem, totalIems, scrollOutItems;
     private ProgressBar progressBar = findViewById(R.id.progress);
 
@@ -115,7 +115,7 @@ public class PesquisarActivity extends AppCompatActivity {
             @Override
             public void run() {
                 for (int i=0;i<5;i++){
-                    //estabelecimentos.add();
+                    //pesquisar(s);
                     adapter.notifyDataSetChanged();
                     progressBar.setVisibility(View.GONE);
                 }
@@ -135,24 +135,7 @@ public class PesquisarActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextSubmit(String s) {
-
-                new RetrofitConfig().getEstabelecimentoService().pesquisar(sp.getString("token", null), s).enqueue(new Callback<ArrayList<Estabelecimento>>() {
-                    @Override
-                    public void onResponse(Call<ArrayList<Estabelecimento>> call, Response<ArrayList<Estabelecimento>> response) {
-                        estabelecimentos = response.body();
-                        Log.e("resposta", estabelecimentos.toString());
-                        adapter = new AdapterItemPesquisaEstabelecimento(getApplicationContext(), estabelecimentos);
-                        //listView.setAdapter(adapter);
-                        recyclerView.setAdapter(adapter);
-                    }
-
-                    @Override
-                    public void onFailure(Call<ArrayList<Estabelecimento>> call, Throwable t) {
-                        Log.e("erro", t.getMessage());
-                        //Log.e("respostaErrada", call.request())
-                    }
-                });
-
+                pesquisar(s);
                 /*
                 new RetrofitConfig().getEstabelecimentoService().pesquisarr(sp.getString("token", null), s).enqueue(new Callback<Object>() {
                     @Override
@@ -177,5 +160,24 @@ public class PesquisarActivity extends AppCompatActivity {
         });
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void pesquisar(String s){
+        new RetrofitConfig().getEstabelecimentoService().pesquisar(sp.getString("token", null), s).enqueue(new Callback<ArrayList<Estabelecimento>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Estabelecimento>> call, Response<ArrayList<Estabelecimento>> response) {
+                estabelecimentos = response.body();
+                Log.e("resposta", estabelecimentos.toString());
+                adapter = new AdapterItemPesquisaEstabelecimento(getApplicationContext(), estabelecimentos);
+                //listView.setAdapter(adapter);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Estabelecimento>> call, Throwable t) {
+                Log.e("erro", t.getMessage());
+                //Log.e("respostaErrada", call.request())
+            }
+        });
     }
 }
