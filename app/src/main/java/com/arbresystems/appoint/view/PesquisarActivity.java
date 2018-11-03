@@ -42,6 +42,7 @@ public class PesquisarActivity extends AppCompatActivity {
     private boolean isScrolling = false;
     private ArrayList<Estabelecimento> estabelecimentos;
     private int currentItem, totalIems, scrollOutItems;
+    private String teste;
     private ProgressBar progressBar = findViewById(R.id.progress);
 
     @Override
@@ -115,7 +116,8 @@ public class PesquisarActivity extends AppCompatActivity {
             @Override
             public void run() {
                 for (int i=0;i<5;i++){
-                    //pesquisar(s);
+                    //estabelecimentos.add();
+                    pesquisar(teste);
                     adapter.notifyDataSetChanged();
                     progressBar.setVisibility(View.GONE);
                 }
@@ -135,6 +137,7 @@ public class PesquisarActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextSubmit(String s) {
+                teste = s;
                 pesquisar(s);
                 /*
                 new RetrofitConfig().getEstabelecimentoService().pesquisarr(sp.getString("token", null), s).enqueue(new Callback<Object>() {
