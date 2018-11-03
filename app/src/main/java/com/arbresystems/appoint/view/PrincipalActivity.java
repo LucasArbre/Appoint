@@ -1,6 +1,7 @@
 package com.arbresystems.appoint.view;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -154,10 +155,11 @@ public class PrincipalActivity extends AppCompatActivity {
         Log.d("token", sp.getString("token", null));
 
         new RetrofitConfig().getAtendimentoService().buscarAceitosENaoConcluidosPorUsuario(sp.getString("token", null)).enqueue(new Callback<ArrayList<Atendimento>>() {
+            @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<ArrayList<Atendimento>> call, Response<ArrayList<Atendimento>> response) {
                 atendimentos = response.body();
-                Log.d("resposta", atendimentos.toString());
+                Log.d("respostaBuscarAtendimentos", atendimentos.toString());
             }
 
             @Override

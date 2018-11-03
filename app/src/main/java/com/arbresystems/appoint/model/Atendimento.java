@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.sql.Date;
+import java.sql.Time;
 
 public class Atendimento {
 
@@ -12,10 +13,10 @@ public class Atendimento {
     private String idEstabelecimento;
     @SerializedName("dataHorarioInicio")
     @Expose
-    private Date dataHorarioInicio;
+    private String dataHorarioInicio;
     @SerializedName("dataHorarioFim")
     @Expose
-    private Date dataHorarioFim;
+    private String dataHorarioFim;
     @SerializedName("valor")
     @Expose
     private int valor;
@@ -39,7 +40,10 @@ public class Atendimento {
     private String idAtendimento;
     @SerializedName("dia")
     @Expose
-    private Date dia;
+    private String dia;
+    @SerializedName("nome")
+    @Expose
+    private String nome;
 
     /**
      * No args constructor for use in serialization
@@ -61,7 +65,7 @@ public class Atendimento {
      * @param descricao
      * @param concluido
      */
-    public Atendimento(String idEstabelecimento, Date dataHorarioInicio, Date dataHorarioFim, int valor, int concluido, int aceito, int avisoEmMinutos, boolean erro, String descricao, String idAtendimento, Date dia) {
+    public Atendimento(String idEstabelecimento, String dataHorarioInicio, String dataHorarioFim, int valor, int concluido, int aceito, int avisoEmMinutos, boolean erro, String descricao, String idAtendimento, String dia, String nome) {
         super();
         this.idEstabelecimento = idEstabelecimento;
         this.dataHorarioInicio = dataHorarioInicio;
@@ -73,6 +77,8 @@ public class Atendimento {
         this.erro = erro;
         this.descricao = descricao;
         this.idAtendimento = idAtendimento;
+        this.dia = dia;
+        this.nome = nome;
     }
 
     public String getIdEstabelecimento() {
@@ -83,19 +89,19 @@ public class Atendimento {
         this.idEstabelecimento = idEstabelecimento;
     }
 
-    public Date getDataHorarioInicio() {
+    public String getDataHorarioInicio() {
         return dataHorarioInicio;
     }
 
-    public void setDataHorarioInicio(Date dataHorarioInicio) {
+    public void setDataHorarioInicio(String dataHorarioInicio) {
         this.dataHorarioInicio = dataHorarioInicio;
     }
 
-    public Date getDataHorarioFim() {
+    public String getDataHorarioFim() {
         return dataHorarioFim;
     }
 
-    public void setDataHorarioFim(Date dataHorarioFim) {
+    public void setDataHorarioFim(String dataHorarioFim) {
         this.dataHorarioFim = dataHorarioFim;
     }
 
@@ -155,9 +161,25 @@ public class Atendimento {
         this.idAtendimento = idAtendimento;
     }
 
+    public String getDia() {
+        return dia;
+    }
+
+    public void setDia(String dia) {
+        this.dia = dia;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     @Override
     public String toString() {
-        return "Estabelecimento{" +
+        return "Atendimento{" +
                 "idEstabelecimento='" + idEstabelecimento + '\'' +
                 ", dataHorarioInicio='" + dataHorarioInicio + '\'' +
                 ", dataHorarioFim='" + dataHorarioFim + '\'' +
@@ -168,6 +190,8 @@ public class Atendimento {
                 ", erro=" + erro +
                 ", descricao='" + descricao + '\'' +
                 ", idAtendimento='" + idAtendimento + '\'' +
+                ", dia='" + dia + '\'' +
+                ", nome='" + nome + '\'' +
                 '}';
     }
 }

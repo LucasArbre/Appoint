@@ -45,7 +45,7 @@ public class AdapterItemHorario extends  RecyclerView.Adapter<AdapterItemHorario
         itemRowHolder.itemMes.setText(sectionMes);
         itemRowHolder.itemDia.setText(sectionDia);
 
-        com.arbresystems.appoint.viewModels.SectionListDataAdapterHorario itemListDataAdapter = new com.arbresystems.appoint.viewModels.SectionListDataAdapterHorario(mContext, singleSectionItems);
+        AdapterItemHorarios itemListDataAdapter = new AdapterItemHorarios(mContext, singleSectionItems);
 
         itemRowHolder.recycler_view_list.setHasFixedSize(true);
         itemRowHolder.recycler_view_list.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));

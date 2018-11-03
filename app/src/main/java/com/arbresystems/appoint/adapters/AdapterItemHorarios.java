@@ -1,4 +1,4 @@
-package com.arbresystems.appoint.viewModels;
+package com.arbresystems.appoint.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -11,17 +11,16 @@ import android.widget.Toast;
 
 import com.arbresystems.appoint.R;
 import com.arbresystems.appoint.model.Atendimento;
-import com.arbresystems.appoint.model.Horario;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 
-public class SectionListDataAdapterHorario extends RecyclerView.Adapter<SectionListDataAdapterHorario.SingleItemRowHolder> {
+public class AdapterItemHorarios extends RecyclerView.Adapter<AdapterItemHorarios.SingleItemRowHolder> {
     private ArrayList<Atendimento> atendimentos;
     private Context mContext;
 
-    public SectionListDataAdapterHorario(Context context, ArrayList<Atendimento> atendimentos) {
+    public AdapterItemHorarios(Context context, ArrayList<Atendimento> atendimentos) {
         this.atendimentos = atendimentos;
         this.mContext = context;
     }
@@ -38,8 +37,8 @@ public class SectionListDataAdapterHorario extends RecyclerView.Adapter<SectionL
 
         Atendimento atendimento = atendimentos.get(i);
 
-        holder.nomeServico.setText(atendimento.getDescricao());
-        //holder.nomeServico.setText(atendimento.getNomeAtendimento());
+        //holder.nomeServico.setText(atendimento.getDescricao());
+        holder.nomeServico.setText(atendimento.getNome());
 
         SimpleDateFormat formatoHora = new SimpleDateFormat("h:mm a");
 
