@@ -8,17 +8,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.arbresystems.appoint.R;
-import com.arbresystems.appoint.model.Servicos;
+import com.arbresystems.appoint.model.Servico;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class AdapterItemServicos extends RecyclerView.Adapter<AdapterItemServicos.ItemRowHolder>{
-    private ArrayList<Servicos> dataList;
+    private ArrayList<Servico> dataList;
     private Context mContext;
 
-    public AdapterItemServicos(Context context, ArrayList<Servicos> dataList) {
+    public AdapterItemServicos(Context context, ArrayList<Servico> dataList) {
         this.dataList = dataList;
         this.mContext = context;
     }
@@ -34,14 +34,12 @@ public class AdapterItemServicos extends RecyclerView.Adapter<AdapterItemServico
     public void onBindViewHolder(ItemRowHolder itemRowHolder, int i) {
 
         final String name = dataList.get(i).getNome();
-        final Date duracao = dataList.get(i).getDuracao();
+        final String duracao = dataList.get(i).getDuracao();
         final String preco = dataList.get(i).getPreco();
-
-        SimpleDateFormat formatoMinuto = new SimpleDateFormat("m");
 
         itemRowHolder.itemNome.setText(name);
         itemRowHolder.itemPreco.setText(preco);
-        itemRowHolder.itemDuracao.setText(formatoMinuto.format(duracao));
+        itemRowHolder.itemDuracao.setText(duracao);
     }
 
     @Override
@@ -68,7 +66,7 @@ public class AdapterItemServicos extends RecyclerView.Adapter<AdapterItemServico
 
     }
 
-    public void updateList(ArrayList<Servicos> novaLista){
+    public void updateList(ArrayList<Servico> novaLista){
         dataList = new ArrayList<>();
         dataList.addAll(novaLista);
         notifyDataSetChanged();
