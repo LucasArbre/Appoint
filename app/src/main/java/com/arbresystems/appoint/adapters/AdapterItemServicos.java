@@ -38,7 +38,7 @@ public class AdapterItemServicos extends RecyclerView.Adapter<AdapterItemServico
         final String preco = dataList.get(i).getPreco();
 
         itemRowHolder.itemNome.setText(name);
-        itemRowHolder.itemPreco.setText(preco);
+        itemRowHolder.itemPreco.setText("R$: " + preco);
         itemRowHolder.itemDuracao.setText(duracao);
     }
 
