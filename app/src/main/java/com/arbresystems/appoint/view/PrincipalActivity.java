@@ -151,19 +151,19 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     public void createDummyData() {
+        //final ArrayList<String>[] datas = {null};
 
-        Log.d("token", sp.getString("token", null));
-
-        new RetrofitConfig().getAtendimentoService().buscarAceitosENaoConcluidosPorUsuario(sp.getString("token", null)).enqueue(new Callback<ArrayList<Atendimento>>() {
+        new RetrofitConfig().getAtendimentoService().buscarAtendimentosAceitosENaoConcluidosPorUsuarioComDatasDistintas(sp.getString("token", null)).enqueue(new Callback<ArrayList<String>>() {
             @SuppressLint("LongLogTag")
             @Override
-            public void onResponse(Call<ArrayList<Atendimento>> call, Response<ArrayList<Atendimento>> response) {
-                atendimentos = response.body();
+            public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {
+                //datas[0] = response.body();
+                Log.d("respostaBuscarDatas", response.body().toString());
                 Log.d("respostaBuscarAtendimentos", atendimentos.toString());
             }
 
             @Override
-            public void onFailure(Call<ArrayList<Atendimento>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<String>> call, Throwable t) {
                 Log.e("erroBuscarAtendimentos", t.getMessage());
             }
         });

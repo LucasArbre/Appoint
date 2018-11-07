@@ -16,4 +16,12 @@ public interface Atendimento {
     @GET("/buscarAtendimentosAceitosENaoConcluidosPorUsuario")
     Call<ArrayList<com.arbresystems.appoint.model.Atendimento>> buscarAceitosENaoConcluidosPorUsuario (
             @Header("x-authentication") String token);
+
+    @Headers({
+            "x-audience: http://api.appoint.arbresystems.com",
+            "x-id: apiAppoint"
+    })
+    @GET("/buscarAtendimentosAceitosENaoConcluidosPorUsuario")
+    Call<ArrayList<String>> buscarAtendimentosAceitosENaoConcluidosPorUsuarioComDatasDistintas (
+            @Header("x-authentication") String token);
 }
