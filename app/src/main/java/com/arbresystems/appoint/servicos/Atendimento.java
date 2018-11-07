@@ -21,7 +21,7 @@ public interface Atendimento {
             "x-audience: http://api.appoint.arbresystems.com",
             "x-id: apiAppoint"
     })
-    @GET("/buscarAtendimentosAceitosENaoConcluidosPorUsuario")
+    @GET("/buscarAtendimentosAceitosENaoConcluidosPorUsuarioComDatasDistintas")
     Call<ArrayList<String>> buscarAtendimentosAceitosENaoConcluidosPorUsuarioComDatasDistintas (
             @Header("x-authentication") String token);
 }

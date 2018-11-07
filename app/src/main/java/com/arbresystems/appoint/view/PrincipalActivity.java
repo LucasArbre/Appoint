@@ -29,10 +29,8 @@ import com.arbresystems.appoint.R;
 import com.arbresystems.appoint.RetrofitConfig;
 import com.arbresystems.appoint.adapters.AdapterItemHorario;
 import com.arbresystems.appoint.model.Atendimento;
-import com.arbresystems.appoint.model.Horario;
 import com.arbresystems.appoint.segundoPlano.ServiceStart;
 import com.arbresystems.appoint.segundoPlano.atualizarLocalizacao.Localizacao;
-import com.arbresystems.appoint.segundoPlano.atualizarLocalizacao.ServiceAtualizarLocalizacao;
 import com.arbresystems.appoint.viewModels.SectionDataModelHorario;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
@@ -151,15 +149,33 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     public void createDummyData() {
-        //final ArrayList<String>[] datas = {null};
+
 
         new RetrofitConfig().getAtendimentoService().buscarAtendimentosAceitosENaoConcluidosPorUsuarioComDatasDistintas(sp.getString("token", null)).enqueue(new Callback<ArrayList<String>>() {
             @SuppressLint("LongLogTag")
             @Override
             public void onResponse(Call<ArrayList<String>> call, Response<ArrayList<String>> response) {
-                //datas[0] = response.body();
                 Log.d("respostaBuscarDatas", response.body().toString());
-                Log.d("respostaBuscarAtendimentos", atendimentos.toString());
+                for (int i = 0; i <= response.body().size()-1; i++) {
+                    String data = response.body().get(i);
+                    String[] d = data.split("-");
+
+                    Date a = new Date();
+                    a.setYear(Integer.valueOf(d[0]));
+                    a.setMonth(Integer.valueOf(d[1]));
+                    a.setDate(Integer.valueOf(d[2]));
+
+                    SectionDataModelHorario dm = new SectionDataModelHorario();
+
+                    dm.setDia(a);
+                    dm.setDiaMes(a);
+
+                    dm.setAllItemsInSection(atendimentos);
+
+                    allSampleData.add(dm);
+
+                }
+                //Log.d("respostaBuscarAtendimentos", atendimentos.toString());
             }
 
             @Override
@@ -168,20 +184,7 @@ public class PrincipalActivity extends AppCompatActivity {
             }
         });
 
-        for (int i = 1; i <= 5; i++) {
 
-            Date a = new Date();
-
-            SectionDataModelHorario dm = new SectionDataModelHorario();
-
-            dm.setDia(a);
-            dm.setDiaMes(a);
-
-            dm.setAllItemsInSection(atendimentos);
-
-            allSampleData.add(dm);
-
-        }
     }
 
     @Override
