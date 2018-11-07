@@ -62,6 +62,7 @@ public class PrincipalActivity extends AppCompatActivity {
     private Button btnAgendar;
 
     private ArrayList<Atendimento> atendimentos;
+    private RecyclerView my_recycler_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,17 +78,11 @@ public class PrincipalActivity extends AppCompatActivity {
         //recyclerView
         allSampleData = new ArrayList<SectionDataModelHorario>();
 
-        createDummyData();
-
-        RecyclerView my_recycler_view = (RecyclerView) findViewById(R.id.rvCompromissos);
-
+        my_recycler_view = (RecyclerView) findViewById(R.id.rvCompromissos);
         my_recycler_view.setHasFixedSize(true);
-
-        AdapterItemHorario adapterItemHorario = new AdapterItemHorario(this, allSampleData);
-
         my_recycler_view.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
-        my_recycler_view.setAdapter(adapterItemHorario);
+        createDummyData();
 
         btnAgendar = findViewById(R.id.btnAgendar);
         btnAgendar.setOnClickListener(new View.OnClickListener() {
@@ -149,8 +144,6 @@ public class PrincipalActivity extends AppCompatActivity {
     }
 
     public void createDummyData() {
-
-
         new RetrofitConfig().getAtendimentoService().buscarAtendimentosAceitosENaoConcluidosPorUsuarioComDatasDistintas(sp.getString("token", null)).enqueue(new Callback<ArrayList<String>>() {
             @SuppressLint("LongLogTag")
             @Override
@@ -160,20 +153,28 @@ public class PrincipalActivity extends AppCompatActivity {
                     String data = response.body().get(i);
                     String[] d = data.split("-");
 
-                    Date a = new Date();
-                    a.setYear(Integer.valueOf(d[0]));
-                    a.setMonth(Integer.valueOf(d[1]));
-                    a.setDate(Integer.valueOf(d[2]));
+                    Date a = new Date(Integer.valueOf(d[0]), Integer.valueOf(d[1]), Integer.valueOf(d[2]));
 
-                    SectionDataModelHorario dm = new SectionDataModelHorario();
+                    Log.d("data", a.toString());
+
+                    final SectionDataModelHorario dm = new SectionDataModelHorario();
 
                     dm.setDia(a);
                     dm.setDiaMes(a);
 
-                    dm.setAllItemsInSection(atendimentos);
+                    new RetrofitConfig().getAtendimentoService().buscarAtendimentosAceitosENaoConcluidosPorUsuarioPorData(sp.getString("token", null), data).enqueue(new Callback<ArrayList<Atendimento>>() {
+                        @Override
+                        public void onResponse(Call<ArrayList<Atendimento>> call, Response<ArrayList<Atendimento>> response) {
+                            Log.d("respostaBuscarAtendimentos", response.body().toString());
+                            dm.setAllItemsInSection(response.body());
+                            allSampleData.add(dm);
+                        }
 
-                    allSampleData.add(dm);
-
+                        @Override
+                        public void onFailure(Call<ArrayList<Atendimento>> call, Throwable t) {
+                            Log.d("erroBuscarAtendimentos", t.getMessage());
+                        }
+                    });
                 }
                 //Log.d("respostaBuscarAtendimentos", atendimentos.toString());
             }
@@ -184,6 +185,8 @@ public class PrincipalActivity extends AppCompatActivity {
             }
         });
 
+        AdapterItemHorario adapterItemHorario = new AdapterItemHorario(this, allSampleData);
+        my_recycler_view.setAdapter(adapterItemHorario);
 
     }
 

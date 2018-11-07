@@ -185,17 +185,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Button btnTestar = findViewById(R.id.btntestar);
-        btnTestar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                overridePendingTransition(0,0);
-                Intent i = new Intent(LoginActivity.this, PrincipalActivity.class);
-                i.addFlags(i.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(i);
-                finish();
-            }
-        });
     }
 
     public void mostrarPopUp(View v){
