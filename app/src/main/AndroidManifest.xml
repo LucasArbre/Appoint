@@ -75,7 +75,14 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".view.ServicosActivity"></activity>
+        <activity android:name=".view.ServicosActivity" />
+        <activity android:name=".viewAdm.LoginAdmActivity" />
+        <activity android:name=".viewAdm.CadastroAdmActivity" />
+        <activity android:name=".viewAdm.PrincipalAdmActivity" />
+        <activity android:name=".viewAdm.AdicionarServicosAdmActivity" />
+        <activity android:name=".viewAdm.MensagemAdmActivity" />
+        <activity android:name=".MensagemActivity" />
+        <activity android:name=".InicioActivity"></activity>
     </application>
 
 </manifest>

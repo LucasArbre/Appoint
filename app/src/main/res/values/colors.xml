@@ -29,4 +29,7 @@
 
     <color name="corPorcentagem1">#FF2EFD33</color>
     <color name="corPorcentagem2">#FF0AE60F</color>
+
+    <color name="teste">#1f1f1f</color>
+    <color name="teste2">#303030</color>
 </resources>

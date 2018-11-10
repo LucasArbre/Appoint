@@ -82,5 +82,8 @@
     <string name="ligar">Ligar</string>
     <string name="agendar_hor_rio">Agendar Horário</string>
     <string name="nada_para_mostrar">Nada Para Mostrar</string>
+    <string name="title_activity_principal_adm">Appoint</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 
 </resources>
