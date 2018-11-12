@@ -203,9 +203,9 @@ public class PrincipalActivity extends AppCompatActivity {
             SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             StringBuilder info = new StringBuilder();
 
-            info.append("Nome: " + sp.getString("key_nome_usr", ""));
-            info.append("\nEmail: " + sp.getString("key_email_usr", ""));
-            info.append("\nTelefone: " + sp.getString("key_telefone_usr", ""));
+//            info.append("Nome: " + sp.getString("key_nome_usr", ""));
+//            info.append("\nEmail: " + sp.getString("key_email_usr", ""));
+//            info.append("\nTelefone: " + sp.getString("key_telefone_usr", ""));
             //info.append("\nAtivar notificações: " + sp.getString("key_notificacoes_habilitar", "-1"));
 
             String nome = sp.getString("key_nome_usr", "");
